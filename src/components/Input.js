@@ -28,6 +28,7 @@
  * @licence Simplified BSD License
  */
 import {h} from 'hyperapp';
+import {className} from '../utils';
 
 const toggleable = props => h('div', {className: 'osjs-gui-input-toggle'}, [
   h('label', {}, [
@@ -45,7 +46,7 @@ const types = {
     placeholder: props.placeholder,
     oncreated: (el) => el.innerHTML = props.value || '',
     rows: props.rows
-  }),
+  }, props.value),
 
   select: props => {
     const choices = props.choices || [];
@@ -65,7 +66,7 @@ const types = {
 };
 
 const Input = props => h('div', {
-  className: 'osjs-gui osjs-gui-input',
+  class: className('osjs-gui-input', props),
   style: props.style
 }, [
   types[props.type]
