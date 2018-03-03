@@ -43,8 +43,10 @@ import Image from './src/components/Image';
 import Video from './src/components/Video';
 import Tabs from './src/components/Tabs';
 import * as adapters from './src/adapters';
+import GUIServiceProvider from './src/provider';
 
 export {
+  GUIServiceProvider,
   Box,
   BoxContainer,
   Button,
