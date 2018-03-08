@@ -41,6 +41,19 @@ const view = callback => (state, actions) => h(Menu, {
   onclick: callback
 });
 
+/*
+ * Check if a target allows for context menu
+ */
+const validContextMenuTarget = ev => {
+  const target = ev.target;
+  let isValid = target.tagName === 'TEXTAREA';
+  if (!isValid && target.tagName === 'INPUT') {
+    isValid = ['text', 'password', 'number', 'email'].indexOf(target.type) !== -1;
+  }
+
+  return isValid;
+};
+
 /**
  * OS.js GUI Service Provider
  *
@@ -78,6 +91,15 @@ export default class GUIServiceProvider {
   async init() {
     this.core.singleton('osjs/contextmenu', () => {
       return this.contextmenu.actions;
+    });
+
+    this.core.$root.addEventListener('contextmenu', (ev) => {
+      if (validContextMenuTarget(ev)) {
+        return;
+      }
+
+      ev.stopPropagation();
+      ev.preventDefault();
     });
   }
 
