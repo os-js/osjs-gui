@@ -30,6 +30,8 @@
 import {h} from 'hyperapp';
 import {className} from '../utils';
 
+const noop = function() {};
+
 const toggleable = props => h('div', {className: 'osjs-gui-input-toggle'}, [
   h('label', {}, [
     h('input', {
@@ -56,9 +58,9 @@ const types = {
         selected: props.value === value ? true : undefined
       }, choices[value]));
 
-      return h('select', {
-        multiple: props.multiple ? 'multiple' : undefined
-      }, children);
+    return h('select', {
+      multiple: props.multiple ? 'multiple' : undefined
+    }, children);
   },
 
   checkbox: toggleable,
@@ -70,15 +72,14 @@ const Input = props => h('div', {
   style: props.style
 }, [
   types[props.type]
-
     ? types[props.type](props)
-
     : h('input', {
-        type: props.type || 'text',
-        placeholder: props.placeholder,
-        oncreate: (el) => (el.value = props.value || ''),
-        onupdate: (el) => (el.value = props.value || '')
-      })
+      type: props.type || 'text',
+      placeholder: props.placeholder,
+      oncreate: (el) => (el.value = props.value || ''),
+      onupdate: (el) => (el.value = props.value || ''),
+      oninput: (ev) => (props.oninput || noop)(ev.target.value, ev)
+    })
 ]);
 
 export default Input;
