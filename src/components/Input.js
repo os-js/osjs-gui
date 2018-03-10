@@ -77,6 +77,7 @@ const Input = props => h('div', {
       type: props.type || 'text',
       min: props.min,
       max: props.max,
+      style: props.style,
       placeholder: props.placeholder,
       oncreate: (el) => (el.value = props.value || ''),
       onupdate: (el) => (el.value = props.value || ''),
