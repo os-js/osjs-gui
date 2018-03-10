@@ -75,10 +75,13 @@ const Input = props => h('div', {
     ? types[props.type](props)
     : h('input', {
       type: props.type || 'text',
+      min: props.min,
+      max: props.max,
       placeholder: props.placeholder,
       oncreate: (el) => (el.value = props.value || ''),
       onupdate: (el) => (el.value = props.value || ''),
-      oninput: (ev) => (props.oninput || noop)(ev.target.value, ev)
+      oninput: (ev) => (props.oninput || noop)(ev.target.value, ev),
+      onchange: (ev) => (props.onchange || noop)(ev.target.value, ev)
     })
 ]);
 
