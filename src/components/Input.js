@@ -47,19 +47,24 @@ const types = {
   textarea: props => h('textarea', {
     placeholder: props.placeholder,
     oncreated: (el) => el.innerHTML = props.value || '',
-    rows: props.rows
+    rows: props.rows,
+    style: props.style
   }, props.value),
 
   select: props => {
-    const choices = props.choices || [];
+    const choices = props.choices || {};
     const children = Object.keys(choices)
       .map(value => h('option', {
         value,
-        selected: props.value === value ? true : undefined
+        selected: props.value == value ? 'selected' : undefined
       }, choices[value]));
 
+    const getValue = ev => Object.keys(choices)[ev.target.selectedIndex];
+
     return h('select', {
-      multiple: props.multiple ? 'multiple' : undefined
+      multiple: props.multiple ? 'multiple' : undefined,
+      onchange: ev => (props.onchange || noop)(getValue(ev), ev),
+      style: props.style
     }, children);
   },
 
@@ -69,7 +74,7 @@ const types = {
 
 const Input = props => h('div', {
   class: className('osjs-gui-input', props),
-  style: props.style
+  //style: props.style
 }, [
   types[props.type]
     ? types[props.type](props)
