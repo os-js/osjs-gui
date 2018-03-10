@@ -34,7 +34,10 @@ import {className, boxStyles} from '../utils';
 const BoxContainer = (props, children) =>
   h('div', {
     class: className('osjs-gui-box-container', props),
-    style: boxStyles(props)
+    style: boxStyles(props),
+    oncreate: props.oncreate,
+    onupdate: props.onupdate,
+    ondestroy: props.ondestroy
   }, children);
 
 export default BoxContainer;
