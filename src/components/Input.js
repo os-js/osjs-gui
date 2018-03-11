@@ -48,7 +48,7 @@ const types = {
     placeholder: props.placeholder,
     oncreated: (el) => el.innerHTML = props.value || '',
     rows: props.rows,
-    style: props.style
+    style: props.inputStyle
   }, props.value),
 
   select: props => {
@@ -64,7 +64,7 @@ const types = {
     return h('select', {
       multiple: props.multiple ? 'multiple' : undefined,
       onchange: ev => (props.onchange || noop)(getValue(ev), ev),
-      style: props.style
+      style: props.inputStyle
     }, children);
   },
 
@@ -74,7 +74,7 @@ const types = {
 
 const Input = props => h('div', {
   class: className('osjs-gui-input', props),
-  //style: props.style
+  style: props.style
 }, [
   types[props.type]
     ? types[props.type](props)
@@ -82,7 +82,7 @@ const Input = props => h('div', {
       type: props.type || 'text',
       min: props.min,
       max: props.max,
-      style: props.style,
+      style: props.inputStyle,
       placeholder: props.placeholder,
       oncreate: (el) => (el.value = props.value || ''),
       onupdate: (el) => (el.value = props.value || ''),
