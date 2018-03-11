@@ -41,7 +41,11 @@ const Image = (props, children) =>
     h('img', {
       src: props.src,
       width: props.width,
-      height: props.height
+      height: props.height,
+      onload: props.onload,
+      oncreate: props.oncreate,
+      onupdate: props.onupdate,
+      ondestroy: props.ondestroy
     })
   ]);
 

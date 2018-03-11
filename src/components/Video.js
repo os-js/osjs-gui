@@ -32,6 +32,8 @@ import {h} from 'hyperapp';
 
 const sources = list => list.map(item => h('source', item));
 
+const isTrue = v => typeof v === 'undefined' || v === true;
+
 const Video = (props, children) =>
   h('div', {
     class: 'osjs-gui osjs-gui-video',
@@ -47,7 +49,12 @@ const Video = (props, children) =>
       poster: props.poster,
       loop: props.loop ? 'loop' : undefined,
       muted: props.muted ? 'muted' : undefined,
-      controls: props.controls ? 'controls' : undefined,
+      controls: isTrue(props.controls) ? 'controls' : undefined,
+      autoplay: isTrue(props.autoplay) ? 'autoplay' : undefined,
+      onloadeddata: props.onload,
+      oncreate: props.oncreate,
+      onupdate: props.onupdate,
+      ondestroy: props.ondestroy
     }, sources(props.sources || []))
   ]);
 
