@@ -45,6 +45,7 @@ const boxStyles = (props, orientation = null) =>
     flexShrink: props.shrink,
     flexBasis: typeof props.basis === 'number' ? String(props.basis) + 'px' : props.basis,
     alignItems: props.align,
+    justifyContent: props.justify,
     padding: typeof props.padding === 'undefined' || props.padding === true ? undefined : '0'
   }, props.style || {});
 
