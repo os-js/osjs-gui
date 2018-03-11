@@ -34,7 +34,8 @@ const Button = props => h('div', {
   className: 'osjs-gui osjs-gui-button'
 }, [
   h('button', {
-    onclick: props.onclick
+    onclick: props.onclick,
+    disabled: props.disabled
   }, props.label || 'Button')
 ]);
 

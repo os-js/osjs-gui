@@ -35,6 +35,7 @@ const noop = function() {};
 const toggleable = props => h('div', {className: 'osjs-gui-input-toggle'}, [
   h('label', {}, [
     h('input', {
+      disabled: props.disabled,
       oncreate: (el) => (el.checked = !!props.value),
       type: props.type,
       group: props.group
@@ -45,6 +46,7 @@ const toggleable = props => h('div', {className: 'osjs-gui-input-toggle'}, [
 
 const types = {
   textarea: props => h('textarea', {
+    disabled: props.disabled,
     placeholder: props.placeholder,
     oncreated: (el) => el.innerHTML = props.value || '',
     rows: props.rows,
@@ -62,6 +64,7 @@ const types = {
     const getValue = ev => Object.keys(choices)[ev.target.selectedIndex];
 
     return h('select', {
+      disabled: props.disabled,
       multiple: props.multiple ? 'multiple' : undefined,
       onchange: ev => (props.onchange || noop)(getValue(ev), ev),
       style: props.inputStyle
@@ -80,6 +83,7 @@ const Input = props => h('div', {
     ? types[props.type](props)
     : h('input', {
       type: props.type || 'text',
+      disabled: props.disabled,
       min: props.min,
       max: props.max,
       style: props.inputStyle,
