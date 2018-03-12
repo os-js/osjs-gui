@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2018, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,40 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import Box from './src/components/Box';
-import BoxContainer from './src/components/BoxContainer';
-import Button from './src/components/Button';
-import Input from './src/components/Input';
-import Progressbar from './src/components/Progressbar';
-import Menu from './src/components/Menu';
-import Toolbar from './src/components/Toolbar';
-import Statusbar from './src/components/Statusbar';
-import Menubar from './src/components/Menubar';
-import Panes from './src/components/Panes';
-import ListView from './src/components/ListView';
-import Image from './src/components/Image';
-import Video from './src/components/Video';
-import Tabs from './src/components/Tabs';
-import Iframe from './src/components/Iframe';
-import * as adapters from './src/adapters';
-import GUIServiceProvider from './src/provider';
-
-export {
-  GUIServiceProvider,
-  Box,
-  BoxContainer,
-  Button,
-  Input,
-  Progressbar,
-  Menu,
-  Panes,
-  Toolbar,
-  Statusbar,
-  Menubar,
-  ListView,
-  Image,
-  Video,
-  Tabs,
-  Iframe,
-  adapters
-};
+.osjs-gui-iframe {
+  display: block;
+  border: 0 none;
+  background-color: #fff;
+}
