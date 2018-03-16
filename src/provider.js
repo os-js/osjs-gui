@@ -104,6 +104,15 @@ export default class GUIServiceProvider {
   }
 
   start() {
+    this.core.$root.addEventListener('click', (ev) => {
+      const menu = document.getElementById('osjs-context-menu');
+      const hit = menu.contains(ev.target);
+
+      if (!hit && this.contextmenu) {
+        this.contextmenu.actions.hide();
+      }
+    }, true);
+
     this.contextmenu.actions = app(this.contextmenu.state, {
       show: (options) => state => {
         let {menu, position} = options;

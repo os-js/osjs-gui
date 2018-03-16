@@ -38,7 +38,7 @@ const ul = (props, children = []) => h('ul', {}, children.map(
         if (child.onclick) {
           child.onclick(child, ev);
         }
-        (props.onclick || function () {})(child, ev);
+        (props.onclick || function() {})(child, ev);
       }
     }, [
       h('span', {
@@ -46,10 +46,10 @@ const ul = (props, children = []) => h('ul', {}, children.map(
           backgroundImage: child.icon ? `url(${child.icon})` : undefined
         }
       }, child.label),
-        child.items ? ul(props, child.items) : null
-      ].filter(c => !!c))
+      child.items ? ul(props, child.items) : null
+    ].filter(c => !!c))
   ])
-))
+));
 
 const Menu = (props) => h('div', {
   id: 'osjs-context-menu',
@@ -60,11 +60,6 @@ const Menu = (props) => h('div', {
     left: props.position ? String(props.position.left) + 'px' : 0
   }
 }, [
-  h('input', {
-    type: 'text',
-    onupdate: (el) => el.focus(),
-    onblur: (ev) => props.onclick(false, ev)
-  }),
   ul(props, props.menu)
 ]);
 
