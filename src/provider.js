@@ -118,6 +118,12 @@ export default class GUIServiceProvider {
         let {menu, position} = options;
         if (position instanceof Event) {
           position = {left: position.clientX, top: position.clientY};
+        } else if (position instanceof Element) {
+          const box = position.getBoundingClientRect();
+          position = {
+            left: box.x,
+            top: box.y + box.height
+          };
         }
 
         this.contextmenu.callback = (...args) => {
