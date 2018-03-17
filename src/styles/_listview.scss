@@ -29,9 +29,8 @@
  */
 
 .osjs-gui-list-view {
-  overflow: hidden;
   display: flex;
-  overflow: hidden;
+  overflow: auto; /* FIXME */
   height: 100%;
 
   & > .pane {
