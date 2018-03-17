@@ -127,7 +127,7 @@ export default class GUIServiceProvider {
         }
 
         this.contextmenu.callback = (...args) => {
-          if (args[0] !== false && options.callback) {
+          if (options.callback) {
             options.callback(...args);
           }
 

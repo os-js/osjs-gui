@@ -35,10 +35,17 @@ const ul = (props, children = []) => h('ul', {}, children.map(
     h('div', {
       'data-has-image': child.icon ? true : undefined,
       onclick: (ev) => {
+        if (child.items) {
+          return;
+        }
+
         if (child.onclick) {
           child.onclick(child, ev);
         }
-        (props.onclick || function() {})(child, ev);
+
+        if (props.onclick) {
+          props.onclick(child, ev);
+        }
       }
     }, [
       h('span', {
