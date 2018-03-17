@@ -31,7 +31,6 @@
 .osjs-gui-list-view {
   display: flex;
   overflow: auto; /* FIXME */
-  height: 100%;
 
   & > .pane {
     display: flex;

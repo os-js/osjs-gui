@@ -33,9 +33,8 @@ import {className} from '../utils';
 
 const items = props => (props.items || [])
   .map((item, index) => h('div', {}, h('span', {
-      onclick: (ev) => (props.onclick || function() {})(item, index, ev)
-    }, item.label))
-  );
+    onclick: (ev) => (props.onclick || function() {})(item, index, ev)
+  }, item.label)));
 
 const Menubar = (props, children) =>
   h('div', {
