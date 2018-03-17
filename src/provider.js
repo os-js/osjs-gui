@@ -127,8 +127,8 @@ export default class GUIServiceProvider {
         }
 
         this.contextmenu.callback = (...args) => {
-          if (args[0] !== false) {
-            (options.callback ||  function() {})(...args);
+          if (args[0] !== false && options.callback) {
+            options.callback(...args);
           }
 
           if (this.contextmenu) {
@@ -139,13 +139,15 @@ export default class GUIServiceProvider {
         return {visible: true, menu, position};
       },
       hide: () => state => {
-        this.contextmenu.callback = function() {};
+        this.contextmenu.callback = null;
 
         return {visible: false};
       }
     }, view((...args) => {
       if (!this.core.destroyed) {
-        this.contextmenu.callback(...args);
+        if (this.contextmenu.callback) {
+          this.contextmenu.callback(...args);
+        }
       }
     }), this.core.$root);
   }
