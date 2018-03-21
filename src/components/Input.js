@@ -33,7 +33,16 @@ import {className} from '../utils';
 const noop = function() {};
 
 const createProps = (defaults, props, except = []) => {
-  const ignore = ['key', 'class', 'style', 'inputStyle', 'multiple', 'oncreate', ...except];
+  const ignore = [
+    'key',
+    'class',
+    'style',
+    'inputStyle',
+    'multiple',
+    'oncreate',
+    'oninput',
+    'onchange',
+    ...except];
 
   const assignProps = Object.keys(props)
     .filter(k => ignore.indexOf(k) === -1)
