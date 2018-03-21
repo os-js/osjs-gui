@@ -33,7 +33,7 @@ import {className} from '../utils';
 const noop = function() {};
 
 const createProps = (defaults, props, except = []) => {
-  const ignore = ['class', 'style', 'inputStyle', 'multiple', 'oncreate', ...except];
+  const ignore = ['key', 'class', 'style', 'inputStyle', 'multiple', 'oncreate', ...except];
 
   const assignProps = Object.keys(props)
     .filter(k => ignore.indexOf(k) === -1)
@@ -50,8 +50,8 @@ const createProps = (defaults, props, except = []) => {
 const toggleable = props => h('div', {className: 'osjs-gui-input-toggle'}, [
   h('label', {}, [
     h('input', createProps({
-      oncreate: (el) => (el.checked = !!props.value)
-    }, props)),
+      checked: !!props.value
+    }, props, ['checked'])),
     h('span', {}, props.label || `(${props.type})`)
   ])
 ]);
@@ -61,9 +61,7 @@ const types = {
 
   radio: toggleable,
 
-  textarea: props => h('textarea', createProps({
-    //oncreate: (el) => el.innerHTML = props.value || ''
-  }, props, ['value', 'type']), props.value),
+  textarea: props => h('textarea', createProps({}, props, ['type'])),
 
   select: props => {
     const choices = props.choices || {};
@@ -88,9 +86,7 @@ const Input = props => h('div', {
   types[props.type]
     ? types[props.type](props)
     : h('input', createProps({
-      type: props.type || 'text',
-      oncreate: (el) => (el.value = props.value || ''),
-      //onupdate: (el) => (el.value = props.value || '')
+      type: props.type || 'text'
     }, props))
 ]);
 
