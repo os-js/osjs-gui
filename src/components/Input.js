@@ -32,26 +32,38 @@ import {className} from '../utils';
 
 const noop = function() {};
 
+const createProps = (defaults, props, except = []) => {
+  const ignore = ['class', 'style', 'inputStyle', 'multiple', 'oncreate', ...except];
+
+  const assignProps = Object.keys(props)
+    .filter(k => ignore.indexOf(k) === -1)
+    .reduce((o, k) => Object.assign(o, {[k]: props[k]}), {});
+
+  return Object.assign({}, defaults, {
+    oninput: (ev) => (props.oninput || noop)(ev.target.value, ev),
+    onchange: (ev) => (props.onchange || noop)(ev.target.value, ev),
+    multiple: props.multiple ? 'multiple' : undefined,
+    style: props.inputStyle
+  }, assignProps);
+};
+
 const toggleable = props => h('div', {className: 'osjs-gui-input-toggle'}, [
   h('label', {}, [
-    h('input', {
-      disabled: props.disabled,
-      oncreate: (el) => (el.checked = !!props.value),
-      type: props.type,
-      group: props.group
-    }),
+    h('input', createProps({
+      oncreate: (el) => (el.checked = !!props.value)
+    }, props)),
     h('span', {}, props.label || `(${props.type})`)
   ])
 ]);
 
 const types = {
-  textarea: props => h('textarea', {
-    disabled: props.disabled,
-    placeholder: props.placeholder,
-    oncreated: (el) => el.innerHTML = props.value || '',
-    rows: props.rows,
-    style: props.inputStyle
-  }, props.value),
+  checkbox: toggleable,
+
+  radio: toggleable,
+
+  textarea: props => h('textarea', createProps({
+    //oncreate: (el) => el.innerHTML = props.value || ''
+  }, props, ['value', 'type']), props.value),
 
   select: props => {
     const choices = props.choices || {};
@@ -63,16 +75,10 @@ const types = {
 
     const getValue = ev => Object.keys(choices)[ev.target.selectedIndex];
 
-    return h('select', {
-      disabled: props.disabled,
-      multiple: props.multiple ? 'multiple' : undefined,
-      onchange: ev => (props.onchange || noop)(getValue(ev), ev),
-      style: props.inputStyle
-    }, children);
-  },
-
-  checkbox: toggleable,
-  radio: toggleable
+    return h('select', createProps({
+      onchange: ev => (props.onchange || noop)(getValue(ev), ev)
+    }, props, ['type']), children);
+  }
 };
 
 const Input = props => h('div', {
@@ -81,18 +87,11 @@ const Input = props => h('div', {
 }, [
   types[props.type]
     ? types[props.type](props)
-    : h('input', {
+    : h('input', createProps({
       type: props.type || 'text',
-      disabled: props.disabled,
-      min: props.min,
-      max: props.max,
-      style: props.inputStyle,
-      placeholder: props.placeholder,
       oncreate: (el) => (el.value = props.value || ''),
-      onupdate: (el) => (el.value = props.value || ''),
-      oninput: (ev) => (props.oninput || noop)(ev.target.value, ev),
-      onchange: (ev) => (props.onchange || noop)(ev.target.value, ev)
-    })
+      //onupdate: (el) => (el.value = props.value || '')
+    }, props))
 ]);
 
 export default Input;
