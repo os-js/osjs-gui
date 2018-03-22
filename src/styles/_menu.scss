@@ -75,6 +75,13 @@
           padding-left: $base-margin * 2;
         }
 
+        &[data-has-children] > span {
+          &::after {
+            content: '\25B6';
+            float: right;
+          }
+        }
+
         & > ul {
           display: none;
           position: absolute;

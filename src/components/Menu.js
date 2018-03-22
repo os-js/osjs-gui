@@ -34,6 +34,7 @@ const ul = (props, children = []) => h('ul', {}, children.map(
   child => h('li', {}, [
     h('div', {
       'data-has-image': child.icon ? true : undefined,
+      'data-has-children': child.items ? true : undefined,
       onclick: (ev) => {
         if (child.items) {
           return;
