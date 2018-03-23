@@ -32,20 +32,6 @@
   position: absolute;
   z-index: 9999999999;
 
-  & > input {
-    top: -1000px;
-    left: -1000px;
-    width: 1px;
-    height: 1px;
-    border: 0 none;
-    background: transparent;
-    font-size: 0;
-    color: transparent;
-    outline: none;
-    pointer-events: none;
-    position: absolute;
-  }
-
   ul {
     list-style-type: none;
     margin: 0;
