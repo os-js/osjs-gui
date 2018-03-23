@@ -28,68 +28,83 @@
  * @licence Simplified BSD License
  */
 
-import ContextMenu from './contextmenu.js';
+import {h, app} from 'hyperapp';
+import Menu from './components/Menu';
 
 /*
- * Check if a target allows for context menu
+ * Context Menu view
  */
-const validContextMenuTarget = ev => {
-  const target = ev.target;
-  let isValid = target.tagName === 'TEXTAREA';
-  if (!isValid && target.tagName === 'INPUT') {
-    isValid = ['text', 'password', 'number', 'email'].indexOf(target.type) !== -1;
-  }
+const view = callback => (state, actions) => h(Menu, {
+  position: state.position,
+  visible: state.visible,
+  menu: state.menu,
+  onclick: callback
+});
 
-  return isValid;
-};
-
-/**
- * OS.js GUI Service Provider
- *
- * Provides wrapper services around GUI features
- */
-export default class GUIServiceProvider {
+export default class ContextMenu {
 
   constructor(core) {
     this.core = core;
-    this.contextmenu = new ContextMenu(core);
+    this.callback = () => {};
+    this.actions = null;
   }
 
   destroy() {
-    const menu = document.getElementById('osjs-context-menu');
-    if (menu) {
-      menu.remove();
-    }
-
-    this.contextmenu.destroy();
+    this.callback = null;
+    this.actions = null;
   }
 
-  async init() {
-    this.core.singleton('osjs/contextmenu', () => ({
-      show: (...args) => this.contextmenu.show(...args),
-      hide: (...args) => this.contextmenu.hide(...args)
-    }));
-
-    this.core.$root.addEventListener('contextmenu', (ev) => {
-      if (validContextMenuTarget(ev)) {
-        return;
+  init() {
+    this.actions = app({
+      oncreate: el => console.error(el),
+      visible: false,
+      menu: [],
+      position: {
+        top: 0,
+        left: 0
       }
+    }, {
+      show: (options) => state => {
+        let {menu, position} = options;
+        if (position instanceof Event) {
+          position = {left: position.clientX, top: position.clientY};
+        } else if (position instanceof Element) {
+          const box = position.getBoundingClientRect();
+          position = {
+            left: box.x,
+            top: box.y + box.height
+          };
+        }
 
-      ev.stopPropagation();
-      ev.preventDefault();
-    });
+        this.callback = (...args) => {
+          if (options.callback) {
+            options.callback(...args);
+          }
+
+          this.actions.hide();
+        };
+
+        return {visible: true, menu, position};
+      },
+      hide: () => state => {
+        this.callback = null;
+
+        return {visible: false};
+      }
+    }, view((...args) => {
+      if (!this.core.destroyed) {
+        if (this.callback) {
+          this.callback(...args);
+        }
+      }
+    }), this.core.$root);
   }
 
-  start() {
-    this.core.$root.addEventListener('click', (ev) => {
-      const menu = document.getElementById('osjs-context-menu');
-      const hit = menu.contains(ev.target);
+  show(...args) {
+    return this.actions ? this.actions.show(...args) : null;
+  }
 
-      if (!hit && this.contextmenu) {
-        this.contextmenu.hide();
-      }
-    }, true);
-
-    this.contextmenu.init();
+  hide(...args) {
+    return this.actions ? this.actions.hide(...args) : null;
   }
 }

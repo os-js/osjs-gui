@@ -67,8 +67,6 @@ const Menu = (props) => h('div', {
     top: props.position ? String(props.position.top) + 'px' : 0,
     left: props.position ? String(props.position.left) + 'px' : 0
   }
-}, [
-  ul(props, props.menu)
-]);
+}, ul(props, props.menu));
 
 export default Menu;
