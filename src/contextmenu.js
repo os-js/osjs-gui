@@ -31,14 +31,30 @@
 import {h, app} from 'hyperapp';
 import Menu from './components/Menu';
 
+const clampPosition = (root, ev) => {
+  const ul = ev.target.querySelector('ul');
+  if (!ul || !ul.offsetParent) {
+    return;
+  }
+
+  ul.classList.remove('clamp-right');
+
+  const rect = ul.getBoundingClientRect();
+  const right = rect.x + rect.width;
+  if (right > root.offsetWidth) {
+    ul.classList.add('clamp-right');
+  }
+};
+
 /*
  * Context Menu view
  */
-const view = callback => (state, actions) => h(Menu, {
-  position: state.position,
-  visible: state.visible,
-  menu: state.menu,
-  onclick: callback
+const view = callback => (props, actions) => h(Menu, {
+  position: props.position,
+  visible: props.visible,
+  menu: props.menu,
+  onclick: callback,
+  onshow: actions.onshow
 });
 
 export default class ContextMenu {
@@ -56,7 +72,6 @@ export default class ContextMenu {
 
   init() {
     this.actions = app({
-      oncreate: el => console.error(el),
       visible: false,
       menu: [],
       position: {
@@ -64,7 +79,10 @@ export default class ContextMenu {
         left: 0
       }
     }, {
-      show: (options) => state => {
+      onshow: (ev) => props => {
+        setTimeout(() => clampPosition(this.core.$root, ev), 1);
+      },
+      show: (options) => props => {
         let {menu, position} = options;
         if (position instanceof Event) {
           position = {left: position.clientX, top: position.clientY};
@@ -86,7 +104,7 @@ export default class ContextMenu {
 
         return {visible: true, menu, position};
       },
-      hide: () => state => {
+      hide: () => props => {
         this.callback = null;
 
         return {visible: false};

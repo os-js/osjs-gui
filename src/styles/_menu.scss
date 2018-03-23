@@ -54,6 +54,8 @@
           background-position: 0 50%;
           background-repeat: no-repeat;
           position: relative;
+          pointer-events: none;
+          white-space: nowrap;
         }
 
         &[data-has-image] > span {
@@ -78,6 +80,11 @@
           position: absolute;
           left: 100%;
           top: 0;
+
+          &.clamp-right {
+            left: auto;
+            right: 100%;
+          }
         }
 
         &:hover > ul {

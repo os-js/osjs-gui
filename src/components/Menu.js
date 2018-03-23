@@ -30,11 +30,13 @@
 
 import {h} from 'hyperapp';
 
-const ul = (props, children = []) => h('ul', {}, children.map(
+const ul = (props, children = [], level = 0) => h('ul', {class: ''}, children.map(
   child => h('li', {}, [
     h('div', {
       'data-has-image': child.icon ? true : undefined,
       'data-has-children': child.items ? true : undefined,
+      onmouseover: child.items ? props.onshow : undefined,
+      ontouchend: child.items ? props.onshow : undefined,
       onclick: (ev) => {
         if (child.items) {
           return;
@@ -54,7 +56,7 @@ const ul = (props, children = []) => h('ul', {}, children.map(
           backgroundImage: child.icon ? `url(${child.icon})` : undefined
         }
       }, child.label),
-      child.items ? ul(props, child.items) : null
+      child.items ? ul(props, child.items, level + 1) : null
     ].filter(c => !!c))
   ])
 ));
