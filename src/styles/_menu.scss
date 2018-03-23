@@ -48,10 +48,12 @@
         & > span {
           display: block;
           padding: $base-margin / 2;
+          padding-right: 1.5em;
           box-sizing: border-box;
           background-size: 1em;
           background-position: 0 50%;
-          background-repeat: no-repeatH
+          background-repeat: no-repeat;
+          position: relative;
         }
 
         &[data-has-image] > span {
@@ -64,7 +66,10 @@
         &[data-has-children] > span {
           &::after {
             content: '\25B6';
-            float: right;
+            position: absolute;
+            right: $base-margin / 2;
+            top: 50%;
+            transform: translateY(-50%);
           }
         }
 
