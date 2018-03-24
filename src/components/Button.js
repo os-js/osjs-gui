@@ -29,14 +29,19 @@
  */
 
 import {h} from 'hyperapp';
+import {className} from '../utils';
 
-const Button = props => h('div', {
-  className: 'osjs-gui osjs-gui-button'
-}, [
-  h('button', {
-    onclick: props.onclick,
-    disabled: props.disabled
-  }, props.label || 'Button')
+const createProps = (props, defaults = {}) => Object.keys(props)
+  .filter(k => ['class', 'style', 'label', 'inputStyle'].indexOf(k) === -1)
+  .reduce((o, k) => Object.assign(o, {[k]: props[k]}), defaults);
+
+const Button = props => h('div', createProps(props, {
+  class: className('osjs-gui-button', props),
+  style: props.style
+}), [
+  h('button', createProps(props, {
+    style: props.inputStyle
+  }), props.label || 'Button')
 ]);
 
 export default Button;
