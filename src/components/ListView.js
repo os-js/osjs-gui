@@ -42,18 +42,26 @@ const cellClassName = (props, rowIndex) => [
 
 const cell = (props, rowIndex, columnIndex, iter, data) => h('div', {
   class: cellClassName(props, rowIndex),
-  'data-has-icon': iter.icon ? true: undefined,
+  'data-has-icon': iter.icon ? true : undefined,
   style: {
     backgroundImage: iter.icon ? `url(${iter.icon})` : undefined
   },
   ondblclick: (ev) => {
     if (props.onactivate) {
-      props.onactivate(data, rowIndex);
+      props.onactivate(data, rowIndex, ev);
     }
   },
   onclick: (ev) => {
     if (props.onselect) {
-      props.onselect(data, rowIndex);
+      props.onselect(data, rowIndex, ev);
+    }
+  },
+  oncontextmenu: (ev) => {
+    if (props.onselect) {
+      props.onselect(data, rowIndex, ev);
+    }
+    if (props.oncontextmenu) {
+      props.oncontextmenu(data, rowIndex, ev);
     }
   }
 }, h('span', {}, iter.label));

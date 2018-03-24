@@ -30,6 +30,8 @@
 
 import {className} from './utils';
 
+// TODO: This is all [probably] just temporary!
+
 const listview = {
   state(props = {}) {
     return {
@@ -39,7 +41,8 @@ const listview = {
       rows: props.rows || [],
       selectedIndex: typeof props.selectedIndex === 'undefined' ? -1 : props.selectedIndex,
       onselect: props.onselect || (() => {}),
-      onactivate: props.onactivate || (() => {})
+      onactivate: props.onactivate || (() => {}),
+      oncontextmenu: props.oncontextmenu || (() => {})
     };
   },
 
