@@ -31,14 +31,14 @@
 import {h} from 'hyperapp';
 import {className} from '../utils';
 
-const createProps = (props, defaults = {}) => Object.keys(props)
-  .filter(k => ['class', 'style', 'label', 'inputStyle'].indexOf(k) === -1)
+const createProps = (props, defaults = {}, ignore = []) => Object.keys(props)
+  .filter(k => ['class', 'style', 'label', 'inputStyle', ...ignore].indexOf(k) === -1)
   .reduce((o, k) => Object.assign(o, {[k]: props[k]}), defaults);
 
 const Button = props => h('div', createProps(props, {
   class: className('osjs-gui-button', props),
   style: props.style
-}), [
+}, ['onclick']), [
   h('button', createProps(props, {
     style: props.inputStyle
   }), props.label || 'Button')
