@@ -51,6 +51,12 @@ const createProps = (defaults, props, except = []) => {
   return Object.assign({}, defaults, {
     oninput: (ev) => (props.oninput || noop)(ev.target.value, ev),
     onchange: (ev) => (props.onchange || noop)(ev.target.value, ev),
+    onkeydown: (ev) => {
+      if (ev.keyCode === 13) {
+        (props.onenter || noop)(ev.target.value, ev);
+      }
+      (props.onkeydown || noop)(ev.target.value, ev);
+    },
     multiple: props.multiple ? 'multiple' : undefined,
     style: props.inputStyle
   }, assignProps);
