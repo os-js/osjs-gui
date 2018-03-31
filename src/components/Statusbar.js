@@ -30,6 +30,11 @@
 
 import {h} from 'hyperapp';
 
+/**
+ * A status bar
+ * @param {Object} props Properties
+ * @param {h[]} children Children
+ */
 const Statusbar = (props, children) => h('div', {
   className: 'osjs-gui osjs-gui-statusbar',
 }, children);

@@ -30,6 +30,14 @@
 
 import {h} from 'hyperapp';
 
+/**
+ * A image
+ * @param {Object} props Properties
+ * @param {String} props.src The image source
+ * @param {number} [props.width] Image width
+ * @param {number} [props.height] Image height
+ * @param {Function} [props.onload] On loaded data event
+ */
 const Image = (props, children) =>
   h('div', {
     class: 'osjs-gui osjs-gui-image',

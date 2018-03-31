@@ -35,6 +35,15 @@ const createProps = (props, defaults = {}, ignore = []) => Object.keys(props)
   .filter(k => ['class', 'style', 'label', 'inputStyle', ...ignore].indexOf(k) === -1)
   .reduce((o, k) => Object.assign(o, {[k]: props[k]}), defaults);
 
+/**
+ * A button
+ * @param {Object} props Properties
+ * @param {String} [props.class] Append this className
+ * @param {Object} [props.style] CSS Style object
+ * @param {Boolean} [props.disabled] Disabled attribute
+ * @param {Object} [props.inputStyle] CSS Style object for input
+ * @param {Function} [props.onclick] Click event
+ */
 const Button = props => h('div', createProps(props, {
   class: className('osjs-gui-button', props),
   style: props.style

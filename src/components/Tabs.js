@@ -49,6 +49,12 @@ const panes = (props, children) => children
     }
   }, child));
 
+/**
+ * A tab container
+ * @param {Object} props Properties
+ * @param {String[]} props.labels Labels
+ * @param {h[]} children Tabs
+ */
 const Tabs = (props, children) =>
   h('div', {
     class: 'osjs-gui osjs-gui-tabs'

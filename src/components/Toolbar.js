@@ -30,6 +30,15 @@
 
 import {h} from 'hyperapp';
 
+/**
+ * A toolbar
+ * @desc Contains entries with spacing
+ * @param {Object} props Properties
+ * @param {String} [props.orientation=vertical] Flex direction
+ * @param {String} [props.alignItems] Align items propery
+ * @param {String} [props.justifyContent] Justify content property
+ * @param {h[]} children Children
+ */
 const Toolbar = (props, children) => h('div', {
   className: 'osjs-gui osjs-gui-toolbar',
   style: {

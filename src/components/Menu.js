@@ -61,6 +61,22 @@ const ul = (props, children = [], level = 0) => h('ul', {class: ''}, children.ma
   ])
 ));
 
+/**
+ * Menu tree
+ * @property {String} label Label
+ * @property {String} [icon] Icon source
+ * @property {Function} onclick Click callback
+ * @property {MenuItems} [items] Child items
+ * @typedef MenuItems
+ */
+
+/**
+ * A menu
+ * @param {Object} props Properties
+ * @param {Boolean} [props.visible=true] Visible property
+ * @param {Object} [posprops.ition] Position
+ * @param {MenuItems} [props.menu] Menu items
+ */
 const Menu = (props) => h('div', {
   id: 'osjs-context-menu',
   className: 'osjs-gui osjs-gui-menu',

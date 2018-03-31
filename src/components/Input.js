@@ -94,6 +94,23 @@ const types = {
   }
 };
 
+/**
+ * A input field
+ * @param {Object} props Properties
+ * @param {String} props.type The input type (text, textarea, select, radio, checkbox)
+ * @param {String} [props.class] Append this className
+ * @param {Object} [props.style] CSS Style object
+ * @param {Boolean} [props.placeholder] Placeholder attribute
+ * @param {Boolean} [props.disabled] Disabled attribute
+ * @param {Boolean} [props.multiple] Multiple attribute
+ * @param {Boolean} [props.value] Value attribute
+ * @param {Boolean} [props.readOnlye] Read Only attribute
+ * @param {Object} [props.inputStyle] CSS Style object for input
+ * @param {Map<String, String>} [props.choices] Dropdown/Select choices
+ * @param {Function} [props.onchange] Change event => (value, ev)
+ * @param {Function} [props.oninput] Input event => (value, ev)
+ * @param {Function} [props.onenter] Enter event => (value, ev)
+ */
 const Input = props => h('div', {
   class: className('osjs-gui-input', props),
   style: props.style

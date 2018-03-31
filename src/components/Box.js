@@ -31,6 +31,21 @@
 import {h} from 'hyperapp';
 import {boxProps} from '../utils';
 
+/**
+ * A flexbox
+ * @param {Object} props Properties
+ * @param {String} [props.orientation=vertical] Flex direction
+ * @param {number} [props.flexGrow] Flex grow factor
+ * @param {number} [props.flexShrink] Flex shrink factor
+ * @param {String} [props.flexBasis] Flex basis
+ * @param {String} [props.alignItems] Align items propery
+ * @param {String} [props.justifyContent] Justify content property
+ * @param {Boolean|String} [props.padding] Inner padding
+ * @param {Boolean} [props.fill=false] Fill child to fit
+ * @param {String} [props.class] Append this className
+ * @param {Object} [props.style] CSS Style object
+ * @param {h[]} children Children
+ */
 const Box = (props, children) =>
   h('div', boxProps('osjs-gui-box', props), children);
 

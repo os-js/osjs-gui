@@ -31,6 +31,14 @@
 import {h} from 'hyperapp';
 import {className, boxStyles} from '../utils';
 
+/**
+ * A flexbox container
+ * @param {Object} props Properties
+ * @param {Boolean} [props.fill=false] Fill child to fit
+ * @param {String} [props.class] Append this className
+ * @param {Object} [props.style] CSS Style object
+ * @param {h[]} children Children
+ */
 const BoxContainer = (props, children) =>
   h('div', {
     class: className('osjs-gui-box-container', props),

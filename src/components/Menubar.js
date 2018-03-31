@@ -36,6 +36,20 @@ const items = props => (props.items || [])
     onclick: (ev) => (props.onclick || function() {})(item, index, ev)
   }, item.label)));
 
+
+/**
+ * Menubar entry
+ * @property {String} label Label
+ * @property {Function} onclick Click callback
+ * @typedef MenubarItem
+ */
+
+/**
+ * A menubar container
+ * @param {Object} props Properties
+ * @param {String} [props.class] Append this className
+ * @param {MenubarItem[]} [props.items] Array of object
+ */
 const Menubar = (props, children) =>
   h('div', {
     class: className('osjs-gui-menubar', props)

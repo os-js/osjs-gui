@@ -34,6 +34,20 @@ const sources = list => list.map(item => h('source', item));
 
 const isTrue = v => typeof v === 'undefined' || v === true;
 
+/**
+ * A video
+ * @param {Object} props Properties
+ * @param {String} [props.class] Append this className
+ * @param {Object} [props.style] CSS Style object
+ * @param {String} props.src The video source
+ * @param {number} [props.width] Video width
+ * @param {number} [props.height] Video height
+ * @param {String} [props.poster] Poster image source
+ * @param {Boolean} [props.loop] Loop video
+ * @param {Boolean} [props.autoplay] Autoplay video
+ * @param {Boolean} [props.controls] Show controls
+ * @param {Function} [props.onloadeddata] On loaded data event
+ */
 const Video = (props, children) =>
   h('div', {
     class: 'osjs-gui osjs-gui-video',

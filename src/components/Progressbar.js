@@ -30,6 +30,11 @@
 
 import {h} from 'hyperapp';
 
+/**
+ * A progress bar
+ * @param {Object} props Properties
+ * @param {number} [props.value] The value (percentage)
+ */
 const Progressbar = (props, children) => h('div', {
   className: 'osjs-gui osjs-gui-progressbar'
 }, [

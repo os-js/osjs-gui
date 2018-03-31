@@ -46,7 +46,7 @@ const validContextMenuTarget = ev => {
 /**
  * OS.js GUI Service Provider
  *
- * Provides wrapper services around GUI features
+ * @desc Provides wrapper services around GUI features
  */
 export default class GUIServiceProvider {
 

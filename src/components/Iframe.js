@@ -31,7 +31,18 @@
 import {h} from 'hyperapp';
 import {className} from '../utils';
 
+/**
+ * A iframe
+ * @param {Object} props Properties
+ * @param {String} props.src The frame source
+ * @param {number} [props.frameborder=0] Frame border
+ * @param {h[]} children Children
+ */
 const Iframe = (props, children) =>
-  h('iframe', Object.assign({frameborder: 0}, props, {class: className('osjs-gui-iframe', props)}), children);
+  h('iframe', Object.assign({
+    frameborder: 0
+  }, props, {
+    class: className('osjs-gui-iframe', props)
+  }), children);
 
 export default Iframe;
