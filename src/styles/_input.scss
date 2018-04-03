@@ -28,6 +28,15 @@
  * @licence Simplified BSD License
  */
 
+@mixin centered {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
 .osjs-gui-input {
   & > select,
   & > textarea,
@@ -45,6 +54,20 @@
     user-select: all;
     font-family: inherit;
     font-size: inherit;
+  }
+
+  &.osjs-gui-input-select {
+    & > select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    &::after {
+      content: '\21B4';
+      @include centered;
+      right: 0;
+    }
   }
 
   & > .osjs-gui-input-toggle {
@@ -77,13 +100,8 @@
         &::after,
         &::before {
           content: '';
-          position: absolute;
-          top: 50%;
+          @include centered;
           left: 0;
-          transform: translateY(-50%);
-          display: inline-block;
-          width: 1em;
-          height: 1em;
         }
 
         &::after {
