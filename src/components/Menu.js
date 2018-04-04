@@ -28,6 +28,7 @@
  * @licence Simplified BSD License
  */
 
+import {icon} from '../utils';
 import {h} from 'hyperapp';
 
 const ul = (props, children = [], level = 0) => h('ul', {class: ''}, children.map(
@@ -51,11 +52,10 @@ const ul = (props, children = [], level = 0) => h('ul', {class: ''}, children.ma
         }
       }
     }, [
-      h('span', {
-        style: {
-          backgroundImage: child.icon ? `url(${child.icon})` : undefined
-        }
-      }, child.label),
+      h('span', {}, [
+        icon(child.icon),
+        child.label
+      ].filter(iter => !!iter)),
       child.items ? ul(props, child.items, level + 1) : null
     ].filter(c => !!c))
   ])

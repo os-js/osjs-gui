@@ -50,19 +50,14 @@
           padding: $base-margin / 2;
           padding-right: 1.5em;
           box-sizing: border-box;
-          background-size: 1em;
-          background-position: 0 50%;
-          background-repeat: no-repeat;
           position: relative;
           pointer-events: none;
           white-space: nowrap;
-        }
 
-        &[data-has-image] > span {
-          background-repeat: no-repeat;
-          background-position: $base-margin / 2 50%;
-          background-size: 1em;
-          padding-left: $base-margin * 2;
+          & > .osjs-icon {
+            vertical-align: middle;
+            margin-right: $base-margin / 2;
+          }
         }
 
         &[data-has-children] > span {

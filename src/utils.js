@@ -28,6 +28,8 @@
  * @licence Simplified BSD License
  */
 
+import {h} from 'hyperapp';
+
 const className = (name, props, ...args) => [
   'osjs-gui',
   props.class || props.className,
@@ -61,4 +63,12 @@ const boxProps = (name, props, defaultOrientation = 'horizontal') => {
   };
 };
 
-export {className, boxProps, boxStyles};
+const icon = (props) => h('i', {
+  'data-icon': typeof props === 'object' ? props.name : undefined,
+  class: 'osjs-icon',
+  style: {
+    backgroundImage: typeof props === 'string' ? `url(${props})` : undefined
+  }
+});
+
+export {className, boxProps, boxStyles, icon};
