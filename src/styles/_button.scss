@@ -52,5 +52,13 @@
       border : 0;
       padding : 0;
     }
+
+    & > .osjs-icon {
+      margin-right: $base-margin / 2;
+    }
+
+    & > span {
+      vertical-align: middle;
+    }
   }
 }

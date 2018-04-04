@@ -29,11 +29,23 @@
  */
 
 import {h} from 'hyperapp';
-import {className} from '../utils';
+import {className, icon} from '../utils';
 
 const createProps = (props, defaults = {}, ignore = []) => Object.keys(props)
   .filter(k => ['class', 'style', 'label', 'inputStyle', ...ignore].indexOf(k) === -1)
   .reduce((o, k) => Object.assign(o, {[k]: props[k]}), defaults);
+
+const createInner = props => {
+  const children = [];
+  if (props.icon) {
+    children.push(icon(props.icon));
+  }
+  if (typeof props.label === 'string') {
+    children.push(h('span', [], props.label));
+  }
+
+  return children;
+};
 
 /**
  * A button
@@ -50,7 +62,7 @@ const Button = props => h('div', createProps(props, {
 }, ['onclick']), [
   h('button', createProps(props, {
     style: props.inputStyle
-  }), props.label || 'Button')
+  }), createInner(props))
 ]);
 
 export default Button;

@@ -31,35 +31,54 @@
 import {icon} from '../utils';
 import {h} from 'hyperapp';
 
-const ul = (props, children = [], level = 0) => h('ul', {class: ''}, children.map(
-  child => h('li', {}, [
-    h('div', {
-      'data-has-image': child.icon ? true : undefined,
-      'data-has-children': child.items ? true : undefined,
-      onmouseover: child.items ? props.onshow : undefined,
-      ontouchend: child.items ? props.onshow : undefined,
-      onclick: (ev) => {
-        if (child.items) {
-          return;
-        }
+const ul = (props, children = [], level = 0) => {
 
-        if (child.onclick) {
-          child.onclick(child, ev);
-        }
+  const label = child => {
+    const children = [];
+    if (child.icon) {
+      children.push(icon(child.icon));
+    }
+    children.push(child.label);
 
-        if (props.onclick) {
-          props.onclick(child, ev);
+    return children;
+  };
+
+  const inner = (props, child) => {
+    const children = [
+      h('span', {}, label(child))
+    ];
+
+    if (child.items) {
+      children.push(ul(props, child.items, level + 1));
+    }
+
+    return children;
+  };
+
+  return h('ul', {class: ''}, children.map(
+    child => h('li', {}, [
+      h('div', {
+        'data-has-image': child.icon ? true : undefined,
+        'data-has-children': child.items ? true : undefined,
+        onmouseover: child.items ? props.onshow : undefined,
+        ontouchend: child.items ? props.onshow : undefined,
+        onclick: (ev) => {
+          if (child.items) {
+            return;
+          }
+
+          if (child.onclick) {
+            child.onclick(child, ev);
+          }
+
+          if (props.onclick) {
+            props.onclick(child, ev);
+          }
         }
-      }
-    }, [
-      h('span', {}, [
-        icon(child.icon),
-        child.label
-      ].filter(iter => !!iter)),
-      child.items ? ul(props, child.items, level + 1) : null
-    ].filter(c => !!c))
-  ])
-));
+      }, inner(props, child))
+    ])
+  ));
+};
 
 /**
  * Menu tree
