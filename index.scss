@@ -43,8 +43,11 @@ $base-margin: 1em;
 }
 
 .osjs-gui-fill {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: $base-margin / 2;
+  left: $base-margin / 2;
+  bottom: $base-margin / 2;
+  right: $base-margin / 2;
 }
 
 @import "./src/styles/_box.scss";
