@@ -29,25 +29,32 @@
  */
 
 import {h} from 'hyperapp';
+import nestable from 'hyperapp-nestable';
+import {className} from '../utils';
 
-const isUnset = (value) => typeof value === 'undefined' || value === -1
-
-const isSelected = (props, index) => isUnset(props.selectedIndex)
-  ? index === 0
-  : index === props.selectedIndex;
-
-const headers = (props, children) => (props.labels || [])
+const headers = (labels, state, actions) => (labels || [])
   .map((label, index) => h('div', {
-    class: isSelected(props, index) ? 'active' : '',
-    onclick: ev => (props.onchange || function() {})(index, ev)
+    class: state.selectedIndex === index ? 'active' : '',
+    onclick: ev => actions.setSelectedIndex(index)
   }, h('span', {}, label)));
 
-const panes = (props, children) => children
+const panes = (state, children) => children
   .map((child, index) => h('div', {
     style: {
-      display: isSelected(props, index) ? 'block' : 'none'
+      display: state.selectedIndex === index ? 'block' : 'none'
     }
   }, child));
+
+const view = nestable({
+  selectedIndex: 0
+}, {
+  setSelectedIndex: selectedIndex => state => ({selectedIndex})
+}, (state, actions) => (props, children) => h('div', {
+  class: 'osjs-gui-tabs-wrapper'
+}, [
+  h('div', {class: 'header'}, headers(props.labels, state, actions)),
+  h('div', {class: 'panes'}, panes(state, children))
+]), 'div');
 
 /**
  * A tab container
@@ -55,12 +62,8 @@ const panes = (props, children) => children
  * @param {String[]} props.labels Labels
  * @param {h[]} children Tabs
  */
-const Tabs = (props, children) =>
-  h('div', {
-    class: 'osjs-gui osjs-gui-tabs'
-  }, [
-    h('div', {class: 'header'}, headers(props, children)),
-    h('div', {class: 'panes'}, panes(props, children))
-  ]);
+const Tabs = (props, children) => h('div', {
+  class: className('osjs-gui-tabs', props)
+}, h(view, Object.assign({class: 'osjs-gui-tabs-inner'}, props), children));
 
 export default Tabs;

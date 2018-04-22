@@ -30,27 +30,38 @@
 
 .osjs-gui-tabs {
   display: flex;
-  flex-direction: column;
 
-  & > .header {
+  .osjs-gui-tabs-inner {
     display: flex;
-    flex: 0 0;
-
-    & > div {
-      padding: $base-margin / 2;
-      cursor: pointer;
-      position: relative;
-      z-index: 2;
-    }
+    flex-grow: 1;
   }
 
-  & > .panes {
-    position: relative;
-    z-index: 1;
-    flex: 1 1;
+  .osjs-gui-tabs-wrapper {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 
-    & > div {
-      padding: $base-margin / 2;
+    & > .header {
+      display: flex;
+      flex-shrink: 0;
+
+      & > div {
+        padding: $base-margin / 2;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+        white-space: nowrap;
+      }
+    }
+
+    & > .panes {
+      position: relative;
+      z-index: 1;
+      flex-grow: 1;
+
+      & > div {
+        padding: $base-margin / 2;
+      }
     }
   }
 }
