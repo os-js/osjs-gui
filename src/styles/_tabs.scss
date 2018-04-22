@@ -58,10 +58,12 @@
       position: relative;
       z-index: 1;
       flex-grow: 1;
+      display: flex;
 
       & > div {
         display: none;
         padding: $base-margin / 2;
+        width: 100%;
 
         &.active {
           display: block;
