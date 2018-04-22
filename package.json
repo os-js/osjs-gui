@@ -1,6 +1,6 @@
 {
   "name": "@osjs/gui",
-  "version": "3.0.0-alpha.8",
+  "version": "3.0.0-alpha.9",
   "description": "OS.js v3 GUI",
   "main": "index.js",
   "style": "index.scss",
@@ -15,7 +15,8 @@
     "osjs"
   ],
   "dependencies": {
-    "hyperapp": "^1.2.5"
+    "hyperapp": "^1.2.5",
+    "hyperapp-nestable": "^1.0.0"
   },
   "author": "Anders Evenrud <andersevenrud@gmail.com>",
   "license": "BSD-2-Clause",
