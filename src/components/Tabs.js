@@ -40,9 +40,7 @@ const headers = (labels, state, actions) => (labels || [])
 
 const panes = (state, children) => children
   .map((child, index) => h('div', {
-    style: {
-      display: state.selectedIndex === index ? 'block' : 'none'
-    }
+    class: state.selectedIndex === index ? 'active' : 'none'
   }, child));
 
 const view = nestable({
