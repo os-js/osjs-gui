@@ -58,6 +58,7 @@ const ul = (props, children = [], level = 0) => {
   return h('ul', {class: ''}, children.map(
     child => h('li', {}, [
       h('div', {
+        class: 'osjs-gui-menu-container',
         'data-has-image': child.icon ? true : undefined,
         'data-has-children': child.items ? true : undefined,
         onmouseover: child.items ? props.onshow : undefined,

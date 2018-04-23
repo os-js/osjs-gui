@@ -32,7 +32,13 @@ import {h, app} from 'hyperapp';
 import Menu from './components/Menu';
 
 const clampPosition = (root, ev) => {
-  const ul = ev.target.querySelector('ul');
+  let ul = ev.target.querySelector('ul');
+
+  // FIXME: Safari reports wrong item
+  if (ul.classList.contains('osjs-gui-menu-container')) {
+    ul = ul.parentNode.parentNode;
+  }
+
   if (!ul || !ul.offsetParent) {
     return;
   }
@@ -40,8 +46,7 @@ const clampPosition = (root, ev) => {
   ul.classList.remove('clamp-right');
 
   const rect = ul.getBoundingClientRect();
-  const right = rect.x + rect.width;
-  if (right > root.offsetWidth) {
+  if (rect.right > root.offsetWidth) {
     ul.classList.add('clamp-right');
   }
 };
@@ -71,6 +76,8 @@ export default class ContextMenu {
   }
 
   init() {
+    let clampTimeout;
+
     this.actions = app({
       visible: false,
       menu: [],
@@ -80,7 +87,8 @@ export default class ContextMenu {
       }
     }, {
       onshow: (ev) => props => {
-        setTimeout(() => clampPosition(this.core.$root, ev), 1);
+        clearTimeout(clampTimeout);
+        clampTimeout = setTimeout(() => clampPosition(this.core.$root, ev), 1);
       },
       show: (options) => props => {
         let {menu, position} = options;
@@ -89,8 +97,8 @@ export default class ContextMenu {
         } else if (position instanceof Element) {
           const box = position.getBoundingClientRect();
           position = {
-            left: box.x,
-            top: box.y + box.height
+            left: box.left,
+            top: box.top + box.height
           };
         }
 
