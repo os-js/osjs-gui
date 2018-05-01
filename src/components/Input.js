@@ -112,7 +112,7 @@ const types = {
  * @param {Function} [props.onenter] Enter event => (value, ev)
  */
 const Input = props => h('div', {
-  class: className('osjs-gui-input', props, `osjs-gui-input-${props.type}`),
+  class: className('osjs-gui-input', props, `osjs-gui-input-${props.type || 'text'}`),
   style: props.style
 }, [
   types[props.type]

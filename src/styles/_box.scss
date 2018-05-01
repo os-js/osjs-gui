@@ -42,4 +42,8 @@
   padding: $base-margin / 2;
   overflow: hidden;
   flex-shrink: 0;
+
+  & > .osjs-gui {
+    flex-basis: 100%;
+  }
 }

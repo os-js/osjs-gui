@@ -30,32 +30,25 @@
 
 .osjs-gui-panes {
   display: flex;
-  width: 100%;
   height: 100%;
 
   & > .pane {
     position: relative;
     margin: $base-margin / 2;
     box-sizing: border-box;
+    overflow: hidden;
 
     &:last-of-type {
       flex-grow: 1;
     }
 
     & > .osjs-gui {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      width: 100%;
+      height: 100%;
     }
   }
 
   &.osjs-gui-vertical {
-    & > .pane {
-      height: calc(100% - #{$base-margin});
-    }
-
     & > .spacer {
       height: 100%;
       width: $base-margin / 2;
@@ -65,10 +58,6 @@
   }
 
   &.osjs-gui-horizontal {
-    & > .pane {
-      width: calc(100% - #{$base-margin});
-    }
-
     & > .spacer {
       width: 100%;
       height: $base-margin / 2;

@@ -33,7 +33,6 @@ import {h} from 'hyperapp';
 const className = (name, props, ...args) => [
   'osjs-gui',
   props.class || props.className,
-  props.fill ? 'osjs-gui-fill' : '',
   name,
   ...args
 ].filter(s => !!s).join(' ').trim();
