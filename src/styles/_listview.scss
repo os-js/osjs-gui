@@ -30,13 +30,23 @@
 
 .osjs-gui-list-view {
   display: flex;
-  overflow: auto; /* FIXME */
+  overflow: none;
+  position: relative;
 
-  & > .pane {
+  .osjs-gui-list-view-wrapper {
+    display: flex;
+    flex-basis: 100%;
+    overflow: auto;
+    align-items: flex-start;
+  }
+
+  .pane {
     display: flex;
     flex-direction: column;
     min-width: 1em;
     min-height: 1em;
+    position: relative;
+    flex: 1 1;
 
     &:last-child {
       flex-grow: 1;
@@ -44,12 +54,20 @@
 
     .cell,
     .header {
+      position: relative;
       padding: $base-margin / 2;
       flex-shrink: 0;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
       min-height: 1em;
+      z-index: 1;
+    }
+
+    .header {
+      z-index: 10;
+      position: sticky;
+      top: 0;
     }
   }
 }

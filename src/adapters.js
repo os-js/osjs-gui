@@ -28,29 +28,19 @@
  * @licence Simplified BSD License
  */
 
-import {className} from './utils';
 
 // TODO: This is all [probably] just temporary!
 
 const listview = {
   state(props = {}) {
-    return {
-      class: className('osjs-gui-list-view', props),
-      hideColumns: props.hideColumns || false,
-      columns: props.columns || [],
-      rows: props.rows || [],
-      selectedIndex: typeof props.selectedIndex === 'undefined' ? -1 : props.selectedIndex,
-      onselect: props.onselect || (() => {}),
-      onactivate: props.onactivate || (() => {}),
-      oncontextmenu: props.oncontextmenu || (() => {})
-    };
+    // TODO: Remove me
+    return props;
   },
 
   actions(actions = {}) {
     return Object.assign({}, actions, {
-      setSelectedIndex: value => state => {
-        return {selectedIndex: value};
-      }
+      setScrollTop: scrollTop => state => ({scrollTop}),
+      setSelectedIndex: selectedIndex => state => ({selectedIndex})
     });
   },
 
@@ -58,7 +48,6 @@ const listview = {
     return Object.assign({}, props, {
       onselect: (data, n) => {
         actions.setSelectedIndex(n);
-
         if (props.onselect) {
           props.onselect(data, n);
         }

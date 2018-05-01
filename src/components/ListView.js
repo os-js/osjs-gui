@@ -31,83 +31,90 @@
 import {h} from 'hyperapp';
 import {className} from '../utils';
 
-const label = cell => cell
-  ? (typeof cell === 'object' ? cell.label : String(cell))
-  : '';
+const defaultRow = {
+  active: false,
+  data: null,
+  columns: []
+};
 
-const cellClassName = (props, rowIndex) => [
-  'cell',
-  props.selectedIndex === rowIndex ? 'active' : ''
-].join(' ').trim();
+const getColumn = iter => typeof iter === 'string' || !iter
+  ? {label: iter}
+  : Object.assign({}, iter); // FIXME
 
-const cell = (props, rowIndex, columnIndex, iter, data) => h('div', {
-  class: cellClassName(props, rowIndex),
-  'data-has-icon': iter.icon ? true : undefined,
-  style: {
-    backgroundImage: iter.icon ? `url(${iter.icon})` : undefined
-  },
-  ondblclick: (ev) => {
-    if (props.onactivate) {
-      props.onactivate(data, rowIndex, ev);
-    }
-  },
-  onclick: (ev) => {
-    if (props.onselect) {
-      props.onselect(data, rowIndex, ev);
-    }
-  },
-  oncontextmenu: (ev) => {
-    if (props.onselect) {
-      props.onselect(data, rowIndex, ev);
-    }
-    if (props.oncontextmenu) {
-      props.oncontextmenu(data, rowIndex, ev);
-    }
+const convertRows = rows => rows.map(row => {
+  if (row instanceof Array) {
+    row = Object.assign({}, defaultRow, {
+      data: row,
+      columns: row
+    });
+  } else {
+    row = Object.assign({}, defaultRow, row);
   }
-}, h('span', {}, iter.label));
 
-const cols = (props, col, columnIndex) => [
+  row.columns = row.columns.map(getColumn);
+  return row;
+});
+
+const cols = (paneIndex, props) => (row, rowIndex) => {
+  const col = row.columns[paneIndex];
+  const selected = props.selectedIndex === rowIndex;
+
+  return h('div', {
+    'data-has-icon': col.icon ? true : undefined,
+    class: 'cell' + (selected ? ' active' : ''),
+    style: {
+      backgroundImage: col.icon ? `url(${col.icon})` : undefined
+    },
+    ondblclick: (ev) => {
+      props.onactivate(row.data, rowIndex, ev);
+    },
+    onclick: (ev) => {
+      props.onselect(row.data, rowIndex, ev);
+    },
+    oncontextmenu: (ev) => {
+      props.onselect(row.data, rowIndex, ev);
+      props.oncontextmenu(row.data, rowIndex, ev);
+    }
+  }, col.label);
+};
+
+const pane = (index, col, props) => h('div', {class: 'pane'}, [
   h('div', {
     class: 'header',
     style: {
       display: props.hideColumns ? 'none' : undefined
     }
-  }, h('span', {}, label(col))),
+  }, getColumn(col).label),
+  h('div', {class: 'rows'}, props.rows.map(cols(index, props)))
+]);
 
-  h('div', {
-    class: 'overflow'
-  }, props.rows.map((row, rowIndex) => {
-    let iter;
-    let data;
-    if (row instanceof Array) {
-      data = row[columnIndex];
-      iter = {label: row[columnIndex]};
-    } else if (typeof row === 'object') {
-      iter = row.columns[columnIndex];
-
-      if (iter === null || typeof iter !== 'object') {
-        iter = {label: iter};
-      }
-
-      data = row.data || iter.label;
-    } else {
-      iter = {label: row};
-      data = row;
+const view = props => h('div', {
+  class: 'osjs-gui-list-view-wrapper',
+  oncreate: el => (el.scrollTop = props.scrollTop),
+  onupdate: el => {
+    if (props.selectedIndex < 0) {
+      el.scrollTop = props.scrollTop;
     }
+  }
+}, props.columns.map((c, i) => pane(i, c, props)));
 
+const ListView = props => {
+  const newProps = Object.assign({
+    hideColumns: false,
+    selectedIndex: -1,
+    scrollTop: 0,
+    columns: [],
+    rows: [],
+    onactivate: function() {},
+    onselect: function() {},
+    oncontextmenu: function() {}
+  }, props);
 
-    return cell(props, rowIndex, columnIndex, iter, data);
-  }))
-];
+  newProps.rows = convertRows(newProps.rows);
 
-const panes = (props) => (col, columnIndex) => h('div', {
-  className: 'pane',
-  style: {width: '150px'} // FIXME
-}, cols(props, col, columnIndex))
-
-const ListView = props =>
-  h('div', {
+  return h('div', {
     class: className('osjs-gui-list-view', props),
-  }, props.columns.map(panes(props)));
+  }, view(newProps));
+};
 
 export default ListView;
