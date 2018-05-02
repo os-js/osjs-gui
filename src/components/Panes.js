@@ -29,26 +29,65 @@
  */
 
 import {h} from 'hyperapp';
-import {boxProps, className} from '../utils';
+import nestable from 'hyperapp-nestable';
+import {boxProps} from '../utils';
 
-const panes = (props, children, bp) => {
+const onmousedown = (ev, actions, orientation) => {
+  const {target, clientX, clientY} = ev;
+  const pane = target.previousSibling;
+  const {offsetWidth, offsetHeight} = pane;
+  const index = Array.from(target.parentNode.children).indexOf(pane);
+  const maxWidth = pane.parentNode.offsetWidth * 0.8;
+  const maxHeight = pane.parentNode.offsetHeight * 0.8;
+
+  if (index < 0) {
+    return;
+  }
+
+  const mousemove = ev => {
+    ev.preventDefault();
+
+    let size = orientation === 'vertical' ? offsetWidth : offsetHeight;
+
+    if (orientation === 'vertical') {
+      const diffX = ev.clientX - clientX;
+      size = Math.min(maxWidth, size + diffX);
+    } else {
+      const diffY = ev.clientY - clientY;
+      size = Math.min(maxHeight, size + diffY);
+    }
+
+    actions.setSize({index, size});
+  };
+
+  const mouseup = ev => {
+    ev.preventDefault();
+    document.removeEventListener('mousemove', mousemove);
+    document.removeEventListener('mouseup', mouseup);
+  };
+
+  ev.preventDefault();
+  document.addEventListener('mousemove', mousemove);
+  document.addEventListener('mouseup', mouseup);
+};
+
+const panes = (state, actions, children, bp) => {
   const orientation = bp.style.flexDirection === 'row' ? 'vertical' : 'horizontal';
 
   const spacers = Array(Math.ceil(children.length / 2))
     .fill(null)
     .map(() => h('div', {
       class: 'spacer',
-      onmousedown: ev => props.onmousedown(ev, props, orientation)
+      onmousedown: ev => onmousedown(ev, actions, orientation)
     }));
 
   const child = (c, i) => {
-    const w = props.sizes[i] ? String(props.sizes[i]) + 'px' : undefined;
+    const w = state.sizes[i] ? String(state.sizes[i]) + 'px' : undefined;
 
     return h('div', {
       class: 'pane',
       style: {
-        width: w,
-        flexBasis: w
+        flex: w ? `0 0 ${w}` : w
       }
     }, c);
   };
@@ -60,9 +99,27 @@ const panes = (props, children, bp) => {
     .filter(v => typeof v !== 'undefined');
 };
 
-const Panes = (props, children) => {
-  const bp = boxProps('osjs-gui-panes', props, 'vertical');
-  return h('div', bp, panes(props, children, bp));
+const view = (state, actions) => (props, children) => {
+  const bp = boxProps('osjs-gui-panes-inner', {
+    orientation: props.orientation
+  }, 'vertical');
+
+  return h('div', bp, panes(state, actions, children, bp));
 };
+
+const inner = nestable({
+  sizes: []
+}, {
+  init: props => ({sizes: props.sizes || [150]}),
+  setSize: ({index, size}) => state => {
+    const sizes = [].concat(state.sizes);
+    sizes[index] = size;
+    return {sizes};
+  }
+}, view, 'div');
+
+const Panes = (props, children) => h(inner, {
+  class: 'osjs-gui-panes'
+}, children);
 
 export default Panes;

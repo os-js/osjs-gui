@@ -29,40 +29,46 @@
  */
 
 .osjs-gui-panes {
-  display: flex;
   height: 100%;
+  overflow: hidden;
 
-  & > .pane {
-    position: relative;
-    margin: $base-margin / 2;
-    box-sizing: border-box;
-    overflow: hidden;
+  & > .osjs-gui-panes-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
 
-    &:last-of-type {
-      flex-grow: 1;
+    & > .pane {
+      position: relative;
+      margin: $base-margin / 2;
+      box-sizing: border-box;
+      overflow: hidden;
+
+      &:last-of-type {
+        flex-grow: 1;
+      }
+
+      & > .osjs-gui {
+        width: 100%;
+        height: 100%;
+      }
     }
 
-    & > .osjs-gui {
-      width: 100%;
-      height: 100%;
+    &.osjs-gui-vertical {
+      & > .spacer {
+        height: 100%;
+        width: $base-margin / 2;
+        min-width: $base-margin / 2;
+        cursor: ew-resize;
+      }
     }
-  }
 
-  &.osjs-gui-vertical {
-    & > .spacer {
-      height: 100%;
-      width: $base-margin / 2;
-      min-width: $base-margin / 2;
-      cursor: ew-resize;
-    }
-  }
-
-  &.osjs-gui-horizontal {
-    & > .spacer {
-      width: 100%;
-      height: $base-margin / 2;
-      min-height: $base-margin / 2;
-      cursor: ns-resize;
+    &.osjs-gui-horizontal {
+      & > .spacer {
+        width: 100%;
+        height: $base-margin / 2;
+        min-height: $base-margin / 2;
+        cursor: ns-resize;
+      }
     }
   }
 }

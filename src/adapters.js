@@ -52,63 +52,20 @@ const listview = {
           props.onselect(data, n);
         }
       }
-    })
+    });
   }
 };
 
+// TODO: Remove me
 const panes = {
   state(props = {}) {
-    const onmousedown = (ev, props, orientation) => {
-      const {target, clientX, clientY} = ev;
-      const pane = target.nextSibling;
-      const {offsetWidth, offsetHeight} = pane;
-      const index = Array.from(target.parentNode.children).indexOf(pane) - 1;
-
-      if (index < 0) {
-        return;
-      }
-
-      const mousemove = ev => {
-        ev.preventDefault();
-
-        let size = orientation === 'vertical' ? offsetWidth : offsetHeight;
-
-        if (orientation === 'vertical') {
-          const diffX = ev.clientX - clientX;
-          size -= diffX;
-        } else {
-          const diffY = ev.clientY - clientY;
-          size -= diffY;
-        }
-
-        props.setSize({index, size});
-      };
-
-      const mouseup = ev => {
-        ev.preventDefault();
-        document.removeEventListener('mousemove', mousemove);
-        document.removeEventListener('mouseup', mouseup);
-      };
-
-      ev.preventDefault();
-      document.addEventListener('mousemove', mousemove);
-      document.addEventListener('mouseup', mouseup);
-    };
-
-    return Object.assign({}, {
-      sizes: props.sizes || [150],
-      onmousedown
+    return Object.assign({
+      sizes: []
     }, props);
   },
 
   actions(actions = {}) {
-    return Object.assign({}, actions, {
-      setSize: ({index, size}) => state => {
-        const sizes = [].concat(state.sizes);
-        sizes[index] = size;
-        return {sizes};
-      }
-    });
+    return Object.assign({}, actions);
   },
 
   proxy(props, actions) {
