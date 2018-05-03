@@ -56,7 +56,7 @@ const convertRows = rows => rows.map(row => {
 });
 
 const cols = (paneIndex, props) => (row, rowIndex) => {
-  const col = row.columns[paneIndex];
+  const col = row.columns[paneIndex] || {};
   const selected = props.selectedIndex === rowIndex;
 
   return h('div', {
