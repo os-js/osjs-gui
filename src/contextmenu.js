@@ -33,6 +33,9 @@ import Menu from './components/Menu';
 
 const clampPosition = (root, ev) => {
   let ul = ev.target.querySelector('ul');
+  if (!ul) {
+    return;
+  }
 
   // FIXME: Safari reports wrong item
   if (ul.classList.contains('osjs-gui-menu-container')) {
