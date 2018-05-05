@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {className} from '../utils';
+import {className, icon} from '../utils';
 
 const defaultRow = {
   active: false,
@@ -58,13 +58,16 @@ const convertRows = rows => rows.map(row => {
 const cols = (paneIndex, props) => (row, rowIndex) => {
   const col = row.columns[paneIndex] || {};
   const selected = props.selectedIndex === rowIndex;
+  const colIcon = col.icon ? icon(col.icon) : null;
+  const children = [h('span', {}, [col.label])];
+
+  if (colIcon) {
+    children.unshift(colIcon);
+  }
 
   return h('div', {
     'data-has-icon': col.icon ? true : undefined,
     class: 'cell' + (selected ? ' active' : ''),
-    style: {
-      backgroundImage: col.icon ? `url(${col.icon})` : undefined
-    },
     ondblclick: (ev) => {
       props.onactivate(row.data, rowIndex, ev);
     },
@@ -75,7 +78,7 @@ const cols = (paneIndex, props) => (row, rowIndex) => {
       props.onselect(row.data, rowIndex, ev);
       props.oncontextmenu(row.data, rowIndex, ev);
     }
-  }, col.label);
+  }, children);
 };
 
 const pane = (index, col, props) => h('div', {class: 'pane'}, [

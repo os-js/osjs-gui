@@ -33,6 +33,10 @@
   overflow: none;
   position: relative;
 
+  .osjs-icon {
+    margin-right: $base-margin / 2;
+  }
+
   .osjs-gui-list-view-wrapper {
     display: flex;
     flex-basis: 100%;
@@ -57,11 +61,16 @@
       position: relative;
       padding: $base-margin / 2;
       flex-shrink: 0;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      min-height: 1em;
       z-index: 1;
+      min-height: 1em;
+      display: flex;
+
+      & > span {
+        min-height: 1em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
 
     .header {
