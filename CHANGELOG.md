@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.12
+
+* Added npmignore
+* Added CHANGELOG
+
 ## 3.0.0-alpha.11
 
 * Better icon support in ListView
