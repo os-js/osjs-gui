@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.13
+
+* Added checkbox support for menu items
+
 ## 3.0.0-alpha.12
 
 * Added npmignore
