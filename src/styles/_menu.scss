@@ -57,6 +57,23 @@
           & > .osjs-icon {
             margin-right: $base-margin / 2;
           }
+
+          & > .osjs-gui-menu-checkbox {
+            margin-right: $base-margin / 2;
+
+            &::after {
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              content: '\2713';
+              text-align: center;
+              display: none;
+            }
+
+            &.active::after {
+              display: inline;
+            }
+          }
         }
 
         &[data-has-children] > span {

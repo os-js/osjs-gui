@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-@mixin centered {
+@mixin gui-input-centered {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -66,7 +66,7 @@
 
     &::after {
       content: '\21B4';
-      @include centered;
+      @include gui-input-centered;
       right: 0;
     }
   }
@@ -101,12 +101,12 @@
         &::after,
         &::before {
           content: '';
-          @include centered;
+          @include gui-input-centered;
           left: 0;
         }
 
         &::after {
-          content: 'x';
+          content: '\274C';
           display: none;
           text-align: center;
         }

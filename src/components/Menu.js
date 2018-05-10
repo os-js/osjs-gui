@@ -35,9 +35,14 @@ const ul = (props, children = [], level = 0) => {
 
   const label = child => {
     const children = [];
-    if (child.icon) {
+    if (typeof child.checked === 'boolean') {
+      children.push(h('span', {
+        class: 'osjs-gui-menu-checkbox ' + (child.checked ? 'active' : '')
+      }));
+    } else if (child.icon) {
       children.push(icon(child.icon));
     }
+
     children.push(child.label);
 
     return children;
