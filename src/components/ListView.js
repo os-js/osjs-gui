@@ -31,93 +31,87 @@
 import {h} from 'hyperapp';
 import {className, icon} from '../utils';
 
-const defaultRow = {
-  active: false,
-  data: null,
-  columns: []
-};
+const createView = props => {
 
-const getColumn = iter => typeof iter === 'string' || !iter
-  ? {label: iter}
-  : Object.assign({}, iter); // FIXME
+  const cols = (paneIndex) => (row, rowIndex) => {
+    const col = row.columns[paneIndex] || {};
+    const selected = props.selectedIndex === rowIndex;
+    const colIcon = col.icon ? icon(col.icon) : null;
+    const children = [h('span', {}, [typeof col === 'object' ? col.label : col])];
 
-const convertRows = rows => rows.map(row => {
-  if (row instanceof Array) {
-    row = Object.assign({}, defaultRow, {
-      data: row,
-      columns: row
-    });
-  } else {
-    row = Object.assign({}, defaultRow, row);
-  }
+    if (colIcon) {
+      children.unshift(colIcon);
+    }
 
-  row.columns = row.columns.map(getColumn);
-  return row;
-});
+    return h('div', {
+      'data-has-icon': col.icon ? true : undefined,
+      class: 'cell' + (selected ? ' active' : ''),
+      ondblclick: (ev) => props.onactivate({data: row.data, index: rowIndex, ev}),
+      onclick: (ev) => props.onselect({data: row.data, index: rowIndex, ev}),
+      oncontextmenu: (ev) => props.oncontextmenu({data: row.data, index: rowIndex, ev})
+    }, children);
+  };
 
-const cols = (paneIndex, props) => (row, rowIndex) => {
-  const col = row.columns[paneIndex] || {};
-  const selected = props.selectedIndex === rowIndex;
-  const colIcon = col.icon ? icon(col.icon) : null;
-  const children = [h('span', {}, [col.label])];
-
-  if (colIcon) {
-    children.unshift(colIcon);
-  }
+  const pane = (index, col) => h('div', {class: 'pane'}, [
+    h('div', {
+      class: 'header',
+      style: {
+        display: props.hideColumns ? 'none' : undefined
+      }
+    }, typeof col === 'object' ? col.label : col),
+    h('div', {class: 'rows'}, props.rows.map(cols(index)))
+  ]);
 
   return h('div', {
-    'data-has-icon': col.icon ? true : undefined,
-    class: 'cell' + (selected ? ' active' : ''),
-    ondblclick: (ev) => {
-      props.onactivate(row.data, rowIndex, ev);
-    },
-    onclick: (ev) => {
-      props.onselect(row.data, rowIndex, ev);
-    },
-    oncontextmenu: (ev) => {
-      props.onselect(row.data, rowIndex, ev);
-      props.oncontextmenu(row.data, rowIndex, ev);
+    class: 'osjs-gui-list-view-wrapper',
+    oncreate: el => (el.scrollTop = props.scrollTop),
+    onupdate: el => {
+      if (props.selectedIndex < 0) {
+        el.scrollTop = props.scrollTop;
+      }
     }
-  }, children);
+  }, props.columns.map((c, i) => pane(i, c)));
 };
 
-const pane = (index, col, props) => h('div', {class: 'pane'}, [
-  h('div', {
-    class: 'header',
-    style: {
-      display: props.hideColumns ? 'none' : undefined
-    }
-  }, getColumn(col).label),
-  h('div', {class: 'rows'}, props.rows.map(cols(index, props)))
-]);
+export const ListView = props => h('div', {
+  class: className('osjs-gui-list-view', props),
+}, createView(props));
 
-const view = props => h('div', {
-  class: 'osjs-gui-list-view-wrapper',
-  oncreate: el => (el.scrollTop = props.scrollTop),
-  onupdate: el => {
-    if (props.selectedIndex < 0) {
-      el.scrollTop = props.scrollTop;
-    }
-  }
-}, props.columns.map((c, i) => pane(i, c, props)));
+export const listView = ({
+  component: (state, actions) => {
+    const newProps = Object.assign({
+      columns: [],
+      rows: [],
+      onselect: ({data, index, ev}) => {
+        actions.select({data, index, ev});
+        actions.setSelectedIndex(index);
+      },
+      onactivate: ({data, index, ev}) => {
+        actions.activate({data, index, ev});
+        actions.setSelectedIndex(-1);
+      },
+      oncontextmenu: ({data, index, ev}) => {
+        actions.select({data, index, ev});
+        actions.contextmenu({data, index, ev});
+        actions.setSelectedIndex(index);
+      }
+    }, state);
 
-const ListView = props => {
-  const newProps = Object.assign({
-    hideColumns: false,
+    return (props = {}) => ListView(Object.assign(newProps, props));
+  },
+
+  state: state => Object.assign({
     selectedIndex: -1,
-    scrollTop: 0,
-    columns: [],
-    rows: [],
-    onactivate: function() {},
-    onselect: function() {},
-    oncontextmenu: function() {}
-  }, props);
+    scrollTop: 0
+  }, state),
 
-  newProps.rows = convertRows(newProps.rows);
-
-  return h('div', {
-    class: className('osjs-gui-list-view', props),
-  }, view(newProps));
-};
-
-export default ListView;
+  actions: actions => Object.assign({
+    select: () => () => ({}),
+    activate: () => () => ({}),
+    contextmenu: () => () => ({}),
+    setRows: rows => ({rows}),
+    setColumns: columns => ({columns}),
+    setScrollTop: scrollTop => state => ({scrollTop}),
+    setSelectedIndex: selectedIndex => state => ({selectedIndex})
+  }, actions || {})
+});

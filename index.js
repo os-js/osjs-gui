@@ -38,15 +38,15 @@ import Toolbar from './src/components/Toolbar';
 import Statusbar from './src/components/Statusbar';
 import Menubar from './src/components/Menubar';
 import Panes from './src/components/Panes';
-import ListView from './src/components/ListView';
+import {ListView, listView} from './src/components/ListView';
 import Image from './src/components/Image';
 import Video from './src/components/Video';
 import Tabs from './src/components/Tabs';
 import Iframe from './src/components/Iframe';
-import * as adapters from './src/adapters';
 import GUIServiceProvider from './src/provider';
 
 export {
+  listView,
   GUIServiceProvider,
   Box,
   BoxContainer,
@@ -62,6 +62,5 @@ export {
   Image,
   Video,
   Tabs,
-  Iframe,
-  adapters
+  Iframe
 };
