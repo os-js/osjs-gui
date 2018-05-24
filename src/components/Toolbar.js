@@ -40,9 +40,11 @@ import {h} from 'hyperapp';
  * @param {h[]} children Children
  */
 const Toolbar = (props, children) => h('div', {
-  className: 'osjs-gui osjs-gui-toolbar',
+  className: 'osjs-gui osjs-gui-toolbar osjs-gui-' + (props.orientation || 'horizontal'),
   style: {
-    flexDirection: (props.orientation === 'horizontal') ? 'column' : 'row',
+    flexDirection: props.orientation === 'vertical'
+      ? 'column'
+      : 'row',
     alignItems: props.align,
     justifyContent: props.justify
   }
