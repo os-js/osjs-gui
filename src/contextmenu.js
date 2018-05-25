@@ -31,7 +31,7 @@
 import {h, app} from 'hyperapp';
 import Menu from './components/Menu';
 
-const clampPosition = (root, ev) => {
+const clampSubMenu = (root, ev) => {
   let ul = ev.target.querySelector('ul');
   if (!ul) {
     return;
@@ -54,6 +54,26 @@ const clampPosition = (root, ev) => {
   }
 };
 
+const clampMenu = (root, el, currentPosition) => {
+  const result = {};
+  const bottom = currentPosition.top + el.offsetHeight;
+  const right = currentPosition.left + el.offsetWidth;
+  const offY = root.offsetHeight - currentPosition.top;
+  const offX = root.offsetWidth - currentPosition.left;
+  const overflowRight = right > root.offsetWidth;
+  const overflowBottom = bottom > root.offsetHeight;
+
+  if (overflowBottom) {
+    result.top = root.offsetHeight - el.offsetHeight - offY;
+  }
+
+  if (overflowRight) {
+    result.left = root.offsetWidth - el.offsetHeight - offX;
+  }
+
+  return (overflowBottom || overflowRight) ? result : null;
+};
+
 /*
  * Context Menu view
  */
@@ -62,7 +82,9 @@ const view = callback => (props, actions) => h(Menu, {
   visible: props.visible,
   menu: props.menu,
   onclick: callback,
-  onshow: actions.onshow
+  onshow: actions.onshow,
+  onupdate: el => actions.clamp(el),
+  oncreate: el => actions.clamp(el)
 });
 
 export default class ContextMenu {
@@ -89,9 +111,18 @@ export default class ContextMenu {
         left: 0
       }
     }, {
+      clamp: (el) => props => {
+        const root = this.core.$root;
+
+        clearTimeout(clampTimeout);
+        const newPosition = clampMenu(root, el, props.position);
+        if (newPosition) {
+          return {position: newPosition};
+        }
+      },
       onshow: (ev) => props => {
         clearTimeout(clampTimeout);
-        clampTimeout = setTimeout(() => clampPosition(this.core.$root, ev), 1);
+        clampTimeout = setTimeout(() => clampSubMenu(this.core.$root, ev), 1);
       },
       show: (options) => props => {
         let {menu, position} = options;

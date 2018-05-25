@@ -105,6 +105,8 @@ const ul = (props, children = [], level = 0) => {
 const Menu = (props) => h('div', {
   id: 'osjs-context-menu',
   className: 'osjs-gui osjs-gui-menu',
+  oncreate: props.oncreate,
+  onupdate: props.onupdate,
   style: {
     display: props.visible !== false ? 'block' : 'none',
     top: props.position ? String(props.position.top) + 'px' : 0,
