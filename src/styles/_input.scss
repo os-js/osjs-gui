@@ -28,20 +28,13 @@
  * @licence Simplified BSD License
  */
 
-@mixin gui-input-centered {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-}
-
+.osjs-gui-field,
 .osjs-gui-input {
+  position: relative;
 
-  & > select,
-  & > textarea,
-  & > input {
+  select,
+  textarea,
+  input {
     display: block;
     width: 100%;
     height: 100%;
@@ -56,8 +49,12 @@
     font-family: inherit;
     font-size: inherit;
   }
+}
 
-  &.osjs-gui-input-select {
+.osjs-gui-select-field {
+  & > div {
+    position: relative;
+
     & > select {
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -66,51 +63,75 @@
 
     &::after {
       content: '\21B4';
-      @include gui-input-centered;
-      right: 0;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      right: $base-margin / 2;
     }
   }
+}
 
-  & > .osjs-gui-input-toggle {
-    & > label {
+.osjs-gui-toggle-field {
+  & > label {
+    position: relative;
+    display: inline-block;
+    user-select: none !important;
+    display: flex;
+
+    & > input {
+      display: block;
+      position: absolute;
+      visibility: hidden;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      &:checked + span::after {
+        display: block;
+      }
+    }
+
+    & > .osjs-toggle-input {
       position: relative;
       display: inline-block;
+      width: 1em;
+      height: 1em;
 
-      & > input {
-        display: block;
+      &::after,
+      &::before {
+        content: '';
         position: absolute;
-        visibility: hidden;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-
-        &:checked + span::after {
-          display: block;
-        }
+        width: 1em;
+        height: 1em;
       }
 
-      & > span {
-        display: block;
-        position: relative;
-        padding-left: $base-margin * 1.5;
-
-        &::after,
-        &::before {
-          content: '';
-          @include gui-input-centered;
-          left: 0;
-        }
-
-        &::after {
-          content: '\274C';
-          display: none;
-          text-align: center;
-        }
+      &::before {
+        z-index: 10;
       }
+
+      &::after {
+        content: '\274C';
+        display: none;
+        font-size: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 20;
+      }
+    }
+
+    & > .osjs-toggle-label {
+      display: block;
+      flex-grow: 1;
+      position: relative;
+      padding-left: $base-margin / 2;
     }
   }
 }

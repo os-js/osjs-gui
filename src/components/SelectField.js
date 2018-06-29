@@ -28,23 +28,33 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-box {
-  display: flex;
+import {h} from 'hyperapp';
+import {fieldWrapper} from '../utils';
 
-  & > .osjs-gui-menubar,
-  & > .osjs-gui-toolbar,
-  & > .osjs-gui-statusbar {
-    flex-shrink: 0;
-  }
-}
+/**
+ * A text field
+ * @param {Object} props Properties
+ * @param {h[]} children Children
+ */
+const SelectField = (props = {}, children = []) => {
+  const choices = Object.keys(props.choices || {})
+    .reduce((result, key) => {
+      result.push(h('option', {
+        value: key,
+        selected: props.key === props.choices[key]
+      }, props.choices[key]));
+      return result;
+    }, []);
 
-.osjs-gui-box > .osjs-gui,
-.osjs-gui-box-container {
-  padding: $base-margin / 2;
-  overflow: hidden;
-  flex-shrink: 0;
+  const getValue = ev => [ev.target.value, ev.target.textContent];
+  const createField = fieldProps => h('div', {}, h('select', fieldProps, [
+    ...choices,
+    ...children
+  ]));
 
-  & > .osjs-gui {
-    flex-basis: 100%;
-  }
-}
+  return fieldWrapper('select-field', props, {
+    selectedIndex: undefined
+  }, createField, getValue);
+};
+
+export default SelectField;

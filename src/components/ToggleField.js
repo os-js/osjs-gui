@@ -28,23 +28,33 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-box {
-  display: flex;
+import {h} from 'hyperapp';
+import {fieldWrapper} from '../utils';
 
-  & > .osjs-gui-menubar,
-  & > .osjs-gui-toolbar,
-  & > .osjs-gui-statusbar {
-    flex-shrink: 0;
-  }
-}
+/**
+ * A text field
+ * @param {Object} props Properties
+ * @param {h[]} children Children
+ */
+const ToggleField = (props = {}, children = []) =>
+  fieldWrapper('toggle-field', props, {
+    type: 'checkbox',
+    checked: false
+  }, (fieldProps) => h('label', {
 
-.osjs-gui-box > .osjs-gui,
-.osjs-gui-box-container {
-  padding: $base-margin / 2;
-  overflow: hidden;
-  flex-shrink: 0;
+  }, [
+    h('input', fieldProps),
+    h('span', {
+      class: 'osjs-toggle-input'
+    }),
+    h('span', {
+      class: 'osjs-toggle-label'
+    }, [
+      props.label || '',
+      ...children
+    ])
+  ]), ev => [props.type === 'radio'
+    ? JSON.parse(ev.target.value)
+    : !!ev.target.checked]);
 
-  & > .osjs-gui {
-    flex-basis: 100%;
-  }
-}
+export default ToggleField;

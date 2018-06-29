@@ -28,23 +28,17 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-box {
-  display: flex;
+import {h} from 'hyperapp';
+import {fieldWrapper} from '../utils';
 
-  & > .osjs-gui-menubar,
-  & > .osjs-gui-toolbar,
-  & > .osjs-gui-statusbar {
-    flex-shrink: 0;
-  }
-}
+/**
+ * A text field
+ * @param {Object} props Properties
+ * @param {h[]} children Children
+ */
+const TextareaField = (props = {}, children = []) =>
+  fieldWrapper('textarea-field', props, {
+    rows: 4
+  }, (fieldProps) => h('textarea', fieldProps, children));
 
-.osjs-gui-box > .osjs-gui,
-.osjs-gui-box-container {
-  padding: $base-margin / 2;
-  overflow: hidden;
-  flex-shrink: 0;
-
-  & > .osjs-gui {
-    flex-basis: 100%;
-  }
-}
+export default TextareaField;

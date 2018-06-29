@@ -31,7 +31,6 @@
 import Box from './src/components/Box';
 import BoxContainer from './src/components/BoxContainer';
 import Button from './src/components/Button';
-import Input from './src/components/Input';
 import Progressbar from './src/components/Progressbar';
 import Menu from './src/components/Menu';
 import Toolbar from './src/components/Toolbar';
@@ -45,13 +44,18 @@ import Tabs from './src/components/Tabs';
 import Iframe from './src/components/Iframe';
 import GUIServiceProvider from './src/provider';
 
+import Input from './src/components/Input';
+import TextField from './src/components/TextField';
+import TextareaField from './src/components/TextareaField';
+import SelectField from './src/components/SelectField';
+import ToggleField from './src/components/ToggleField';
+
 export {
   listView,
   GUIServiceProvider,
   Box,
   BoxContainer,
   Button,
-  Input,
   Progressbar,
   Menu,
   Panes,
@@ -62,5 +66,10 @@ export {
   Image,
   Video,
   Tabs,
-  Iframe
+  Iframe,
+  Input, // FIXME: Deprecate
+  TextField,
+  TextareaField,
+  SelectField,
+  ToggleField
 };

@@ -70,4 +70,33 @@ const icon = (props) => h('i', {
   }
 });
 
-export {className, boxProps, boxStyles, icon};
+const filteredProps = (props, filterKeys) => {
+  const keys = Object.keys(props);
+  const filter = k => filterKeys.indexOf(k) === -1;
+
+  return keys
+    .filter(filter)
+    .reduce((result, k) => Object.assign({
+      [k]: props[k]
+    }, result), {});
+};
+
+const fieldWrapper = (name, props, defaultProps, cb, cbInput) => {
+  const oninput = props.oninput || function() {};
+  const onchange = props.onchange || function() {};
+  const getValue = cbInput || (ev => [ev.target.value]);
+
+  const wrapperProps = boxProps('osjs-gui-field', props.box || {}, name);
+  const fieldProps = Object.assign(
+    {
+      oninput: ev => oninput(ev, ...getValue(ev)),
+      onchange: ev => onchange(ev, ...getValue(ev))
+    },
+    defaultProps,
+    filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])
+  );
+
+  return h('div', wrapperProps, cb(fieldProps));
+};
+
+export {className, boxProps, boxStyles, filteredProps, fieldWrapper, icon};

@@ -65,7 +65,8 @@ const createProps = (defaults, props, except = []) => {
 const toggleable = props => h('div', {className: 'osjs-gui-input-toggle'}, [
   h('label', {}, [
     h('input', createProps({
-      checked: !!props.value
+      value: props.value,
+      checked: !!props.checked
     }, props, ['checked'])),
     h('span', {}, props.label || `(${props.type})`)
   ])
@@ -111,15 +112,19 @@ const types = {
  * @param {Function} [props.oninput] Input event => (value, ev)
  * @param {Function} [props.onenter] Enter event => (value, ev)
  */
-const Input = props => h('div', {
-  class: className('osjs-gui-input', props, `osjs-gui-input-${props.type || 'text'}`),
-  style: props.style
-}, [
-  types[props.type]
-    ? types[props.type](props)
-    : h('input', createProps({
-      type: props.type || 'text'
-    }, props))
-]);
+const Input = props => {
+  console.warn('GUI Field "Input" is deprecated');
+
+  return h('div', {
+    class: className('osjs-gui-input', props, `osjs-gui-input-${props.type || 'text'}`),
+    style: props.style
+  }, [
+    types[props.type]
+      ? types[props.type](props)
+      : h('input', createProps({
+        type: props.type || 'text'
+      }, props))
+  ]);
+};
 
 export default Input;
