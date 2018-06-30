@@ -91,7 +91,6 @@ const fieldWrapper = (name, props, defaultProps, cb, cbInput) => {
   const onkeydown = props.onkeydown || function() {};
 
   const getValue = cbInput || (ev => [ev.target.value]);
-  const wrapperProps = boxProps('osjs-gui-field', props.box || {}, null);
   const fieldProps = Object.assign(
     {
       oninput: ev => oninput(ev, ...getValue(ev)),
@@ -107,9 +106,10 @@ const fieldWrapper = (name, props, defaultProps, cb, cbInput) => {
     filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])
   );
 
-  wrapperProps.class += ' osjs-gui-' + name;
-
-  return h('div', wrapperProps, cb(fieldProps));
+  return h('div', {
+    class: className('osjs-gui-' + name, props, 'osjs-gui-field'),
+    style: boxStyles(props.box || {})
+  }, cb(fieldProps));
 };
 
 export {className, boxProps, boxStyles, filteredProps, fieldWrapper, icon};

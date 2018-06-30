@@ -57,6 +57,7 @@
 .osjs-gui-select-field {
   & > div {
     position: relative;
+    flex-basis: 100%;
 
     & > select {
       -webkit-appearance: none;
