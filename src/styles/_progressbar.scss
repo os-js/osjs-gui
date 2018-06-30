@@ -28,13 +28,17 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-progressbar {
+.osjs-gui-progressbar-wrapper {
+  display: flex;
   z-index: 1;
   width: 100%;
   line-height: 2;
-  padding: $base-margin;
+  padding: $base-margin / 2;
   text-align: center;
-  min-height: 2em;
+  min-height: $base-margin * 2;
+  position: relative;
+  box-sizing: border-box;
+  flex-grow: 1;
 
   & > .value {
     position: absolute;
@@ -52,13 +56,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
 
     & > span {
       display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

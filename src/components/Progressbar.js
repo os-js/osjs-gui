@@ -29,28 +29,35 @@
  */
 
 import {h} from 'hyperapp';
+import {boxProps} from '../utils';
 
 /**
  * A progress bar
  * @param {Object} props Properties
  * @param {number} [props.value] The value (percentage)
  */
-const Progressbar = (props, children) => h('div', {
-  className: 'osjs-gui osjs-gui-progressbar'
-}, [
-  h('div', {
-    className: 'value',
-    style: {
-      width: String(props.value || 0) + '%'
-    }
-  }),
-  h('div', {
-    className: 'label',
-  }, [
-    h('span', {}, [
-      String(props.value || 0) + '%'
+const Progressbar = (props, children) => {
+  let value = typeof props.value === 'number'
+    ? Math.max(0, Math.abs(props.value)) % 100
+    : 0;
+
+  const c = h('div', {class: 'osjs-gui-progressbar-wrapper'}, [
+    h('div', {
+      className: 'value',
+      style: {
+        width: String(value) + '%'
+      }
+    }),
+    h('div', {
+      className: 'label',
+    }, [
+      h('span', {}, [
+        String(value) + '%'
+      ])
     ])
-  ])
-]);
+  ]);
+
+  return h('div', boxProps('osjs-gui-progressbar', props.box || {}), c);
+};
 
 export default Progressbar;
