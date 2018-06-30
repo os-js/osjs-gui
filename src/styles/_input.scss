@@ -50,8 +50,12 @@
   }
 }
 
-.osjs-gui-textarea-field > textarea {
-  flex-grow: 1;
+.osjs-gui-textarea-field {
+  flex-direction: column;
+
+  & > textarea {
+    flex-grow: 1;
+  }
 }
 
 .osjs-gui-select-field {
