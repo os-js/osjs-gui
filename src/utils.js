@@ -47,7 +47,7 @@ const boxStyles = (props, orientation = null) =>
     flexBasis: typeof props.basis === 'number' ? String(props.basis) + 'px' : props.basis,
     alignItems: props.align,
     justifyContent: props.justify,
-    padding: typeof props.padding === 'undefined' || props.padding === true ? undefined : '0'
+    margin: typeof props.padding === 'undefined' || props.padding === true ? undefined : '0'
   }, props.style || {});
 
 const boxProps = (name, props, defaultOrientation = 'horizontal') => {

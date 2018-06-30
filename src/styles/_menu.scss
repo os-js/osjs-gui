@@ -107,20 +107,14 @@
 }
 
 .osjs-gui-menubar {
-  display: flex;
-  padding: $base-margin / 2;
+  margin: 0 !important;
 
   & > div {
-    margin: -($base-margin / 2);
     box-sizing: border-box;
 
     & > span {
-      padding: $base-margin / 2;
+      margin: $base-margin / 2;
       display: block;
-    }
-
-    &:not(:last-child) {
-      margin-right: $base-margin / 2;
     }
   }
 }
