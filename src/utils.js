@@ -37,23 +37,27 @@ const className = (name, props, ...args) => [
   ...args
 ].filter(s => !!s).join(' ').trim();
 
-const boxStyles = (props, orientation = null) =>
-  Object.assign({}, {
-    flexDirection: orientation
-      ? orientation === 'vertical' ? 'row' : 'column'
-      : orientation,
-    flexGrow: props.grow,
-    flexShrink: props.shrink,
-    flexBasis: typeof props.basis === 'number' ? String(props.basis) + 'px' : props.basis,
-    alignItems: props.align,
-    justifyContent: props.justify,
-    margin: typeof props.padding === 'undefined' || props.padding === true ? undefined : '0'
-  }, props.style || {});
+const flexes = {
+  vertical: 'row',
+  horizontal: 'column'
+};
+
+const boxStyles = (props, orientation = null) => Object.assign({}, {
+  flexDirection: flexes[orientation],
+  flexGrow: props.grow,
+  flexShrink: props.shrink,
+  flexBasis: typeof props.basis === 'number' ? String(props.basis) + 'px' : props.basis,
+  alignItems: props.align,
+  justifyContent: props.justify,
+  margin: typeof props.padding === 'undefined' || props.padding === true ? undefined : '0'
+}, props.style || {});
 
 const boxProps = (name, props, defaultOrientation = 'horizontal') => {
   let orientation = props.orientation || defaultOrientation;
-  if (orientation !== defaultOrientation) {
-    orientation = defaultOrientation === 'horizontal' ? 'vertical' : 'horizontal';
+  if (defaultOrientation !== null) {
+    if (orientation !== defaultOrientation) {
+      orientation = defaultOrientation === 'horizontal' ? 'vertical' : 'horizontal';
+    }
   }
 
   return {
@@ -87,7 +91,7 @@ const fieldWrapper = (name, props, defaultProps, cb, cbInput) => {
   const onkeydown = props.onkeydown || function() {};
 
   const getValue = cbInput || (ev => [ev.target.value]);
-  const wrapperProps = boxProps('osjs-gui-field', props.box || {}, name);
+  const wrapperProps = boxProps('osjs-gui-field', props.box || {}, null);
   const fieldProps = Object.assign(
     {
       oninput: ev => oninput(ev, ...getValue(ev)),
@@ -102,6 +106,8 @@ const fieldWrapper = (name, props, defaultProps, cb, cbInput) => {
     defaultProps,
     filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])
   );
+
+  wrapperProps.class += ' osjs-gui-' + name;
 
   return h('div', wrapperProps, cb(fieldProps));
 };
