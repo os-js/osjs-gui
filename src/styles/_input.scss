@@ -50,6 +50,10 @@
   }
 }
 
+.osjs-gui-textarea-field > textarea {
+  flex-grow: 1;
+}
+
 .osjs-gui-select-field {
   & > div {
     position: relative;
