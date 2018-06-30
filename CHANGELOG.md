@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.16
+
+* Hotfix for textarea size
+
 ## 3.0.0-alpha.15
 
 * Updated default entry box styles
