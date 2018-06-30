@@ -1,5 +1,11 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.15
+
+* Updated default entry box styles
+* Updated iframe style
+* Some improvements to default flexing
+
 ## 3.0.0-alpha.14
 
 * Separated Input into separate Fields
