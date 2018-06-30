@@ -42,14 +42,14 @@ import Image from './src/components/Image';
 import Video from './src/components/Video';
 import Tabs from './src/components/Tabs';
 import Iframe from './src/components/Iframe';
-import GUIServiceProvider from './src/provider';
 
-import Input from './src/components/Input';
 import TextField from './src/components/TextField';
 import TextareaField from './src/components/TextareaField';
 import SelectField from './src/components/SelectField';
 import ToggleField from './src/components/ToggleField';
 import RangeField from './src/components/RangeField';
+
+import GUIServiceProvider from './src/provider';
 
 export {
   listView,
@@ -68,7 +68,6 @@ export {
   Video,
   Tabs,
   Iframe,
-  Input, // FIXME: Deprecate
   TextField,
   TextareaField,
   SelectField,
