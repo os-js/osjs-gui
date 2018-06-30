@@ -49,6 +49,7 @@ import TextField from './src/components/TextField';
 import TextareaField from './src/components/TextareaField';
 import SelectField from './src/components/SelectField';
 import ToggleField from './src/components/ToggleField';
+import RangeField from './src/components/RangeField';
 
 export {
   listView,
@@ -71,5 +72,6 @@ export {
   TextField,
   TextareaField,
   SelectField,
-  ToggleField
+  ToggleField,
+  RangeField
 };

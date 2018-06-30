@@ -84,13 +84,20 @@ const filteredProps = (props, filterKeys) => {
 const fieldWrapper = (name, props, defaultProps, cb, cbInput) => {
   const oninput = props.oninput || function() {};
   const onchange = props.onchange || function() {};
-  const getValue = cbInput || (ev => [ev.target.value]);
+  const onkeydown = props.onkeydown || function() {};
 
+  const getValue = cbInput || (ev => [ev.target.value]);
   const wrapperProps = boxProps('osjs-gui-field', props.box || {}, name);
   const fieldProps = Object.assign(
     {
       oninput: ev => oninput(ev, ...getValue(ev)),
-      onchange: ev => onchange(ev, ...getValue(ev))
+      onchange: ev => onchange(ev, ...getValue(ev)),
+      onkeydown: ev => {
+        if (ev.keyCode === 13 && props.onenter) {
+          props.onenter(ev, ...getValue(ev));
+        }
+        onkeydown(ev);
+      }
     },
     defaultProps,
     filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])

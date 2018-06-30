@@ -39,13 +39,16 @@ import {className, boxStyles} from '../utils';
  * @param {Object} [props.style] CSS Style object
  * @param {h[]} children Children
  */
-const BoxContainer = (props, children) =>
-  h('div', {
+const BoxContainer = (props, children) => {
+  console.warn('BoxContainer is deprecated, use Box');
+
+  return h('div', {
     class: className('osjs-gui-box-container', props),
     style: boxStyles(props, props.orientation),
     oncreate: props.oncreate,
     onupdate: props.onupdate,
     ondestroy: props.ondestroy
   }, children);
+};
 
 export default BoxContainer;

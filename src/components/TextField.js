@@ -39,6 +39,9 @@ import {fieldWrapper} from '../utils';
 const TextField = (props = {}, children = []) =>
   fieldWrapper('text-field', props, {
     autocomplete: 'off',
+    autocorrect: 'off',
+    autocapitalize: 'off',
+    spellcheck: 'false',
     type: 'text'
   }, (fieldProps) => h('input', fieldProps));
 

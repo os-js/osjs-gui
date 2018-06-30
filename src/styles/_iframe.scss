@@ -29,7 +29,15 @@
  */
 
 .osjs-gui-iframe {
-  display: block;
-  border: 0 none;
-  background-color: #fff;
+  & > iframe {
+    display: block;
+    border: 0 none;
+    background-color: #fff;
+    position: absolute;
+    top: $base-margin / 2;
+    left: $base-margin / 2;
+    box-sizing: border-box;
+    width: calc(100% - #{$base-margin});
+    height: calc(100% - #{$base-margin});
+  }
 }

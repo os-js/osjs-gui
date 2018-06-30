@@ -29,28 +29,16 @@
  */
 
 import {h} from 'hyperapp';
-import {fieldWrapper, icon} from '../utils';
+import {fieldWrapper} from '../utils';
 
 /**
- * A button
+ * A text field
  * @param {Object} props Properties
+ * @param {h[]} children Children
  */
-const Button = (props = {}, children = []) => 
-  fieldWrapper('button', props, {
-  }, (fieldProps) => {
-    const inner = [];
-    if (props.icon) {
-      inner.push(icon(props.icon));
-    }
+const RangeField = (props = {}, children = []) =>
+  fieldWrapper('range-field', props, {
+    type: 'range'
+  }, (fieldProps) => h('input', fieldProps));
 
-    if (typeof props.label === 'string') {
-      inner.push(h('span', [], props.label));
-    }
-
-    return h('button', fieldProps, [
-      ...inner,
-      ...children
-    ]);
-  });
-
-export default Button;
+export default RangeField;
