@@ -34,10 +34,10 @@
     border: 0 none;
     background-color: #fff;
     position: absolute;
-    top: $base-margin / 2;
-    left: $base-margin / 2;
+    top: 0;
+    left: 0;
     box-sizing: border-box;
-    width: calc(100% - #{$base-margin});
-    height: calc(100% - #{$base-margin});
+    width: 100%;
+    height: 100%;
   }
 }
