@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {className, icon} from '../utils';
+import {className, boxProps, filteredProps, icon} from '../utils';
 
 const createView = props => {
 
@@ -73,9 +73,11 @@ const createView = props => {
   }, props.columns.map((c, i) => pane(i, c)));
 };
 
-export const ListView = props => h('div', {
-  class: className('osjs-gui-list-view', props),
-}, createView(props));
+export const ListView = props => h(
+  'div',
+  boxProps('osjs-gui-list-view', props.box || {}, 'vertical'),
+  createView(filteredProps(props, ['box']))
+);
 
 export const listView = ({
   component: (state, actions) => {

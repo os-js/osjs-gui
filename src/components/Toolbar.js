@@ -29,6 +29,7 @@
  */
 
 import {h} from 'hyperapp';
+import {className} from '../utils';
 
 /**
  * A toolbar
@@ -40,7 +41,7 @@ import {h} from 'hyperapp';
  * @param {h[]} children Children
  */
 const Toolbar = (props, children) => h('div', {
-  className: 'osjs-gui osjs-gui-toolbar osjs-gui-' + (props.orientation || 'horizontal'),
+  className: className('osjs-gui-toolbar', props, 'osjs-gui-' + (props.orientation || 'horizontal')),
   style: {
     flexDirection: props.orientation === 'vertical'
       ? 'column'
