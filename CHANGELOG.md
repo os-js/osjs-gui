@@ -1,5 +1,12 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.14
+
+* Separated Input into separate Fields
+* Changed how padding/margin on flexboxes work
+* Toolbar now supports both orientations
+* New ListView context creation
+
 ## 3.0.0-alpha.13
 
 * Added checkbox support for menu items
