@@ -28,53 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-
-const className = (name, props, ...args) => [
-  'osjs-gui',
-  props.class || props.className,
-  name,
-  ...args
-].filter(s => !!s).join(' ').trim();
-
-const flexes = {
-  vertical: 'row',
-  horizontal: 'column'
-};
-
-const boxStyles = (props, orientation = null) => Object.assign({}, {
-  flexDirection: flexes[orientation],
-  flexGrow: props.grow,
-  flexShrink: props.shrink,
-  flexBasis: typeof props.basis === 'number' ? String(props.basis) + 'px' : props.basis,
-  alignItems: props.align,
-  justifyContent: props.justify,
-  margin: typeof props.padding === 'undefined' || props.padding === true ? undefined : '0'
-}, props.style || {});
-
-const boxProps = (name, props, defaultOrientation = 'horizontal') => {
-  let orientation = props.orientation || defaultOrientation;
-  if (defaultOrientation !== null) {
-    if (orientation !== defaultOrientation) {
-      orientation = defaultOrientation === 'horizontal' ? 'vertical' : 'horizontal';
-    }
-  }
-
-  return {
-    class: className(name, props, 'osjs-gui-' + orientation),
-    style: boxStyles(props, orientation)
-  };
-};
-
-const icon = (props) => h('i', {
-  'data-icon': typeof props === 'object' ? props.name : undefined,
-  class: 'osjs-icon',
-  style: {
-    backgroundImage: typeof props === 'string' ? `url(${props})` : undefined
-  }
-});
-
-const filteredProps = (props, filterKeys) => {
+export const filteredProps = (props, filterKeys) => {
   const keys = Object.keys(props);
   const filter = k => filterKeys.indexOf(k) === -1;
 
@@ -84,32 +38,3 @@ const filteredProps = (props, filterKeys) => {
       [k]: props[k]
     }, result), {});
 };
-
-const fieldWrapper = (name, props, defaultProps, cb, cbInput) => {
-  const oninput = props.oninput || function() {};
-  const onchange = props.onchange || function() {};
-  const onkeydown = props.onkeydown || function() {};
-
-  const getValue = cbInput || (ev => [ev.target.value]);
-  const fieldProps = Object.assign(
-    {
-      oninput: ev => oninput(ev, ...getValue(ev)),
-      onchange: ev => onchange(ev, ...getValue(ev)),
-      onkeydown: ev => {
-        if (ev.keyCode === 13 && props.onenter) {
-          props.onenter(ev, ...getValue(ev));
-        }
-        onkeydown(ev);
-      }
-    },
-    defaultProps,
-    filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])
-  );
-
-  return h('div', {
-    class: className('osjs-gui-' + name, props, 'osjs-gui-field'),
-    style: boxStyles(props.box || {})
-  }, cb(fieldProps));
-};
-
-export {className, boxProps, boxStyles, filteredProps, fieldWrapper, icon};

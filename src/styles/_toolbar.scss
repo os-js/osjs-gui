@@ -33,16 +33,15 @@
 
   & > .osjs-gui {
     flex-shrink: 0;
-
   }
 
-  &.osjs-gui-horizontal {
+  &.osjs-gui-vertical {
     & > .osjs-gui:not(:last-child) {
       margin-right: $base-margin;
     }
   }
 
-  &.osjs-gui-vertical {
+  &.osjs-gui-horizontal {
     & > .osjs-gui:not(:last-child) {
       margin-bottom: $base-margin;
     }

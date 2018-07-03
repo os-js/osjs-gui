@@ -30,7 +30,6 @@
 
 import {h} from 'hyperapp';
 import nestable from 'hyperapp-nestable';
-import {className} from '../utils';
 
 const headers = (labels, state, actions) => (labels || [])
   .map((label, index) => h('div', {
@@ -61,7 +60,7 @@ const view = nestable({
  * @param {h[]} children Tabs
  */
 const Tabs = (props, children) => h(view, Object.assign({
-  class: className('osjs-gui-tabs', props)
+  class: 'osjs-gui osjs-gui-tabs ' + (props.class || '')
 }, props), children);
 
 export default Tabs;

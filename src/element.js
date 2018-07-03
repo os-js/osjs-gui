@@ -27,18 +27,40 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
-
 import {h} from 'hyperapp';
-import {createField} from '../element';
+import {filteredProps} from './utils';
+import Element from './components/Element';
 
-/**
- * A text field
- * @param {Object} props Properties
- * @param {h[]} children Children
- */
-const RangeField = (props = {}, children = []) =>
-  createField('range-field', props, {
-    type: 'range'
-  }, (fieldProps) => h('input', fieldProps));
+export const createField = (name, props, defaultProps, cb, cbInput) => {
+  const oninput = props.oninput || function() {};
+  const onchange = props.onchange || function() {};
+  const onkeydown = props.onkeydown || function() {};
 
-export default RangeField;
+  const getValue = cbInput || (ev => [ev.target.value]);
+  const fieldProps = Object.assign(
+    {
+      oninput: ev => oninput(ev, ...getValue(ev)),
+      onchange: ev => onchange(ev, ...getValue(ev)),
+      onkeydown: ev => {
+        if (ev.keyCode === 13 && props.onenter) {
+          props.onenter(ev, ...getValue(ev));
+        }
+        onkeydown(ev);
+      }
+    },
+    defaultProps,
+    filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])
+  );
+
+  return h(Element, Object.assign({
+    class: 'osjs-gui-field osjs-gui-' + name
+  }, props.box || {}), cb(fieldProps));
+};
+
+export const createIcon = props => h('i', {
+  'data-icon': typeof props === 'object' ? props.name : undefined,
+  class: 'osjs-icon',
+  style: {
+    backgroundImage: typeof props === 'string' ? `url(${props})` : undefined
+  }
+});

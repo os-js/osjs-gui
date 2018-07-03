@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {fieldWrapper} from '../utils';
+import {createField} from '../element';
 
 /**
  * A text field
@@ -37,7 +37,7 @@ import {fieldWrapper} from '../utils';
  * @param {h[]} children Children
  */
 const ToggleField = (props = {}, children = []) =>
-  fieldWrapper('toggle-field', props, {
+  createField('toggle-field', props, {
     type: 'checkbox',
     checked: false
   }, (fieldProps) => h('label', {

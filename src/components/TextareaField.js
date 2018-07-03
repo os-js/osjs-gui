@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {fieldWrapper} from '../utils';
+import {createField} from '../element';
 
 /**
  * A text field
@@ -37,7 +37,7 @@ import {fieldWrapper} from '../utils';
  * @param {h[]} children Children
  */
 const TextareaField = (props = {}, children = []) =>
-  fieldWrapper('textarea-field', props, {
+  createField('textarea-field', props, {
     rows: 4
   }, (fieldProps) => h('textarea', fieldProps, children));
 

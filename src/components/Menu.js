@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {icon} from '../utils';
 import {h} from 'hyperapp';
+import {createIcon} from '../element';
 
 const ul = (props, children = [], level = 0) => {
 
@@ -40,7 +40,7 @@ const ul = (props, children = [], level = 0) => {
         class: 'osjs-gui-menu-checkbox ' + (child.checked ? 'active' : '')
       }));
     } else if (child.icon) {
-      children.push(icon(child.icon));
+      children.push(createIcon(child.icon));
     }
 
     children.push(child.label);

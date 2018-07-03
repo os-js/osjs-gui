@@ -29,7 +29,8 @@
  */
 
 import {h} from 'hyperapp';
-import {filteredProps, boxProps} from '../utils';
+import {filteredProps} from '../utils';
+import Element from './Element';
 
 /**
  * A iframe
@@ -39,7 +40,9 @@ import {filteredProps, boxProps} from '../utils';
  * @param {h[]} children Children
  */
 const Iframe = (props, children = []) =>
-  h('div', boxProps('osjs-gui-iframe', props.box), [
+  h(Element, Object.assign({
+    class: 'osjs-gui-iframe'
+  }, props.box || {}), [
     h('iframe', Object.assign({
       frameborder: 0
     }, filteredProps(props, ['box']))),

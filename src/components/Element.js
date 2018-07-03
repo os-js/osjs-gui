@@ -29,16 +29,66 @@
  */
 
 import {h} from 'hyperapp';
-import {createField} from '../element';
+
+const flexes = {
+  vertical: 'row',
+  horizontal: 'column'
+};
+
+const unitValue = (value, unset) => typeof value === 'number'
+  ? `${value}px`
+  : (value === false ? '0' : value);
+
+const boxPropNames = {
+  orientation: value => ({flexDirection: flexes[value]}),
+  grow: value => ({flexGrow: value}),
+  shrink: value => ({flexShrink: value}),
+  basis: value => ({flexBasis: unitValue}),
+  align: value => ({alignItems: value}),
+  justify: value => ({justifyContent: value}),
+  padding: value => ({margin: unitValue(value, '0')}),
+  margin: value => ({margin: unitValue(value, '0')})
+};
 
 /**
- * A text field
+ * A generic OS.js GUI container
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const RangeField = (props = {}, children = []) =>
-  createField('range-field', props, {
-    type: 'range'
-  }, (fieldProps) => h('input', fieldProps));
+const Element = (props, children = []) => {
+  let classNames = ['osjs-gui'];
 
-export default RangeField;
+  const givenClassName = props.class || props.className;
+  if (givenClassName) {
+    if (givenClassName instanceof Array) {
+      classNames = [...classNames, ...givenClassName];
+    } else {
+      classNames.push(givenClassName);
+    }
+  }
+
+  if (props.orientation) {
+    classNames.push('osjs-gui-' + props.orientation);
+  }
+
+  const defaultStyle = typeof props.style === 'string'
+    ? {}
+    : Object.assign({}, props.style || {});
+
+  const style = Object.keys(props).reduce((result, prop) => {
+    const value = boxPropNames[prop]
+      ? boxPropNames[prop](props[prop])
+      : undefined;
+
+    return Object.assign({}, result, value);
+  }, defaultStyle);
+
+  return h('div', {
+    oncreate: props.oncreate,
+    ondestroy: props.ondestroy,
+    class: classNames.join(' '),
+    style
+  }, children);
+};
+
+export default Element;

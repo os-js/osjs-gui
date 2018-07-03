@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {fieldWrapper} from '../utils';
+import {createField} from '../element';
 
 /**
  * A text field
@@ -37,7 +37,7 @@ import {fieldWrapper} from '../utils';
  * @param {h[]} children Children
  */
 const TextField = (props = {}, children = []) =>
-  fieldWrapper('text-field', props, {
+  createField('text-field', props, {
     autocomplete: 'off',
     autocorrect: 'off',
     autocapitalize: 'off',

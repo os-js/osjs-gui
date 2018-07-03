@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {fieldWrapper} from '../utils';
+import {createField} from '../element';
 
 /**
  * A text field
@@ -47,14 +47,14 @@ const SelectField = (props = {}, children = []) => {
     }, []);
 
   const getValue = ev => [ev.target.value, ev.target.textContent];
-  const createField = fieldProps => h('div', {}, h('select', fieldProps, [
+  const createSelect = fieldProps => h('div', {}, h('select', fieldProps, [
     ...choices,
     ...children
   ]));
 
-  return fieldWrapper('select-field', props, {
+  return createField('select-field', props, {
     selectedIndex: undefined
-  }, createField, getValue);
+  }, createSelect, getValue);
 };
 
 export default SelectField;

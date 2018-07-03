@@ -29,26 +29,18 @@
  */
 
 import {h} from 'hyperapp';
-import {className} from '../utils';
+import Element from './Element';
 
 /**
  * A toolbar
  * @desc Contains entries with spacing
  * @param {Object} props Properties
- * @param {String} [props.orientation=vertical] Flex direction
- * @param {String} [props.alignItems] Align items propery
- * @param {String} [props.justifyContent] Justify content property
  * @param {h[]} children Children
  */
-const Toolbar = (props, children) => h('div', {
-  className: className('osjs-gui-toolbar', props, 'osjs-gui-' + (props.orientation || 'horizontal')),
-  style: {
-    flexDirection: props.orientation === 'vertical'
-      ? 'column'
-      : 'row',
-    alignItems: props.align,
-    justifyContent: props.justify
-  }
-}, children);
+const Toolbar = (props, children) =>
+  h(Element, Object.assign({
+    class: 'osjs-gui-toolbar',
+    orientation: 'vertical'
+  }, props), children);
 
 export default Toolbar;

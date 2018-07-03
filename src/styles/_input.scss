@@ -47,6 +47,7 @@
     user-select: all;
     font-family: inherit;
     font-size: inherit;
+    border-radius: 0;
   }
 }
 
@@ -118,6 +119,7 @@
         position: absolute;
         width: 1em;
         height: 1em;
+        box-sizing: border-box;
       }
 
       &::before {

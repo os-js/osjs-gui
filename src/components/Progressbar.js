@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {boxProps} from '../utils';
+import Element from './Element';
 
 /**
  * A progress bar
@@ -57,7 +57,9 @@ const Progressbar = (props, children) => {
     ])
   ]);
 
-  return h('div', boxProps('osjs-gui-progressbar', props.box || {}), c);
+  return h(Element, Object.assign({
+    class: 'osjs-gui-progressbar'
+  }, props.box || {}), c);
 };
 
 export default Progressbar;

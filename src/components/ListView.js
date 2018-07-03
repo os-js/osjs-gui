@@ -29,14 +29,16 @@
  */
 
 import {h} from 'hyperapp';
-import {className, boxProps, filteredProps, icon} from '../utils';
+import {filteredProps} from '../utils';
+import {createIcon} from '../element';
+import Element from './Element';
 
 const createView = props => {
 
   const cols = (paneIndex) => (row, rowIndex) => {
     const col = row.columns[paneIndex] || {};
     const selected = props.selectedIndex === rowIndex;
-    const colIcon = col.icon ? icon(col.icon) : null;
+    const colIcon = col.icon ? createIcon(col.icon) : null;
     const children = [h('span', {}, [typeof col === 'object' ? col.label : col])];
 
     if (colIcon) {
@@ -73,11 +75,9 @@ const createView = props => {
   }, props.columns.map((c, i) => pane(i, c)));
 };
 
-export const ListView = props => h(
-  'div',
-  boxProps('osjs-gui-list-view', props.box || {}, 'vertical'),
-  createView(filteredProps(props, ['box']))
-);
+export const ListView = props => h(Element, Object.assign({
+  class: 'osjs-gui-list-view'
+}, props.box || {}), createView(filteredProps(props, ['box'])));
 
 export const listView = ({
   component: (state, actions) => {

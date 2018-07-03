@@ -29,23 +29,16 @@
  */
 
 import {h} from 'hyperapp';
-import {className, boxStyles} from '../utils';
+import Element from './Element';
 
 /**
  * A flexbox container
  * @param {Object} props Properties
- * @param {Boolean} [props.fill=false] Fill child to fit
- * @param {String} [props.class] Append this className
- * @param {Object} [props.style] CSS Style object
  * @param {h[]} children Children
  */
 const BoxContainer = (props, children) =>
-  h('div', {
-    class: className('osjs-gui-box-container', props),
-    style: boxStyles(props, props.orientation),
-    oncreate: props.oncreate,
-    onupdate: props.onupdate,
-    ondestroy: props.ondestroy
-  }, children);
+  h(Element, Object.assign({
+    class: 'osjs-gui-box-container'
+  }, props), children);
 
 export default BoxContainer;

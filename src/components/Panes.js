@@ -30,7 +30,7 @@
 
 import {h} from 'hyperapp';
 import nestable from 'hyperapp-nestable';
-import {boxProps} from '../utils';
+import Element from './Element';
 
 const onmousedown = (ev, actions, orientation) => {
   const {target, clientX, clientY} = ev;
@@ -71,9 +71,7 @@ const onmousedown = (ev, actions, orientation) => {
   document.addEventListener('mouseup', mouseup);
 };
 
-const panes = (state, actions, children, bp) => {
-  const orientation = bp.style.flexDirection === 'row' ? 'vertical' : 'horizontal';
-
+const panes = (state, actions, children, orientation) => {
   const spacers = Array(Math.ceil(children.length / 2))
     .fill(null)
     .map(() => h('div', {
@@ -100,11 +98,12 @@ const panes = (state, actions, children, bp) => {
 };
 
 const view = (state, actions) => (props, children) => {
-  const bp = boxProps('osjs-gui-panes-inner', {
-    orientation: props.orientation
-  }, 'vertical');
+  const orientation = props.orientation || 'vertical';
 
-  return h('div', bp, panes(state, actions, children, bp));
+  return h(Element, {
+    orientation,
+    class: 'osjs-gui-panes-inner'
+  }, panes(state, actions, children, orientation));
 };
 
 const inner = nestable({

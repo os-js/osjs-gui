@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {className} from '../utils';
+import Element from './Element';
 
 const items = props => (props.items || [])
   .map((item, index) => h('div', {}, h('span', {
@@ -47,12 +47,14 @@ const items = props => (props.items || [])
 /**
  * A menubar container
  * @param {Object} props Properties
- * @param {String} [props.class] Append this className
  * @param {MenubarItem[]} [props.items] Array of object
  */
-const Menubar = (props, children) =>
-  h('div', {
-    class: className('osjs-gui-menubar', props)
-  }, items(props));
+const Menubar = (props, children = []) =>
+  h(Element, Object.assign({
+    class: 'osjs-gui-menubar'
+  }, props), [
+    ...items(props),
+    ...children
+  ]);
 
 export default Menubar;

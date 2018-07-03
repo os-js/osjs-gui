@@ -29,18 +29,18 @@
  */
 
 import {h} from 'hyperapp';
-import {fieldWrapper, icon} from '../utils';
+import {createField, createIcon} from '../element';
 
 /**
  * A button
  * @param {Object} props Properties
  */
 const Button = (props = {}, children = []) => 
-  fieldWrapper('button', props, {
+  createField('button', props, {
   }, (fieldProps) => {
     const inner = [];
     if (props.icon) {
-      inner.push(icon(props.icon));
+      inner.push(createIcon(props.icon));
     }
 
     if (typeof props.label === 'string') {
