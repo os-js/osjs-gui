@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import Element from './Element';
+import {Element} from './Element';
 
 /**
  * A toolbar
@@ -37,10 +37,8 @@ import Element from './Element';
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const Toolbar = (props, children) =>
+export const Toolbar = (props, children) =>
   h(Element, Object.assign({
     class: 'osjs-gui-toolbar',
     orientation: 'vertical'
   }, props), children);
-
-export default Toolbar;

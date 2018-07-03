@@ -36,7 +36,7 @@ import {createField} from '../element';
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const SelectField = (props = {}, children = []) => {
+export const SelectField = (props = {}, children = []) => {
   const choices = Object.keys(props.choices || {})
     .reduce((result, key) => {
       result.push(h('option', {
@@ -56,5 +56,3 @@ const SelectField = (props = {}, children = []) => {
     selectedIndex: undefined
   }, createSelect, getValue);
 };
-
-export default SelectField;

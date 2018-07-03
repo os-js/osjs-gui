@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import ContextMenu from './contextmenu.js';
+import {ContextMenu} from './contextmenu.js';
 
 /*
  * Check if a target allows for context menu
@@ -48,7 +48,7 @@ const validContextMenuTarget = ev => {
  *
  * @desc Provides wrapper services around GUI features
  */
-export default class GUIServiceProvider {
+export class GUIServiceProvider {
 
   constructor(core) {
     this.core = core;

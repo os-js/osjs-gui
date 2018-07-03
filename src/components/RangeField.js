@@ -36,9 +36,7 @@ import {createField} from '../element';
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const RangeField = (props = {}, children = []) =>
+export const RangeField = (props = {}, children = []) =>
   createField('range-field', props, {
     type: 'range'
   }, (fieldProps) => h('input', fieldProps));
-
-export default RangeField;

@@ -28,49 +28,24 @@
  * @licence Simplified BSD License
  */
 
-import Box from './src/components/Box';
-import BoxContainer from './src/components/BoxContainer';
-import Button from './src/components/Button';
-import Progressbar from './src/components/Progressbar';
-import Menu from './src/components/Menu';
-import Toolbar from './src/components/Toolbar';
-import Statusbar from './src/components/Statusbar';
-import Menubar from './src/components/Menubar';
-import Panes from './src/components/Panes';
-import {ListView, listView} from './src/components/ListView';
-import Image from './src/components/Image';
-import Video from './src/components/Video';
-import Tabs from './src/components/Tabs';
-import Iframe from './src/components/Iframe';
-
-import TextField from './src/components/TextField';
-import TextareaField from './src/components/TextareaField';
-import SelectField from './src/components/SelectField';
-import ToggleField from './src/components/ToggleField';
-import RangeField from './src/components/RangeField';
-
-import GUIServiceProvider from './src/provider';
-
-export {
-  listView,
-  GUIServiceProvider,
-  Box,
-  BoxContainer,
-  Button,
-  Progressbar,
-  Menu,
-  Panes,
-  Toolbar,
-  Statusbar,
-  Menubar,
-  ListView,
-  Image,
-  Video,
-  Tabs,
-  Iframe,
-  TextField,
-  TextareaField,
-  SelectField,
-  ToggleField,
-  RangeField
-};
+export * from './src/components/Element';
+export * from './src/components/Box';
+export * from './src/components/BoxContainer';
+export * from './src/components/Button';
+export * from './src/components/Progressbar';
+export * from './src/components/Menu';
+export * from './src/components/Toolbar';
+export * from './src/components/Statusbar';
+export * from './src/components/Menubar';
+export * from './src/components/Panes';
+export * from './src/components/ListView';
+export * from './src/components/Image';
+export * from './src/components/Video';
+export * from './src/components/Tabs';
+export * from './src/components/Iframe';
+export * from './src/components/TextField';
+export * from './src/components/TextareaField';
+export * from './src/components/SelectField';
+export * from './src/components/ToggleField';
+export * from './src/components/RangeField';
+export * from './src/provider';

@@ -59,8 +59,6 @@ const view = nestable({
  * @param {String[]} props.labels Labels
  * @param {h[]} children Tabs
  */
-const Tabs = (props, children) => h(view, Object.assign({
+export const Tabs = (props, children) => h(view, Object.assign({
   class: 'osjs-gui osjs-gui-tabs ' + (props.class || '')
 }, props), children);
-
-export default Tabs;

@@ -35,7 +35,7 @@ import {createField, createIcon} from '../element';
  * A button
  * @param {Object} props Properties
  */
-const Button = (props = {}, children = []) => 
+export const Button = (props = {}, children = []) => 
   createField('button', props, {
   }, (fieldProps) => {
     const inner = [];
@@ -52,5 +52,3 @@ const Button = (props = {}, children = []) =>
       ...children
     ]);
   });
-
-export default Button;

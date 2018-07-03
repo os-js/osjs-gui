@@ -102,7 +102,7 @@ const ul = (props, children = [], level = 0) => {
  * @param {Object} [posprops.ition] Position
  * @param {MenuItems} [props.menu] Menu items
  */
-const Menu = (props) => h('div', {
+export const Menu = (props) => h('div', {
   id: 'osjs-context-menu',
   className: 'osjs-gui osjs-gui-menu',
   oncreate: props.oncreate,
@@ -113,5 +113,3 @@ const Menu = (props) => h('div', {
     left: props.position ? String(props.position.left) + 'px' : 0
   }
 }, ul(props, props.menu));
-
-export default Menu;

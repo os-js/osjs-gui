@@ -30,7 +30,7 @@
 
 import {h} from 'hyperapp';
 import nestable from 'hyperapp-nestable';
-import Element from './Element';
+import {Element} from './Element';
 
 const onmousedown = (ev, actions, orientation) => {
   const {target, clientX, clientY} = ev;
@@ -117,8 +117,6 @@ const inner = nestable({
   }
 }, view, 'div');
 
-const Panes = (props, children) => h(inner, {
+export const Panes = (props, children) => h(inner, {
   class: 'osjs-gui-panes'
 }, children);
-
-export default Panes;

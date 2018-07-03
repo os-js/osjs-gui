@@ -55,7 +55,7 @@ const boxPropNames = {
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const Element = (props, children = []) => {
+export const Element = (props, children = []) => {
   let classNames = ['osjs-gui'];
 
   const givenClassName = props.class || props.className;
@@ -90,5 +90,3 @@ const Element = (props, children = []) => {
     style
   }, children);
 };
-
-export default Element;

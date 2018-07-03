@@ -29,14 +29,14 @@
  */
 
 import {h} from 'hyperapp';
-import Element from './Element';
+import {Element} from './Element';
 
 /**
  * A progress bar
  * @param {Object} props Properties
  * @param {number} [props.value] The value (percentage)
  */
-const Progressbar = (props, children) => {
+export const Progressbar = (props, children) => {
   let value = typeof props.value === 'number'
     ? Math.max(0, Math.abs(props.value)) % 100
     : 0;
@@ -61,5 +61,3 @@ const Progressbar = (props, children) => {
     class: 'osjs-gui-progressbar'
   }, props.box || {}), c);
 };
-
-export default Progressbar;

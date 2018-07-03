@@ -29,7 +29,7 @@
  */
 
 import {h, app} from 'hyperapp';
-import Menu from './components/Menu';
+import {Menu} from './components/Menu';
 
 const clampSubMenu = (root, ev) => {
   let ul = ev.target.querySelector('ul');
@@ -87,7 +87,7 @@ const view = callback => (props, actions) => h(Menu, {
   oncreate: el => actions.clamp(el)
 });
 
-export default class ContextMenu {
+export class ContextMenu {
 
   constructor(core) {
     this.core = core;

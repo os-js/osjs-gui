@@ -30,7 +30,7 @@
 
 import {h} from 'hyperapp';
 import {filteredProps} from '../utils';
-import Element from './Element';
+import {Element} from './Element';
 
 /**
  * A iframe
@@ -39,7 +39,7 @@ import Element from './Element';
  * @param {number} [props.frameborder=0] Frame border
  * @param {h[]} children Children
  */
-const Iframe = (props, children = []) =>
+export const Iframe = (props, children = []) =>
   h(Element, Object.assign({
     class: 'osjs-gui-iframe'
   }, props.box || {}), [
@@ -48,5 +48,3 @@ const Iframe = (props, children = []) =>
     }, filteredProps(props, ['box']))),
     ...children
   ]);
-
-export default Iframe;

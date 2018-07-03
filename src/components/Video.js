@@ -48,7 +48,7 @@ const isTrue = v => typeof v === 'undefined' || v === true;
  * @param {Boolean} [props.controls] Show controls
  * @param {Function} [props.onloadeddata] On loaded data event
  */
-const Video = (props, children) =>
+export const Video = (props, children) =>
   h('div', {
     class: 'osjs-gui osjs-gui-video',
     style: {
@@ -71,5 +71,3 @@ const Video = (props, children) =>
       ondestroy: props.ondestroy
     }, sources(props.sources || []))
   ]);
-
-export default Video;

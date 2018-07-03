@@ -29,17 +29,15 @@
  */
 
 import {h} from 'hyperapp';
-import Element from './Element';
+import {Element} from './Element';
 
 /**
  * A flexbox
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const Box = (props, children) =>
+export const Box = (props, children) =>
   h(Element, Object.assign({
     class: 'osjs-gui-box',
     orientation: 'horizontal'
   }, props), children);
-
-export default Box;

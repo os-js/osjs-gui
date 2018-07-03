@@ -29,7 +29,7 @@
  */
 import {h} from 'hyperapp';
 import {filteredProps} from './utils';
-import Element from './components/Element';
+import {Element} from './components/Element';
 
 export const createField = (name, props, defaultProps, cb, cbInput) => {
   const oninput = props.oninput || function() {};

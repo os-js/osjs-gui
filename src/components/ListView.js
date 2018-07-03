@@ -31,7 +31,7 @@
 import {h} from 'hyperapp';
 import {filteredProps} from '../utils';
 import {createIcon} from '../element';
-import Element from './Element';
+import {Element} from './Element';
 
 const createView = props => {
 

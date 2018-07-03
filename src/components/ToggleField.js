@@ -36,7 +36,7 @@ import {createField} from '../element';
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const ToggleField = (props = {}, children = []) =>
+export const ToggleField = (props = {}, children = []) =>
   createField('toggle-field', props, {
     type: 'checkbox',
     checked: false
@@ -56,5 +56,3 @@ const ToggleField = (props = {}, children = []) =>
   ]), ev => [props.type === 'radio'
     ? JSON.parse(ev.target.value)
     : !!ev.target.checked]);
-
-export default ToggleField;

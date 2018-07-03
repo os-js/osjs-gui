@@ -38,7 +38,7 @@ import {h} from 'hyperapp';
  * @param {number} [props.height] Image height
  * @param {Function} [props.onload] On loaded data event
  */
-const Image = (props, children) =>
+export const Image = (props, children) =>
   h('div', {
     class: 'osjs-gui osjs-gui-image',
     style: {
@@ -56,5 +56,3 @@ const Image = (props, children) =>
       ondestroy: props.ondestroy
     })
   ]);
-
-export default Image;

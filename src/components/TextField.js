@@ -36,7 +36,7 @@ import {createField} from '../element';
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const TextField = (props = {}, children = []) =>
+export const TextField = (props = {}, children = []) =>
   createField('text-field', props, {
     autocomplete: 'off',
     autocorrect: 'off',
@@ -44,5 +44,3 @@ const TextField = (props = {}, children = []) =>
     spellcheck: 'false',
     type: 'text'
   }, (fieldProps) => h('input', fieldProps));
-
-export default TextField;

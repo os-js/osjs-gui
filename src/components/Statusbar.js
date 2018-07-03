@@ -29,16 +29,14 @@
  */
 
 import {h} from 'hyperapp';
-import Element from './Element';
+import {Element} from './Element';
 
 /**
  * A status bar
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const Statusbar = (props, children) =>
+export const Statusbar = (props, children) =>
   h(Element, Object.assign({
     class: 'osjs-gui-statusbar',
   }, props.box || {}), children);
-
-export default Statusbar;

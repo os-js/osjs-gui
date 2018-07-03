@@ -36,9 +36,7 @@ import {createField} from '../element';
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
-const TextareaField = (props = {}, children = []) =>
+export const TextareaField = (props = {}, children = []) =>
   createField('textarea-field', props, {
     rows: 4
   }, (fieldProps) => h('textarea', fieldProps, children));
-
-export default TextareaField;
