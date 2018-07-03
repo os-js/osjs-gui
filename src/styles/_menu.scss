@@ -115,6 +115,7 @@
     & > span {
       margin: $base-margin / 2;
       display: block;
+      pointer-events: none;
     }
   }
 }

@@ -31,28 +31,39 @@
 import {h} from 'hyperapp';
 import {Element} from './Element';
 
-const items = props => (props.items || [])
-  .map((item, index) => h('div', {}, h('span', {
-    onclick: (ev) => (props.onclick || function() {})(item, index, ev)
-  }, item.label)));
-
-
 /**
- * Menubar entry
- * @property {String} label Label
- * @property {Function} onclick Click callback
- * @typedef MenubarItem
+ * A menubar item
+ * @param {Object} props Properties
+ * @param {Array} [children] Children
  */
+export const MenubarItem = (props, children = []) => {
+  const {onclick, data} = props;
+
+  return h('div', {
+    onclick: (ev) => {
+      if (typeof onclick === 'function') {
+        const parentNode = ev.target.parentNode;
+        const index = Array.prototype.indexOf.call(parentNode.children, ev.target);
+
+        onclick(ev, data || {}, index);
+      }
+    }
+  }, h('span', {}, children));
+};
 
 /**
  * A menubar container
  * @param {Object} props Properties
  * @param {MenubarItem[]} [props.items] Array of object
+ * @param {Array} [children] Children
  */
 export const Menubar = (props, children = []) =>
   h(Element, Object.assign({
     class: 'osjs-gui-menubar'
   }, props), [
-    ...items(props),
+    ...(props.items || []).map(item => h(MenubarItem, {
+      data: item.data,
+      onclick: (item.onclick || props.onclick)
+    }, item.label)),
     ...children
   ]);

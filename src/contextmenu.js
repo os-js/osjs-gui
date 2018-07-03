@@ -119,6 +119,8 @@ export class ContextMenu {
         if (newPosition) {
           return {position: newPosition};
         }
+
+        return {};
       },
       onshow: (ev) => props => {
         clearTimeout(clampTimeout);
