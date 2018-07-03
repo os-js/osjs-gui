@@ -35,8 +35,9 @@ import {Element} from './Element';
  * A progress bar
  * @param {Object} props Properties
  * @param {number} [props.value] The value (percentage)
+ * @param {h[]} children Children
  */
-export const Progressbar = (props, children) => {
+export const Progressbar = (props, children = []) => {
   let value = typeof props.value === 'number'
     ? Math.max(0, Math.abs(props.value)) % 100
     : 0;
@@ -59,5 +60,8 @@ export const Progressbar = (props, children) => {
 
   return h(Element, Object.assign({
     class: 'osjs-gui-progressbar'
-  }, props.box || {}), c);
+  }, props.box || {}), [
+    c,
+    ...children
+  ]);
 };

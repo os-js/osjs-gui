@@ -31,6 +31,9 @@
 import {h, app} from 'hyperapp';
 import {Menu} from './components/Menu';
 
+/*
+ * Makes sure sub-menus stays within viewport
+ */
 const clampSubMenu = (root, ev) => {
   let ul = ev.target.querySelector('ul');
   if (!ul) {
@@ -54,6 +57,9 @@ const clampSubMenu = (root, ev) => {
   }
 };
 
+/*
+ * Makes sure menu stays within viewport
+ */
 const clampMenu = (root, el, currentPosition) => {
   const result = {};
   const bottom = currentPosition.top + el.offsetHeight;
@@ -87,6 +93,11 @@ const view = callback => (props, actions) => h(Menu, {
   oncreate: el => actions.clamp(el)
 });
 
+/**
+ * ContextMenu Class
+ *
+ * @desc Handles a Menu/ContextMenu globally for OS.js
+ */
 export class ContextMenu {
 
   constructor(core) {
@@ -100,6 +111,9 @@ export class ContextMenu {
     this.actions = null;
   }
 
+  /**
+   * Initializes the Menu Hyperapp
+   */
   init() {
     let clampTimeout;
 
@@ -162,10 +176,16 @@ export class ContextMenu {
     }), this.core.$root);
   }
 
+  /**
+   * Show the menu
+   */
   show(...args) {
     return this.actions ? this.actions.show(...args) : null;
   }
 
+  /**
+   * Hide the menu
+   */
   hide(...args) {
     return this.actions ? this.actions.hide(...args) : null;
   }

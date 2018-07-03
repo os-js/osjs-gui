@@ -31,6 +31,13 @@ import {h} from 'hyperapp';
 import {filteredProps} from './utils';
 import {Element} from './components/Element';
 
+/**
+ * Creates a new field Element wrapper
+ * @param {String} name Field name
+ * @param {Object} props Field props
+ * @param {Function} cb Callback to create inner element => (props)
+ * @param {Function} cb Callback to get value => (event)
+ */
 export const createField = (name, props, defaultProps, cb, cbInput) => {
   const oninput = props.oninput || function() {};
   const onchange = props.onchange || function() {};
@@ -57,6 +64,12 @@ export const createField = (name, props, defaultProps, cb, cbInput) => {
   }, props.box || {}), cb(fieldProps));
 };
 
+/**
+ * Create a Icon Element
+ * @desc Either a URI (string) or object with {name} for internal mapped icon
+ * @param {String|Object} props Props
+ * @param {String} [props.name] Internal Icon name
+ */
 export const createIcon = props => h('i', {
   'data-icon': typeof props === 'object' ? props.name : undefined,
   class: 'osjs-icon',

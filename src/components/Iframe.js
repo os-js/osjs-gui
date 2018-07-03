@@ -35,8 +35,6 @@ import {Element} from './Element';
 /**
  * A iframe
  * @param {Object} props Properties
- * @param {String} props.src The frame source
- * @param {number} [props.frameborder=0] Frame border
  * @param {h[]} children Children
  */
 export const Iframe = (props, children = []) =>

@@ -117,6 +117,11 @@ const inner = nestable({
   }
 }, view, 'div');
 
+/**
+ * Resizable panes
+ * @param {Object} props Properties
+ * @param {h[]} children Children
+ */
 export const Panes = (props, children) => h(inner, {
   class: 'osjs-gui-panes'
 }, children);

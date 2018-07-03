@@ -34,7 +34,7 @@ import {Element} from './Element';
 /**
  * A menubar item
  * @param {Object} props Properties
- * @param {Array} [children] Children
+ * @param {h[]} children Children
  */
 export const MenubarItem = (props, children = []) => {
   const {onclick, data} = props;
@@ -55,7 +55,7 @@ export const MenubarItem = (props, children = []) => {
  * A menubar container
  * @param {Object} props Properties
  * @param {MenubarItem[]} [props.items] Array of object
- * @param {Array} [children] Children
+ * @param {h[]} children Children
  */
 export const Menubar = (props, children = []) =>
   h(Element, Object.assign({

@@ -28,6 +28,12 @@
  * @licence Simplified BSD License
  */
 
+/**
+ * Filter an object based on keys
+ * @param {Object} props Props
+ * @param {String[]} filterKeys List of keys to filter
+ * @return {Object}
+ */
 export const filteredProps = (props, filterKeys) => {
   const keys = Object.keys(props);
   const filter = k => filterKeys.indexOf(k) === -1;
