@@ -1,5 +1,11 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.18
+
+* Updated docs
+* Add MenubarItem component
+* Better export pattern
+
 ## 3.0.0-alpha.17
 
 * General improvements (performance, compability, abstraction)
