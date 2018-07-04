@@ -58,9 +58,9 @@ export const Progressbar = (props, children = []) => {
     ])
   ]);
 
-  return h(Element, Object.assign({
-    class: 'osjs-gui-progressbar'
-  }, props.box || {}), [
+  return h(Element, Object.assign({}, props.box || {}, {
+    class: ['osjs-gui-progressbar', props.class]
+  }), [
     c,
     ...children
   ]);

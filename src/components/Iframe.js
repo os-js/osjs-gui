@@ -38,9 +38,9 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Iframe = (props, children = []) =>
-  h(Element, Object.assign({
-    class: 'osjs-gui-iframe'
-  }, props.box || {}), [
+  h(Element, Object.assign({}, props.box || {}, {
+    class: ['osjs-gui-iframe', props.class]
+  }), [
     h('iframe', Object.assign({
       frameborder: 0
     }, filteredProps(props, ['box']))),

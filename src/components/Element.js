@@ -37,7 +37,7 @@ const flexes = {
 
 const unitValue = (value, unset) => typeof value === 'number'
   ? `${value}px`
-  : (value === false ? '0' : value);
+  : (value === false ? unset : value);
 
 const boxPropNames = {
   orientation: value => ({flexDirection: flexes[value]}),
@@ -56,16 +56,14 @@ const boxPropNames = {
  * @param {h[]} children Children
  */
 export const Element = (props, children = []) => {
-  let classNames = ['osjs-gui'];
+  const givenClassNames = props.class instanceof Array
+    ? props.class
+    : [props.class];
 
-  const givenClassName = props.class || props.className;
-  if (givenClassName) {
-    if (givenClassName instanceof Array) {
-      classNames = [...classNames, ...givenClassName];
-    } else {
-      classNames.push(givenClassName);
-    }
-  }
+  const classNames = [
+    'osjs-gui',
+    ...givenClassNames
+  ].filter(s => !!s);
 
   if (props.orientation) {
     classNames.push('osjs-gui-' + props.orientation);

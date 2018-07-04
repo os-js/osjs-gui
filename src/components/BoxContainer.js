@@ -37,6 +37,6 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const BoxContainer = (props, children) =>
-  h(Element, Object.assign({
-    class: 'osjs-gui-box-container'
-  }, props), children);
+  h(Element, Object.assign({}, props, {
+    class: ['osjs-gui-box-container', props.class]
+  }), children);

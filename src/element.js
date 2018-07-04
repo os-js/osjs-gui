@@ -59,9 +59,9 @@ export const createField = (name, props, defaultProps, cb, cbInput) => {
     filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])
   );
 
-  return h(Element, Object.assign({
+  return h(Element, Object.assign({}, props.box || {}, {
     class: 'osjs-gui-field osjs-gui-' + name
-  }, props.box || {}), cb(fieldProps));
+  }), cb(fieldProps));
 };
 
 /**

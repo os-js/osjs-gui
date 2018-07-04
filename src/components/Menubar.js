@@ -58,9 +58,9 @@ export const MenubarItem = (props, children = []) => {
  * @param {h[]} children Children
  */
 export const Menubar = (props, children = []) =>
-  h(Element, Object.assign({
-    class: 'osjs-gui-menubar'
-  }, props), [
+  h(Element, Object.assign({}, props, {
+    class: ['osjs-gui-menubar', props.class]
+  }), [
     ...(props.items || []).map(item => h(MenubarItem, {
       data: item.data,
       onclick: (item.onclick || props.onclick)

@@ -37,6 +37,6 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Statusbar = (props, children) =>
-  h(Element, Object.assign({
-    class: 'osjs-gui-statusbar',
-  }, props.box || {}), children);
+  h(Element, Object.assign({}, props.box || {}, {
+    class: ['osjs-gui-statusbar', props.class]
+  }), children);
