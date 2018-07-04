@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2018, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,25 +28,15 @@
  * @licence Simplified BSD License
  */
 
-export * from './src/components/Element';
-export * from './src/components/Box';
-export * from './src/components/BoxContainer';
-export * from './src/components/BoxStyled';
-export * from './src/components/Button';
-export * from './src/components/Progressbar';
-export * from './src/components/Menu';
-export * from './src/components/Toolbar';
-export * from './src/components/Statusbar';
-export * from './src/components/Menubar';
-export * from './src/components/Panes';
-export * from './src/components/ListView';
-export * from './src/components/Image';
-export * from './src/components/Video';
-export * from './src/components/Tabs';
-export * from './src/components/Iframe';
-export * from './src/components/TextField';
-export * from './src/components/TextareaField';
-export * from './src/components/SelectField';
-export * from './src/components/ToggleField';
-export * from './src/components/RangeField';
-export * from './src/provider';
+import {h} from 'hyperapp';
+import {Element} from './Element';
+
+/**
+ * A styled flexbox container
+ * @param {Object} props Properties
+ * @param {h[]} children Children
+ */
+export const BoxStyled = (props, children) =>
+  h(Element, Object.assign({}, props, {
+    class: ['osjs-gui-box-styled', props.class]
+  }), children);
