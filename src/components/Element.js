@@ -63,7 +63,7 @@ export const Element = (props, children = []) => {
   const classNames = [
     'osjs-gui',
     ...givenClassNames
-  ].filter(s => !!s);
+  ];
 
   if (props.orientation) {
     classNames.push('osjs-gui-' + props.orientation);
@@ -84,7 +84,7 @@ export const Element = (props, children = []) => {
   return h('div', {
     oncreate: props.oncreate,
     ondestroy: props.ondestroy,
-    class: classNames.join(' '),
+    class: classNames.filter(s => !!s).join(' '),
     style
   }, children);
 };

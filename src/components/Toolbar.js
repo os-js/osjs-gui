@@ -38,7 +38,8 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Toolbar = (props, children) =>
-  h(Element, Object.assign({}, props, {
-    class: ['osjs-gui-toolbar', props.class],
+  h(Element, Object.assign({
     orientation: 'vertical'
+  }, props, {
+    class: ['osjs-gui-toolbar', props.class]
   }), children);
