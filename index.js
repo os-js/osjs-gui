@@ -49,4 +49,5 @@ export * from './src/components/TextareaField';
 export * from './src/components/SelectField';
 export * from './src/components/ToggleField';
 export * from './src/components/RangeField';
+export * from './src/components/Icon';
 export * from './src/provider';

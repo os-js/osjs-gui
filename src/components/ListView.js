@@ -30,15 +30,15 @@
 
 import {h} from 'hyperapp';
 import {filteredProps} from '../utils';
-import {createIcon} from '../element';
 import {Element} from './Element';
+import {Icon} from './Icon';
 
 const createView = props => {
 
   const cols = (paneIndex) => (row, rowIndex) => {
     const col = row.columns[paneIndex] || {};
     const selected = props.selectedIndex === rowIndex;
-    const colIcon = col.icon ? createIcon(col.icon) : null;
+    const colIcon = col.icon ? h(Icon, col.icon) : null;
     const children = [h('span', {}, [typeof col === 'object' ? col.label : col])];
 
     if (colIcon) {

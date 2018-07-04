@@ -27,39 +27,19 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
+
 import {h} from 'hyperapp';
-import {filteredProps} from './utils';
-import {Element} from './components/Element';
 
 /**
- * Creates a new field Element wrapper
- * @param {String} name Field name
- * @param {Object} props Field props
- * @param {Function} cb Callback to create inner element => (props)
- * @param {Function} cb Callback to get value => (event)
+ * An icon
+ * @param {Object} props Properties
+ * @param {h[]} children Children
  */
-export const createField = (name, props, defaultProps, cb, cbInput) => {
-  const oninput = props.oninput || function() {};
-  const onchange = props.onchange || function() {};
-  const onkeydown = props.onkeydown || function() {};
-
-  const getValue = cbInput || (ev => [ev.target.value]);
-  const fieldProps = Object.assign(
-    {
-      oninput: ev => oninput(ev, ...getValue(ev)),
-      onchange: ev => onchange(ev, ...getValue(ev)),
-      onkeydown: ev => {
-        if (ev.keyCode === 13 && props.onenter) {
-          props.onenter(ev, ...getValue(ev));
-        }
-        onkeydown(ev);
-      }
-    },
-    defaultProps,
-    filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])
-  );
-
-  return h(Element, Object.assign({}, props.box || {}, {
-    class: 'osjs-gui-field osjs-gui-' + name
-  }), cb(fieldProps));
-};
+export const Icon = (props, children) =>
+  h('i', {
+    'data-icon': typeof props === 'object' ? props.name : undefined,
+    class: 'osjs-icon',
+    style: {
+      backgroundImage: typeof props === 'string' ? `url(${props})` : undefined
+    }
+  });

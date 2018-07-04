@@ -29,7 +29,8 @@
  */
 
 import {h} from 'hyperapp';
-import {createField, createIcon} from '../element';
+import {Icon} from './Icon';
+import {createField} from '../element';
 
 /**
  * A button
@@ -41,7 +42,7 @@ export const Button = (props = {}, children = []) =>
   }, (fieldProps) => {
     const inner = [];
     if (props.icon) {
-      inner.push(createIcon(props.icon));
+      inner.push(h(Icon, props.icon));
     }
 
     if (typeof props.label === 'string') {

@@ -29,7 +29,7 @@
  */
 
 import {h} from 'hyperapp';
-import {createIcon} from '../element';
+import {Icon} from './Icon';
 
 const ul = (props, children = [], level = 0) => {
 
@@ -40,7 +40,7 @@ const ul = (props, children = [], level = 0) => {
         class: 'osjs-gui-menu-checkbox ' + (child.checked ? 'active' : '')
       }));
     } else if (child.icon) {
-      children.push(createIcon(child.icon));
+      children.push(h(Icon, child.icon));
     }
 
     children.push(child.label);
