@@ -1,5 +1,13 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.19
+
+* Replaced programatic orientation setting with CSS
+* Updated some component defaults
+* Added 'Icon' component (and moved old code)
+* Added 'BoxStyled' component
+* Fixed custom class names for components
+
 ## 3.0.0-alpha.18
 
 * Updated docs
