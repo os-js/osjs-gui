@@ -30,17 +30,11 @@
 
 import {h} from 'hyperapp';
 
-const flexes = {
-  vertical: 'row',
-  horizontal: 'column'
-};
-
 const unitValue = (value, unset) => typeof value === 'number'
   ? `${value}px`
   : (value === false ? unset : value);
 
 const boxPropNames = {
-  orientation: value => ({flexDirection: flexes[value]}),
   grow: value => ({flexGrow: value}),
   shrink: value => ({flexShrink: value}),
   basis: value => ({flexBasis: unitValue}),

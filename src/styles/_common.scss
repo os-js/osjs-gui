@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2018, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,18 +28,26 @@
  * @licence Simplified BSD License
  */
 
-$base-margin: 1em;
+.osjs-gui {
+  display: flex;
+  position: relative;
+  min-width: 1em;
+  min-height: 1em;
+  box-sizing: border-box;
+}
 
-@import "./src/styles/_common.scss";
-@import "./src/styles/_box.scss";
-@import "./src/styles/_button.scss";
-@import "./src/styles/_input.scss";
-@import "./src/styles/_listview.scss";
-@import "./src/styles/_media.scss";
-@import "./src/styles/_menu.scss";
-@import "./src/styles/_panes.scss";
-@import "./src/styles/_progressbar.scss";
-@import "./src/styles/_statusbar.scss";
-@import "./src/styles/_tabs.scss";
-@import "./src/styles/_toolbar.scss";
-@import "./src/styles/_iframe.scss";
+.osjs-window-content > .osjs-gui-box:only-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.osjs-gui-horizontal {
+  flex-direction: column;
+}
+
+.osjs-gui-vertical {
+  flex-direction: row;
+}
