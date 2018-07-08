@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.20
+
+* Fixed box flex basis property
+
 ## 3.0.0-alpha.19
 
 * Replaced programatic orientation setting with CSS
