@@ -37,7 +37,7 @@ const unitValue = (value, unset) => typeof value === 'number'
 const boxPropNames = {
   grow: value => ({flexGrow: value}),
   shrink: value => ({flexShrink: value}),
-  basis: value => ({flexBasis: unitValue}),
+  basis: value => ({flexBasis: unitValue(value, 'auto')}),
   align: value => ({alignItems: value}),
   justify: value => ({justifyContent: value}),
   padding: value => ({margin: unitValue(value, '0')}),
