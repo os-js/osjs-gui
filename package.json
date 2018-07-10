@@ -1,6 +1,6 @@
 {
   "name": "@osjs/gui",
-  "version": "3.0.0-alpha.20",
+  "version": "3.0.0-alpha.21",
   "description": "OS.js v3 GUI",
   "main": "index.js",
   "style": "index.scss",

@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.21
+
+* Remove overflow:none from elements by default
+* Don't apply margin on button icon when no label present
+
 ## 3.0.0-alpha.20
 
 * Fixed box flex basis property
