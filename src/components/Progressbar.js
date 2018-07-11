@@ -44,13 +44,13 @@ export const Progressbar = (props, children = []) => {
 
   const c = h('div', {class: 'osjs-gui-progressbar-wrapper'}, [
     h('div', {
-      className: 'value',
+      className: 'osjs-gui-progressbar-value',
       style: {
         width: String(value) + '%'
       }
     }),
     h('div', {
-      className: 'label',
+      className: 'osjs-gui-progressbar-label',
     }, [
       h('span', {}, [
         String(value) + '%'

@@ -32,51 +32,52 @@
   height: 100%;
   overflow: hidden;
   position: relative;
+}
 
-  & > .osjs-gui-panes-inner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
+.osjs-gui-panes-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
 
-    & > .pane {
-      position: relative;
-      margin: $base-margin / 2;
-      box-sizing: border-box;
-      overflow: hidden;
-      display: flex;
-
-      &:last-of-type {
-        flex-grow: 1;
-      }
+  &.osjs-gui-vertical {
+    & > .osjs-gui-panes-pane > .osjs-gui {
+      width: 100%;
     }
 
-    &.osjs-gui-vertical {
-      & > .pane > .osjs-gui {
-        width: 100%;
-      }
+    & > .osjs-gui-panes-spacer {
+      height: 100%;
+      width: $base-margin / 2;
+      min-width: $base-margin / 2;
+      cursor: ew-resize;
+    }
+  }
 
-      & > .spacer {
-        height: 100%;
-        width: $base-margin / 2;
-        min-width: $base-margin / 2;
-        cursor: ew-resize;
-      }
+  &.osjs-gui-horizontal {
+    & > .osjs-gui-panes-pane > .osjs-gui {
+      height: 100%;
     }
 
-    &.osjs-gui-horizontal {
-      & > .pane > .osjs-gui {
-        height: 100%;
-      }
-
-      & > .spacer {
-        width: 100%;
-        height: $base-margin / 2;
-        min-height: $base-margin / 2;
-        cursor: ns-resize;
-      }
+    & > .osjs-gui-panes-spacer {
+      width: 100%;
+      height: $base-margin / 2;
+      min-height: $base-margin / 2;
+      cursor: ns-resize;
     }
   }
 }
+
+.osjs-gui-panes-pane {
+  position: relative;
+  margin: $base-margin / 2;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+
+  &:last-of-type {
+    flex-grow: 1;
+  }
+}
+

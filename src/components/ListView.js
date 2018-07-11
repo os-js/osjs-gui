@@ -47,16 +47,16 @@ const createView = props => {
 
     return h('div', {
       'data-has-icon': col.icon ? true : undefined,
-      class: 'cell' + (selected ? ' active' : ''),
+      class: 'osjs-gui-list-view-cell' + (selected ? ' osjs__active' : ''),
       ondblclick: (ev) => props.onactivate({data: row.data, index: rowIndex, ev}),
       onclick: (ev) => props.onselect({data: row.data, index: rowIndex, ev}),
       oncontextmenu: (ev) => props.oncontextmenu({data: row.data, index: rowIndex, ev})
     }, children);
   };
 
-  const pane = (index, col) => h('div', {class: 'pane'}, [
+  const pane = (index, col) => h('div', {class: 'osjs-gui-list-view-pane'}, [
     h('div', {
-      class: 'header',
+      class: 'osjs-gui-list-view-header',
       style: {
         display: props.hideColumns ? 'none' : undefined
       }

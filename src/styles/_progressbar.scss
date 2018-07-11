@@ -39,30 +39,30 @@
   position: relative;
   box-sizing: border-box;
   flex-grow: 1;
+}
 
-  & > .value {
+.osjs-gui-progressbar-value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  z-index: 2;
+}
+
+.osjs-gui-progressbar-label {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  & > span {
+    display: inline-block;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    z-index: 2;
-  }
-
-  & > .label {
-    z-index: 3;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    & > span {
-      display: inline-block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

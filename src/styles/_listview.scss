@@ -29,62 +29,62 @@
  */
 
 .osjs-gui-list-view {
-    min-height: 10em;
+  min-height: 10em;
 
   .osjs-icon {
     margin-right: $base-margin / 2;
   }
+}
 
-  .osjs-gui-list-view-inner {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.osjs-gui-list-view-inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.osjs-gui-list-view-wrapper {
+  display: flex;
+  flex-basis: 100%;
+  overflow: auto;
+  align-items: flex-start;
+  position: relative;
+}
+
+.osjs-gui-list-view-pane {
+  display: flex;
+  flex-direction: column;
+  min-width: 1em;
+  min-height: 1em;
+  position: relative;
+  flex: 1 1;
+
+  &:last-child {
+    flex-grow: 1;
+  }
+}
+
+.osjs-gui-list-view-cell,
+.osjs-gui-list-view-header {
+  position: relative;
+  padding: $base-margin / 2;
+  flex-shrink: 0;
+  z-index: 1;
+  min-height: 1em;
+  display: flex;
+
+  & > span {
+    min-height: 1em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
   }
+}
 
-  .osjs-gui-list-view-wrapper {
-    display: flex;
-    flex-basis: 100%;
-    overflow: auto;
-    align-items: flex-start;
-    position: relative;
-  }
-
-  .pane {
-    display: flex;
-    flex-direction: column;
-    min-width: 1em;
-    min-height: 1em;
-    position: relative;
-    flex: 1 1;
-
-    &:last-child {
-      flex-grow: 1;
-    }
-
-    .cell,
-    .header {
-      position: relative;
-      padding: $base-margin / 2;
-      flex-shrink: 0;
-      z-index: 1;
-      min-height: 1em;
-      display: flex;
-
-      & > span {
-        min-height: 1em;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-    }
-
-    .header {
-      z-index: 10;
-      position: sticky;
-      top: 0;
-    }
-  }
+.osjs-gui-list-view-header {
+  z-index: 10;
+  position: sticky;
+  top: 0;
 }

@@ -50,7 +50,9 @@ const ul = (props, children = [], level = 0) => {
 
   const inner = (props, child) => {
     const children = [
-      h('span', {}, label(child))
+      h('span', {
+        class: child.disabled ? 'osjs__disabled' : ''
+      }, label(child))
     ];
 
     if (child.items) {

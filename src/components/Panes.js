@@ -75,7 +75,7 @@ const panes = (state, actions, children, orientation) => {
   const spacers = Array(Math.ceil(children.length / 2))
     .fill(null)
     .map(() => h('div', {
-      class: 'spacer',
+      class: 'osjs-gui-panes-spacer',
       onmousedown: ev => onmousedown(ev, actions, orientation)
     }));
 
@@ -83,7 +83,7 @@ const panes = (state, actions, children, orientation) => {
     const w = state.sizes[i] ? String(state.sizes[i]) + 'px' : undefined;
 
     return h('div', {
-      class: 'pane',
+      class: 'osjs-gui-panes-pane',
       style: {
         flex: w ? `0 0 ${w}` : w
       }

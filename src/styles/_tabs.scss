@@ -31,40 +31,40 @@
 .osjs-gui-tabs {
   display: flex;
   flex-grow: 1;
+}
 
-  .osjs-gui-tabs-wrapper {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
+.osjs-gui-tabs-wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
 
-    & > .header {
-      display: flex;
-      flex-shrink: 0;
+.osjs-gui-tabs-header {
+  display: flex;
+  flex-shrink: 0;
 
-      & > div {
-        padding: $base-margin / 2;
-        cursor: pointer;
-        position: relative;
-        z-index: 2;
-        white-space: nowrap;
-      }
-    }
+  & > div {
+    padding: $base-margin / 2;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+  }
+}
 
-    & > .panes {
-      position: relative;
-      z-index: 1;
-      flex-grow: 1;
-      display: flex;
+.osjs-gui-tabs-panes {
+  position: relative;
+  z-index: 1;
+  flex-grow: 1;
+  display: flex;
 
-      & > div {
-        display: none;
-        padding: $base-margin / 2;
-        width: 100%;
+  & > div {
+    display: none;
+    padding: $base-margin / 2;
+    width: 100%;
 
-        &.active {
-          display: block;
-        }
-      }
+    &.active {
+      display: block;
     }
   }
 }

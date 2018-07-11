@@ -33,13 +33,13 @@ import nestable from 'hyperapp-nestable';
 
 const headers = (labels, state, actions) => (labels || [])
   .map((label, index) => h('div', {
-    class: state.selectedIndex === index ? 'active' : '',
+    class: state.selectedIndex === index ? 'osjs__active' : '',
     onclick: ev => actions.setSelectedIndex(index)
   }, h('span', {}, label)));
 
 const panes = (state, children) => children
   .map((child, index) => h('div', {
-    class: state.selectedIndex === index ? 'active' : 'none'
+    class: state.selectedIndex === index ? 'osjs__active' : ''
   }, child));
 
 const view = nestable({
@@ -49,8 +49,8 @@ const view = nestable({
 }, (state, actions) => (props, children) => h('div', {
   class: 'osjs-gui-tabs-wrapper'
 }, [
-  h('div', {class: 'header'}, headers(props.labels, state, actions)),
-  h('div', {class: 'panes'}, panes(state, children))
+  h('div', {class: 'osjs-gui-tabs-header'}, headers(props.labels, state, actions)),
+  h('div', {class: 'osjs-gui-tabs-panes'}, panes(state, children))
 ]), 'div');
 
 /**
