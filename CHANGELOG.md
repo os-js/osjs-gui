@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.22
+
+* Added 'overflow:hidden' to Toolbar by default
+* Updated some CSS className-s
+
 ## 3.0.0-alpha.21
 
 * Remove overflow:none from elements by default
