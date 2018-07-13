@@ -30,6 +30,7 @@
 
 .osjs-gui-toolbar {
   display: flex;
+  overflow: hidden;
 
   & > .osjs-gui {
     flex-shrink: 0;
