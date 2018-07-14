@@ -51,3 +51,14 @@
 .osjs-gui-vertical {
   flex-direction: row;
 }
+
+.osjs-icon {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-color: transparent;
+  background-size: 100%;
+  min-width: 1rem;
+  min-height: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+}
