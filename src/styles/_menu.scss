@@ -46,13 +46,15 @@
         cursor: pointer;
 
         & > span {
-          display: block;
+          display: flex;
           padding: $base-margin / 2;
           padding-right: 1.5em;
           box-sizing: border-box;
           position: relative;
           pointer-events: none;
           white-space: nowrap;
+          min-height: 1rem;
+          align-items: center;
 
           & > .osjs-icon {
             margin-right: $base-margin / 2;

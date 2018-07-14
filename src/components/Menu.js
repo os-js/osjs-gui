@@ -43,7 +43,7 @@ const ul = (props, children = [], level = 0) => {
       children.push(h(Icon, child.icon));
     }
 
-    children.push(child.label);
+    children.push(h('span', {}, child.label));
 
     return children;
   };
