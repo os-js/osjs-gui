@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.23
+
+* Better Menu child rendering
+* Moved .osjs-icon style from theme
+
 ## 3.0.0-alpha.22
 
 * Added 'overflow:hidden' to Toolbar by default
