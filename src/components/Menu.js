@@ -35,7 +35,7 @@ const ul = (props, children = [], level = 0) => {
 
   const label = child => {
     const children = [];
-    if (typeof child.checked === 'boolean') {
+    if (child.type === 'checkbox' || typeof child.checked === 'boolean') {
       children.push(h('span', {
         class: 'osjs-gui-menu-checkbox ' + (child.checked ? 'active' : '')
       }));
@@ -49,10 +49,12 @@ const ul = (props, children = [], level = 0) => {
   };
 
   const inner = (props, child) => {
+    const className = child.type === 'separator'
+      ? 'osjs-gui-menu-separator'
+      : 'osjs-gui-menu-label ' + (child.disabled ? 'osjs__disabled' : '');
+
     const children = [
-      h('span', {
-        class: child.disabled ? 'osjs__disabled' : ''
-      }, label(child))
+      h('span', {class: className}, label(child))
     ];
 
     if (child.items) {
@@ -62,8 +64,12 @@ const ul = (props, children = [], level = 0) => {
     return children;
   };
 
-  return h('ul', {class: ''}, children.map(
-    child => h('li', {}, [
+  return h('ul', {
+    class: ''
+  }, children.map(
+    child => h('li', {
+      class: 'osjs-gui-menu-entry'
+    }, [
       h('div', {
         class: 'osjs-gui-menu-container',
         'data-has-image': child.icon ? true : undefined,

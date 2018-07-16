@@ -45,49 +45,6 @@
         position: relative;
         cursor: pointer;
 
-        & > span {
-          display: flex;
-          padding: $base-margin / 2;
-          padding-right: 1.5em;
-          box-sizing: border-box;
-          position: relative;
-          pointer-events: none;
-          white-space: nowrap;
-          min-height: 1rem;
-          align-items: center;
-
-          & > .osjs-icon {
-            margin-right: $base-margin / 2;
-          }
-
-          & > .osjs-gui-menu-checkbox {
-            margin-right: $base-margin / 2;
-
-            &::after {
-              left: 50%;
-              top: 50%;
-              transform: translate(-50%, -50%);
-              content: '\2713';
-              text-align: center;
-              display: none;
-            }
-
-            &.active::after {
-              display: inline;
-            }
-          }
-        }
-
-        &[data-has-children] > span {
-          &::after {
-            content: '\25B6';
-            position: absolute;
-            right: $base-margin / 2;
-            top: 50%;
-            transform: translateY(-50%);
-          }
-        }
-
         & > ul {
           display: none;
           position: absolute;
@@ -104,6 +61,65 @@
           display: block;
         }
       }
+    }
+  }
+}
+
+.osjs-gui-menu-container {
+  &[data-has-children] > .osjs-gui-menu-label {
+    &::after {
+      content: '\25B6';
+      position: absolute;
+      right: $base-margin / 2;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.osjs-gui-menu-separator {
+  height: 1px;
+  display: block;
+  padding: $base-margin / 2;
+  box-sizing: border-box;
+
+  &::after {
+    content: '';
+    display: block;
+    background: rgba(#ffffff, 0.5);
+    height: 1px;
+  }
+}
+
+.osjs-gui-menu-label {
+  display: flex;
+  padding: $base-margin / 2;
+  padding-right: 1.5em;
+  box-sizing: border-box;
+  position: relative;
+  pointer-events: none;
+  white-space: nowrap;
+  min-height: 1rem;
+  align-items: center;
+
+  & > .osjs-icon {
+    margin-right: $base-margin / 2;
+  }
+
+  & > .osjs-gui-menu-checkbox {
+    margin-right: $base-margin / 2;
+
+    &::after {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      content: '\2713';
+      text-align: center;
+      display: none;
+    }
+
+    &.active::after {
+      display: inline;
     }
   }
 }
