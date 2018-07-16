@@ -29,23 +29,15 @@
  */
 
 .osjs-gui-list-view {
-  min-height: 10em;
+  overflow: hidden;
 
   .osjs-icon {
     margin-right: $base-margin / 2;
   }
 }
 
-.osjs-gui-list-view-inner {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-}
-
 .osjs-gui-list-view-wrapper {
+  min-height: 4em;
   display: flex;
   flex-basis: 100%;
   overflow: auto;
