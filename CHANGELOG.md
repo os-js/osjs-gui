@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.24
+
+* Don't wrap text on statusbar by default
+* Added 'separator' support in Menu
+
 ## 3.0.0-alpha.23
 
 * Better Menu child rendering
