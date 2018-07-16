@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.25
+
+* Updated image/video sizing
+
 ## 3.0.0-alpha.24
 
 * Don't wrap text on statusbar by default
