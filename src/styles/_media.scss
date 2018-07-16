@@ -34,8 +34,12 @@
 
 .osjs-gui-video {
   display: block;
+  background-color: #000;
+  flex-basis: 100%;
 
   & > video {
     background-color: #000;
+    width: 100%;
+    height: 100%;
   }
 }
