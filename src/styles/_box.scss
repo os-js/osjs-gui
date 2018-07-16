@@ -30,6 +30,7 @@
 
 .osjs-gui-box {
   display: flex;
+  overflow: hidden;
 
   & > .osjs-gui-menubar,
   & > .osjs-gui-toolbar,
