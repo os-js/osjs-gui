@@ -29,10 +29,12 @@
  */
 
 .osjs-gui-image {
-
+  display: block;
 }
 
 .osjs-gui-video {
+  display: block;
+
   & > video {
     background-color: #000;
   }
