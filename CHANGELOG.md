@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.26
+
+* Updated overflow in certain containers
+* Updated the video element styles
+
 ## 3.0.0-alpha.25
 
 * Updated image/video sizing
