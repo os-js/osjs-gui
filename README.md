@@ -13,6 +13,8 @@
 
 This is the main client GUI component module of OS.js.
 
+[![Build Status](https://travis-ci.org/os-js/osjs-gui.svg?branch=master)](https://travis-ci.org/os-js/osjs-gui)
+
 Contains all components and adapters for the default UIs.
 
 **PLEASE NOTE THAT THIS IS AN ALPHA PRE-RELEASE AND SUBJECT TO CHANGE WITHOUT NOTICE**
