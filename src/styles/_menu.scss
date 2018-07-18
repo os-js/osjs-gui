@@ -28,6 +28,20 @@
  * @licence Simplified BSD License
  */
 
+.osjs-gui-menubar {
+  margin: 0 !important;
+
+  & > div {
+    box-sizing: border-box;
+
+    & > span {
+      margin: $base-margin / 2;
+      display: block;
+      pointer-events: none;
+    }
+  }
+}
+
 .osjs-gui-menu {
   position: absolute;
   z-index: 9999999999;
@@ -65,18 +79,6 @@
   }
 }
 
-.osjs-gui-menu-container {
-  &[data-has-children] > .osjs-gui-menu-label {
-    &::after {
-      content: '\25B6';
-      position: absolute;
-      right: $base-margin / 2;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-}
-
 .osjs-gui-menu-separator {
   height: 1px;
   display: block;
@@ -86,7 +88,7 @@
   &::after {
     content: '';
     display: block;
-    background: rgba(#ffffff, 0.5);
+    background: rgba(#fff, 0.5);
     height: 1px;
   }
 }
@@ -124,16 +126,14 @@
   }
 }
 
-.osjs-gui-menubar {
-  margin: 0 !important;
-
-  & > div {
-    box-sizing: border-box;
-
-    & > span {
-      margin: $base-margin / 2;
-      display: block;
-      pointer-events: none;
+.osjs-gui-menu-container {
+  &[data-has-children] > .osjs-gui-menu-label {
+    &::after {
+      content: '\25B6';
+      position: absolute;
+      right: $base-margin / 2;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }
