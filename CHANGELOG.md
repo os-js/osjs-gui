@@ -1,5 +1,13 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.27
+
+* Added travis-ci badge to README
+* Lint pass
+* Added initial travis-ci config
+* Added stylelintrc
+* Adjusted ListView minimum size handling
+
 ## 3.0.0-alpha.26
 
 * Updated overflow in certain containers
