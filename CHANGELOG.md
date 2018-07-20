@@ -1,5 +1,11 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.28
+
+* Added IconView component
+* Updated eslintrc
+* Updated npmignore
+
 ## 3.0.0-alpha.27
 
 * Added travis-ci badge to README

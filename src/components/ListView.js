@@ -33,8 +33,6 @@ import {filteredProps} from '../utils';
 import {Element} from './Element';
 import {Icon} from './Icon';
 
-// TODO: Create ListViewEntry and ditch the state-based
-
 const createView = props => {
 
   const cols = (paneIndex) => (row, rowIndex) => {

@@ -32,51 +32,28 @@ import {h} from 'hyperapp';
 import {Element} from './Element';
 import {Icon} from './Icon';
 
-export const IconViewEntry = (props, children) => {
-  const handleEvent = member => ev => {
-    const target = ev.target;
-    const parent = target.parentNode.parentNode;
-    const index = Array.from(target.parentNode.children).indexOf(target);
-    const signal = new CustomEvent('entryAction', {
-      detail: {
-        ev,
-        index,
-        member,
-        data: props.data
-      }
-    });
-
-    parent.dispatchEvent(signal);
-  };
-
-  const icon = props.icon || {name: 'application-x-executable'};
+export const IconViewEntry = (entry, index, props) => () => {
+  const icon = entry.icon || {name: 'application-x-executable'};
+  const selected = props.selectedIndex === index;
 
   return h('div', {
-    class: 'osjs-gui-icon-view-entry',
-    oncontextmenu: handleEvent('oncontextmenu'),
-    ondblclick: handleEvent('onactivate'),
-    onclick: handleEvent('onselect')
+    class: 'osjs-gui-icon-view-entry' + (selected ? ' osjs__active' : ''),
+    ondblclick: (ev) => props.onactivate({data: entry.data, index, ev}),
+    onclick: (ev) => props.onselect({data: entry.data, index, ev}),
+    oncontextmenu: (ev) => props.oncontextmenu({data: entry.data, index, ev})
   }, [
     h('div', {class: 'osjs__container'}, [
       h('div', {class: 'osjs__image'}, [
         h(Icon, icon)
       ]),
       h('div', {class: 'osjs__label'}, [
-        h('span', {}, children)
+        h('span', {}, entry.label)
       ])
     ])
   ]);
 };
 
-export const IconView = (props, children = []) => {
-  const onEntryAction = ev => {
-    props[ev.detail.member]({
-      ev: ev.detail.ev,
-      index: ev.detail.index,
-      data: ev.detail.data
-    });
-  };
-
+export const IconView = (props) => {
   const inner = h('div', {
     class: 'osjs-gui-icon-view-wrapper',
     oncreate: el => (el.scrollTop = props.scrollTop),
@@ -85,24 +62,19 @@ export const IconView = (props, children = []) => {
         el.scrollTop = props.scrollTop;
       }
     }
-  }, children.map((child, index) => {
-    if (props.selectedIndex === index) {
-      child.attributes.class += ' osjs__active';
-    }
-
-    return child;
+  }, props.entries.map((entry, index) => {
+    return h(IconViewEntry(entry, index, props));
   }));
 
   return h(Element, Object.assign({
-    class: 'osjs-gui-icon-view',
-    oncreate: el => el.addEventListener('entryAction', onEntryAction),
-    ondestroy: el => el.removeEventListener('entryAction', onEntryAction)
+    class: 'osjs-gui-icon-view'
   }, props.box || {}), inner);
 };
 
 export const iconView = ({
   component: (state, actions) => {
     const newProps = Object.assign({
+      entries: [],
       onselect: ({data, index, ev}) => {
         actions.select({data, index, ev});
         actions.setSelectedIndex(index);
@@ -118,7 +90,7 @@ export const iconView = ({
       }
     }, state);
 
-    return (props = {}, children = []) => IconView(Object.assign(newProps, props), children);
+    return (props = {}) => IconView(Object.assign(newProps, props));
   },
 
   state: state => Object.assign({
@@ -130,6 +102,7 @@ export const iconView = ({
     select: () => () => ({}),
     activate: () => () => ({}),
     contextmenu: () => () => ({}),
+    setEntries: entries => () => ({entries}),
     setScrollTop: scrollTop => state => ({scrollTop}),
     setSelectedIndex: selectedIndex => state => ({selectedIndex}),
   }, actions || {})
