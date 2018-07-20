@@ -29,63 +29,80 @@
  */
 
 import {h} from 'hyperapp';
-import {filteredProps} from '../utils';
 import {Element} from './Element';
 import {Icon} from './Icon';
 
-// TODO: Create ListViewEntry and ditch the state-based
+export const IconViewEntry = (props, children) => {
+  const handleEvent = member => ev => {
+    const target = ev.target;
+    const parent = target.parentNode.parentNode;
+    const index = Array.from(target.parentNode.children).indexOf(target);
+    const signal = new CustomEvent('entryAction', {
+      detail: {
+        ev,
+        index,
+        member,
+        data: props.data
+      }
+    });
 
-const createView = props => {
-
-  const cols = (paneIndex) => (row, rowIndex) => {
-    const col = row.columns[paneIndex] || {};
-    const selected = props.selectedIndex === rowIndex;
-    const colIcon = col.icon ? h(Icon, col.icon) : null;
-    const children = [h('span', {}, [typeof col === 'object' ? col.label : col])];
-
-    if (colIcon) {
-      children.unshift(colIcon);
-    }
-
-    return h('div', {
-      'data-has-icon': col.icon ? true : undefined,
-      class: 'osjs-gui-list-view-cell' + (selected ? ' osjs__active' : ''),
-      ondblclick: (ev) => props.onactivate({data: row.data, index: rowIndex, ev}),
-      onclick: (ev) => props.onselect({data: row.data, index: rowIndex, ev}),
-      oncontextmenu: (ev) => props.oncontextmenu({data: row.data, index: rowIndex, ev})
-    }, children);
+    parent.dispatchEvent(signal);
   };
 
-  const pane = (index, col) => h('div', {class: 'osjs-gui-list-view-pane'}, [
-    h('div', {
-      class: 'osjs-gui-list-view-header',
-      style: {
-        display: props.hideColumns ? 'none' : undefined
-      }
-    }, typeof col === 'object' ? col.label : col),
-    h('div', {class: 'rows'}, props.rows.map(cols(index)))
-  ]);
+  const icon = props.icon || {name: 'application-x-executable'};
 
   return h('div', {
-    class: 'osjs-gui-list-view-wrapper',
+    class: 'osjs-gui-icon-view-entry',
+    oncontextmenu: handleEvent('oncontextmenu'),
+    ondblclick: handleEvent('onactivate'),
+    onclick: handleEvent('onselect')
+  }, [
+    h('div', {class: 'osjs__container'}, [
+      h('div', {class: 'osjs__image'}, [
+        h(Icon, icon)
+      ]),
+      h('div', {class: 'osjs__label'}, [
+        h('span', {}, children)
+      ])
+    ])
+  ]);
+};
+
+export const IconView = (props, children = []) => {
+  const onEntryAction = ev => {
+    props[ev.detail.member]({
+      ev: ev.detail.ev,
+      index: ev.detail.index,
+      data: ev.detail.data
+    });
+  };
+
+  const inner = h('div', {
+    class: 'osjs-gui-icon-view-wrapper',
     oncreate: el => (el.scrollTop = props.scrollTop),
     onupdate: el => {
       if (props.selectedIndex < 0) {
         el.scrollTop = props.scrollTop;
       }
     }
-  }, props.columns.map((c, i) => pane(i, c)));
+  }, children.map((child, index) => {
+    if (props.selectedIndex === index) {
+      child.attributes.class += ' osjs__active';
+    }
+
+    return child;
+  }));
+
+  return h(Element, Object.assign({
+    class: 'osjs-gui-icon-view',
+    oncreate: el => el.addEventListener('entryAction', onEntryAction),
+    ondestroy: el => el.removeEventListener('entryAction', onEntryAction)
+  }, props.box || {}), inner);
 };
 
-export const ListView = props => h(Element, Object.assign({
-  class: 'osjs-gui-list-view'
-}, props.box || {}), createView(filteredProps(props, ['box'])));
-
-export const listView = ({
+export const iconView = ({
   component: (state, actions) => {
     const newProps = Object.assign({
-      columns: [],
-      rows: [],
       onselect: ({data, index, ev}) => {
         actions.select({data, index, ev});
         actions.setSelectedIndex(index);
@@ -101,7 +118,7 @@ export const listView = ({
       }
     }, state);
 
-    return (props = {}) => ListView(Object.assign(newProps, props));
+    return (props = {}, children = []) => IconView(Object.assign(newProps, props), children);
   },
 
   state: state => Object.assign({
@@ -113,9 +130,7 @@ export const listView = ({
     select: () => () => ({}),
     activate: () => () => ({}),
     contextmenu: () => () => ({}),
-    setRows: rows => ({rows}),
-    setColumns: columns => ({columns}),
     setScrollTop: scrollTop => state => ({scrollTop}),
-    setSelectedIndex: selectedIndex => state => ({selectedIndex})
+    setSelectedIndex: selectedIndex => state => ({selectedIndex}),
   }, actions || {})
 });

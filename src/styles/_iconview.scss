@@ -1,4 +1,4 @@
-/**
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2018, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,27 +28,71 @@
  * @licence Simplified BSD License
  */
 
-export * from './src/components/Element';
-export * from './src/components/Box';
-export * from './src/components/BoxContainer';
-export * from './src/components/BoxStyled';
-export * from './src/components/Button';
-export * from './src/components/Progressbar';
-export * from './src/components/Menu';
-export * from './src/components/Toolbar';
-export * from './src/components/Statusbar';
-export * from './src/components/Menubar';
-export * from './src/components/Panes';
-export * from './src/components/ListView';
-export * from './src/components/IconView';
-export * from './src/components/Image';
-export * from './src/components/Video';
-export * from './src/components/Tabs';
-export * from './src/components/Iframe';
-export * from './src/components/TextField';
-export * from './src/components/TextareaField';
-export * from './src/components/SelectField';
-export * from './src/components/ToggleField';
-export * from './src/components/RangeField';
-export * from './src/components/Icon';
-export * from './src/provider';
+//.osjs-gui-icon-view {}
+
+.osjs-gui-icon-view-wrapper {
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+
+.osjs-gui-icon-view-entry {
+  position: relative;
+  display: inline-block;
+  width: 6em;
+  height: 7em;
+  text-align: center;
+  overflow: visible;
+  z-index: 1;
+
+  &.osjs__active {
+    z-index: 2;
+
+    .osjs__label {
+      overflow: visible !important;
+      height: auto !important;
+    }
+  }
+
+  * {
+    pointer-events: none;
+  }
+
+  & > .osjs__container {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    & > .osjs__image {
+      padding: $base-margin / 2;
+
+      & > .osjs-icon {
+        width: 3em;
+        height: 3em;
+      }
+    }
+
+    & > .osjs__label {
+      padding: $base-margin / 2;
+      height: 2em;
+      line-height: 1.2;
+      overflow: hidden;
+      word-break: break-all;
+
+      & > span {
+        display: block;
+      }
+    }
+  }
+
+  /*
+  &:not(.osjs__active) .osjs__label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  */
+}
