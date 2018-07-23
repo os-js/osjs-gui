@@ -2,12 +2,16 @@
   "name": "@osjs/gui",
   "version": "3.0.0-alpha.28",
   "description": "OS.js v3 GUI",
-  "main": "index.js",
-  "style": "index.scss",
+  "main": "dist/main.js",
+  "module": "dist/main.js",
+  "style": "dist/main.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint index.js src/**/*.js",
-    "stylelint": "stylelint index.scss src/**/*.scss"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "stylelint": "stylelint index.scss src/**/*.scss",
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && npm run build"
   },
   "repository": {
     "type": "git",
@@ -16,15 +20,34 @@
   "keywords": [
     "osjs"
   ],
-  "dependencies": {
-    "hyperapp": "^1.2.5",
-    "hyperapp-nestable": "^1.0.0"
-  },
+  "files": [
+    "dist/main.js",
+    "dist/main.js.map",
+    "dist/main.css",
+    "dist/main.css.map",
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
     "eslint": "^5.1.0",
     "stylelint": "^9.3.0",
     "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.1.3"
+    "stylelint-scss": "^3.1.3",
+    "@osjs/common": "^3.0.0-alpha.15",
+    "@babel/core": "^7.0.0-beta.54",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.54",
+    "@babel/preset-env": "^7.0.0-beta.54",
+    "@babel/runtime": "^7.0.0-beta.54",
+    "babel-loader": "^8.0.0-beta.4",
+    "css-loader": "^1.0.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "sass-loader": "^7.0.3",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0",
+    "hyperapp": "^1.2.5",
+    "hyperapp-nestable": "^1.0.0"
   },
   "author": "Anders Evenrud <andersevenrud@gmail.com>",
   "license": "BSD-2-Clause",

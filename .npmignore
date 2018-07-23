@@ -8,4 +8,5 @@ package-lock.json
 .gitignore
 .esdoc.json
 .travis.yml
+.flowconfig
 .stylelintrc
