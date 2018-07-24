@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.29
+
+* Prebuild npm package
+
 ## 3.0.0-alpha.28
 
 * Added IconView component

@@ -1,6 +1,6 @@
 {
   "name": "@osjs/gui",
-  "version": "3.0.0-alpha.28",
+  "version": "3.0.0-alpha.29",
   "description": "OS.js v3 GUI",
   "main": "dist/main.js",
   "module": "dist/main.js",
