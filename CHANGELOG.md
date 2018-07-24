@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.30
+
+* Removed a gitignore file leading to missing files in npm package
+
 ## 3.0.0-alpha.29
 
 * Prebuild npm package
