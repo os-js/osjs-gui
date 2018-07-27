@@ -70,7 +70,7 @@ export class GUIServiceProvider {
       hide: (...args) => this.contextmenu.hide(...args)
     };
 
-    this.core.singleton('osjs/contextmenu', (...args) => {
+    this.core.instance('osjs/contextmenu', (...args) => {
       if (args.length) {
         return contextmenuApi.show(...args);
       }
