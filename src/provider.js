@@ -65,10 +65,18 @@ export class GUIServiceProvider {
   }
 
   async init() {
-    this.core.singleton('osjs/contextmenu', () => ({
+    const contextmenuApi = {
       show: (...args) => this.contextmenu.show(...args),
       hide: (...args) => this.contextmenu.hide(...args)
-    }));
+    };
+
+    this.core.singleton('osjs/contextmenu', (...args) => {
+      if (args.length) {
+        return contextmenuApi.show(...args);
+      }
+
+      return contextmenuApi;
+    });
 
     this.core.$root.addEventListener('contextmenu', (ev) => {
       if (validContextMenuTarget(ev)) {

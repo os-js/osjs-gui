@@ -3,7 +3,6 @@
   "version": "3.0.0-alpha.30",
   "description": "OS.js v3 GUI",
   "main": "dist/main.js",
-  "module": "dist/main.js",
   "style": "dist/main.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
