@@ -1,5 +1,11 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.31
+
+* Publish in production mode
+* Add shortcut of making contextmenu
+* Updated babelrc
+
 ## 3.0.0-alpha.30
 
 * Removed a gitignore file leading to missing files in npm package
