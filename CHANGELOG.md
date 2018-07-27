@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.32
+
+* Updated contextmenu provider
+
 ## 3.0.0-alpha.31
 
 * Publish in production mode
