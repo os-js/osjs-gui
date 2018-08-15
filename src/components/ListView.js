@@ -29,10 +29,11 @@
  */
 
 import {h} from 'hyperapp';
-import {filteredProps} from '../utils';
+import {filteredProps, doubleTap} from '../utils';
 import {Element} from './Element';
 import {Icon} from './Icon';
 
+const tapper = doubleTap();
 const createView = props => {
 
   const cols = (paneIndex) => (row, rowIndex) => {
@@ -48,6 +49,7 @@ const createView = props => {
     return h('div', {
       'data-has-icon': col.icon ? true : undefined,
       class: 'osjs-gui-list-view-cell' + (selected ? ' osjs__active' : ''),
+      ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: row.data, index: rowIndex, ev})),
       ondblclick: (ev) => props.onactivate({data: row.data, index: rowIndex, ev}),
       onclick: (ev) => props.onselect({data: row.data, index: rowIndex, ev}),
       oncontextmenu: (ev) => props.oncontextmenu({data: row.data, index: rowIndex, ev})
