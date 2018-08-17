@@ -1,5 +1,11 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.33
+
+* Added double-tap support in IconView
+* Added double-tap support in ListView
+* Added double-tap util function
+
 ## 3.0.0-alpha.32
 
 * Updated contextmenu provider
