@@ -29,8 +29,11 @@
  */
 
 import {h} from 'hyperapp';
+import {doubleTap} from '../utils';
 import {Element} from './Element';
 import {Icon} from './Icon';
+
+const tapper = doubleTap();
 
 export const IconViewEntry = (entry, index, props) => () => {
   const icon = entry.icon || {name: 'application-x-executable'};
@@ -38,6 +41,7 @@ export const IconViewEntry = (entry, index, props) => () => {
 
   return h('div', {
     class: 'osjs-gui-icon-view-entry' + (selected ? ' osjs__active' : ''),
+    ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: entry.data, index, ev})),
     ondblclick: (ev) => props.onactivate({data: entry.data, index, ev}),
     onclick: (ev) => props.onselect({data: entry.data, index, ev}),
     oncontextmenu: (ev) => props.oncontextmenu({data: entry.data, index, ev})

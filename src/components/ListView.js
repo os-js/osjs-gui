@@ -34,6 +34,7 @@ import {Element} from './Element';
 import {Icon} from './Icon';
 
 const tapper = doubleTap();
+
 const createView = props => {
 
   const cols = (paneIndex) => (row, rowIndex) => {
