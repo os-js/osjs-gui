@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.34
+
+* Updated dependencies
+
 ## 3.0.0-alpha.33
 
 * Added double-tap support in IconView
