@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 3.0.0-alpha.36
+
+* Added 'created' action to *Views
+
 ## 3.0.0-alpha.35
 
 * Updated dependencies
