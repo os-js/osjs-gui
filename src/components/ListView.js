@@ -53,7 +53,8 @@ const createView = props => {
       ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: row.data, index: rowIndex, ev})),
       ondblclick: (ev) => props.onactivate({data: row.data, index: rowIndex, ev}),
       onclick: (ev) => props.onselect({data: row.data, index: rowIndex, ev}),
-      oncontextmenu: (ev) => props.oncontextmenu({data: row.data, index: rowIndex, ev})
+      oncontextmenu: (ev) => props.oncontextmenu({data: row.data, index: rowIndex, ev}),
+      oncreate: (el) => props.oncreate({data: row.data, index: rowIndex, el})
     }, children);
   };
 
@@ -99,6 +100,9 @@ export const listView = ({
         actions.select({data, index, ev});
         actions.contextmenu({data, index, ev});
         actions.setSelectedIndex(index);
+      },
+      oncreate: (args) => {
+        actions.created(args);
       }
     }, state);
 
@@ -114,6 +118,7 @@ export const listView = ({
     select: () => () => ({}),
     activate: () => () => ({}),
     contextmenu: () => () => ({}),
+    created: () => () => ({}),
     setRows: rows => ({rows}),
     setColumns: columns => ({columns}),
     setScrollTop: scrollTop => state => ({scrollTop}),

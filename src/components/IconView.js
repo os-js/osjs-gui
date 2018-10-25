@@ -44,7 +44,8 @@ export const IconViewEntry = (entry, index, props) => () => {
     ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: entry.data, index, ev})),
     ondblclick: (ev) => props.onactivate({data: entry.data, index, ev}),
     onclick: (ev) => props.onselect({data: entry.data, index, ev}),
-    oncontextmenu: (ev) => props.oncontextmenu({data: entry.data, index, ev})
+    oncontextmenu: (ev) => props.oncontextmenu({data: entry.data, index, ev}),
+    oncreate: (el) => props.oncreate({data: entry.data, index, el})
   }, [
     h('div', {class: 'osjs__container'}, [
       h('div', {class: 'osjs__image'}, [
@@ -91,6 +92,9 @@ export const iconView = ({
         actions.select({data, index, ev});
         actions.contextmenu({data, index, ev});
         actions.setSelectedIndex(index);
+      },
+      oncreate: (args) => {
+        actions.created(args);
       }
     }, state);
 
@@ -106,6 +110,7 @@ export const iconView = ({
     select: () => () => ({}),
     activate: () => () => ({}),
     contextmenu: () => () => ({}),
+    created: () => () => ({}),
     setEntries: entries => () => ({entries}),
     setScrollTop: scrollTop => state => ({scrollTop}),
     setSelectedIndex: selectedIndex => state => ({selectedIndex}),
