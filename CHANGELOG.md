@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.0
+
+* Now provided as a ES library and UMD
+
 ## 3.0.0-alpha.36
 
 * Added 'created' action to *Views
