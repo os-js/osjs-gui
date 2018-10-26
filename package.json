@@ -28,7 +28,8 @@
     "src/",
     "index.js",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    ".babelrc"
   ],
   "dependencies": {
     "hyperapp": "^1.2.9",
