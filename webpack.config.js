@@ -19,6 +19,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     path.resolve(__dirname, 'index.js'),
+    path.resolve(__dirname, 'index.scss')
   ],
   output: {
     library: 'osjsGui',
