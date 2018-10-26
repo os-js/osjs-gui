@@ -42,7 +42,6 @@ module.exports = {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
-        exclude: /(node_modules|bower_components)/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -62,7 +61,6 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)\/(?!@osjs)/,
         use: {
           loader: 'babel-loader'
         }
