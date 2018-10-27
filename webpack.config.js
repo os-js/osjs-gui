@@ -20,7 +20,6 @@ module.exports = {
   entry: [
     path.resolve(__dirname, 'src/umd.js')
   ],
-  /*
   output: {
     library: 'osjsGui',
     libraryTarget: 'umd',
@@ -28,7 +27,6 @@ module.exports = {
     sourceMapFilename: '[file].map',
     filename: '[name].js'
   },
-  */
   optimization: {
     minimize,
   },
