@@ -9,8 +9,11 @@ const plugins = [];
 if (mode === 'production') {
   plugins.push(new OptimizeCSSAssetsPlugin({
     cssProcessorOptions: {
-      discardComments: true
-    },
+      discardComments: true,
+      map: {
+        inline: false
+      }
+    }
   }));
 }
 

@@ -28,6 +28,5 @@
  * @licence Simplified BSD License
  */
 
-require('../index.scss');
-
+import '../index.scss';
 export * from '../index.js';
