@@ -2,7 +2,6 @@
   "name": "@osjs/gui",
   "version": "4.0.1",
   "description": "OS.js v3 GUI",
-  "module": "index.js",
   "main": "dist/main.js",
   "style": "dist/main.css",
   "scripts": {
