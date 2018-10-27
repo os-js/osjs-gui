@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.3
+
+* Added esm bundle
+
 ## 4.0.0
 
 * Now provided as a ES library and UMD
