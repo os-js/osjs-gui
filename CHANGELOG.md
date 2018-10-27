@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.5
+
+* Updated sourcemap generation
+
 ## 4.0.3
 
 * Added esm bundle
