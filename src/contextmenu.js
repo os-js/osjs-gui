@@ -138,7 +138,7 @@ export class ContextMenu {
       },
       onshow: (ev) => props => {
         clearTimeout(clampTimeout);
-        clampTimeout = setTimeout(() => clampSubMenu(this.core.$root, ev), 1);
+        clampTimeout = setTimeout(() => clampSubMenu(this.core.$root, ev), 100);
       },
       show: (options) => props => {
         let {menu, position} = options;
