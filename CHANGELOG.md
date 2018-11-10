@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.7
+
+* Added 'Expander' element
+
 ## 4.0.6
 
 * Fixed overlapping contextmenu issues
