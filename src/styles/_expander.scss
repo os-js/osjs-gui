@@ -1,4 +1,4 @@
-/**
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2018, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,28 +28,40 @@
  * @licence Simplified BSD License
  */
 
-export * from './src/components/Element';
-export * from './src/components/Box';
-export * from './src/components/BoxContainer';
-export * from './src/components/BoxStyled';
-export * from './src/components/Button';
-export * from './src/components/Progressbar';
-export * from './src/components/Menu';
-export * from './src/components/Toolbar';
-export * from './src/components/Statusbar';
-export * from './src/components/Menubar';
-export * from './src/components/Panes';
-export * from './src/components/ListView';
-export * from './src/components/IconView';
-export * from './src/components/Image';
-export * from './src/components/Video';
-export * from './src/components/Tabs';
-export * from './src/components/Iframe';
-export * from './src/components/TextField';
-export * from './src/components/TextareaField';
-export * from './src/components/SelectField';
-export * from './src/components/ToggleField';
-export * from './src/components/RangeField';
-export * from './src/components/Icon';
-export * from './src/components/Expander';
-export * from './src/provider';
+.osjs-gui-expander {
+  display: block;
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-header {
+    flex: 1 1;
+    display: flex;
+    padding: $base-margin / 2;
+    cursor: pointer;
+
+    &-icon {
+      flex: 0 0;
+      min-width: 1em;
+      margin-right: $base-margin / 2;
+
+      &::after {
+        content: '\25BC';
+      }
+
+      &[data-active="true"]::after {
+        content: '\25B2';
+      }
+    }
+
+    &-label {
+      flex: 1 1;
+    }
+  }
+
+  &-content {
+    margin-top: $base-margin;
+  }
+}

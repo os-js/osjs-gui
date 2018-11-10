@@ -1,4 +1,4 @@
-/**
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2018, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,28 +28,60 @@
  * @licence Simplified BSD License
  */
 
-export * from './src/components/Element';
-export * from './src/components/Box';
-export * from './src/components/BoxContainer';
-export * from './src/components/BoxStyled';
-export * from './src/components/Button';
-export * from './src/components/Progressbar';
-export * from './src/components/Menu';
-export * from './src/components/Toolbar';
-export * from './src/components/Statusbar';
-export * from './src/components/Menubar';
-export * from './src/components/Panes';
-export * from './src/components/ListView';
-export * from './src/components/IconView';
-export * from './src/components/Image';
-export * from './src/components/Video';
-export * from './src/components/Tabs';
-export * from './src/components/Iframe';
-export * from './src/components/TextField';
-export * from './src/components/TextareaField';
-export * from './src/components/SelectField';
-export * from './src/components/ToggleField';
-export * from './src/components/RangeField';
-export * from './src/components/Icon';
-export * from './src/components/Expander';
-export * from './src/provider';
+import {h} from 'hyperapp';
+import {Element} from './Element';
+import nestable from 'hyperapp-nestable';
+
+const view = (state, actions) => (props, children) => {
+  return h(Element, Object.assign({}, props.box || {}, {
+    class: ['osjs-gui-expander-wrapper']
+  }), [
+    h('div', {
+      class: 'osjs-gui-expander-header',
+      onclick: ev => actions.ontoggle({
+        ev,
+        active: !state.active,
+        ontoggle: props.ontoggle
+      })
+    }, [
+      h('div', {
+        class: 'osjs-gui-expander-header-icon',
+        'data-active': String(state.active)
+      }),
+      h('div', {
+        class: 'osjs-gui-expander-header-label'
+      }, props.label)
+    ]),
+    h('div', {
+      class: 'osjs-gui-expander-content',
+      style: {
+        display: state.active === false ? 'none' : undefined
+      }
+    }, children)
+  ]);
+};
+
+const inner = nestable({
+  active: true
+}, {
+  init: props => ({
+    ative: props.active !== false
+  }),
+  ontoggle: ({ev, active, ontoggle}) => {
+    const cb = ontoggle || function() {};
+    cb(ev, active);
+    return {active};
+  }
+}, view, 'div');
+
+/**
+ * A status bar
+ * @param {Object} props Properties
+ * @param {boolean} [props.active] Active state
+ * @param {Function} [props.ontoggle] Toggle callback => (ev, active)
+ * @param {h[]} children Children
+ */
+export const Expander = (props, children) =>
+  h(inner, Object.assign({}, props, {
+    class: 'osjs-gui osjs-gui-expander'
+  }), children);
