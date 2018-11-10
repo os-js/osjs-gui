@@ -11,6 +11,7 @@
     "build": "webpack",
     "build:esm": "rollup -c",
     "watch": "webpack --watch",
+    "watch:esm": "rollup -c --watch",
     "stylelint": "stylelint index.scss src/**/*.scss",
     "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && NODE_ENV=production npm run build && npm run build:esm"
   },
