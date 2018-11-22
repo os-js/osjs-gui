@@ -33,7 +33,8 @@ import {Element} from './Element';
 
 /**
  * A flexbox container
- * @param {Object} props Properties
+ * @param {BoxProperties} props Properties
+ * @param {string} [props.orientation='vertical'] Box orientation
  * @param {h[]} children Children
  */
 export const BoxContainer = (props, children) =>

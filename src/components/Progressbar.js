@@ -35,6 +35,7 @@ import {Element} from './Element';
  * A progress bar
  * @param {Object} props Properties
  * @param {number} [props.value] The value (percentage)
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const Progressbar = (props, children = []) => {

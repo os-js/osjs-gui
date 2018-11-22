@@ -35,6 +35,9 @@ import {createField} from '../element';
 /**
  * A button
  * @param {Object} props Properties
+ * @param {string} [props.icon] Icon source
+ * @param {string} [props.label] Use this as label instead of children
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const Button = (props = {}, children = []) => 

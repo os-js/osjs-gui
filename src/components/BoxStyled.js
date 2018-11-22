@@ -33,7 +33,7 @@ import {Element} from './Element';
 
 /**
  * A styled flexbox container
- * @param {Object} props Properties
+ * @param {BoxProperties} props Properties
  * @param {h[]} children Children
  */
 export const BoxStyled = (props, children) =>

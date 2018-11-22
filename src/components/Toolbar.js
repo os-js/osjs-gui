@@ -34,7 +34,8 @@ import {Element} from './Element';
 /**
  * A toolbar
  * @desc Contains entries with spacing
- * @param {Object} props Properties
+ * @param {BoxProperties} props Properties
+ * @param {string} [props.orientation='vertical'] Box orientation
  * @param {h[]} children Children
  */
 export const Toolbar = (props, children) =>

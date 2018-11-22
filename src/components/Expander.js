@@ -79,6 +79,7 @@ const inner = nestable({
  * @param {Object} props Properties
  * @param {boolean} [props.active] Active state
  * @param {Function} [props.ontoggle] Toggle callback => (ev, active)
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const Expander = (props, children) =>

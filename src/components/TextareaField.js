@@ -34,6 +34,9 @@ import {createField} from '../element';
 /**
  * A text field
  * @param {Object} props Properties
+ * @param {string} [props.value] Value
+ * @param {number} [props.rows=4] Number of rows
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const TextareaField = (props = {}, children = []) =>

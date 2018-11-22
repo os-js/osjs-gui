@@ -34,6 +34,8 @@ import {createField} from '../element';
 /**
  * A text field
  * @param {Object} props Properties
+ * @param {string} [props.value] Value
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const SelectField = (props = {}, children = []) => {

@@ -35,6 +35,7 @@ import {Element} from './Element';
 /**
  * A iframe
  * @param {Object} props Properties
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const Iframe = (props, children = []) =>

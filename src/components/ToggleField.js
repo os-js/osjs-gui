@@ -34,6 +34,9 @@ import {createField} from '../element';
 /**
  * A text field
  * @param {Object} props Properties
+ * @param {string} [props.value] Value
+ * @param {string} [props.type=checkbox] Type
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const ToggleField = (props = {}, children = []) =>

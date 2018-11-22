@@ -30,6 +30,23 @@
 
 import {h} from 'hyperapp';
 
+/**
+ * Window dimension definition
+ * @property {string} [class] Container class name
+ * @property {number} [grow] Flexbox grow value
+ * @property {number} [shrink] Flexbox shrink value
+ * @property {number|string} [basis] Flexbox basis value
+ * @property {string} [align] Flexbox alignItems value
+ * @property {string} [justify] Flexbox justifyContent value
+ * @property {number|string} [padding] Margin
+ * @property {number|string} [margin] Margin
+ * @property {string} [key] Hyperapp element key
+ * @property {Function} [oncreate] Hyperapp oncreate function
+ * @property {Function} [onupdate] Hyperapp onupdate function
+ * @property {Function} [ondestroy] Hyperapp ondestroy function
+ * @typedef BoxProperties
+ */
+
 const unitValue = (value, unset) => typeof value === 'number'
   ? `${value}px`
   : (value === false ? unset : value);

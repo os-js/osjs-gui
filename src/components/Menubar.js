@@ -53,7 +53,7 @@ export const MenubarItem = (props, children = []) => {
 
 /**
  * A menubar container
- * @param {Object} props Properties
+ * @param {BoxProperties} [props] Box Properties
  * @param {MenubarItem[]} [props.items] Array of object
  * @param {h[]} children Children
  */

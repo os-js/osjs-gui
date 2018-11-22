@@ -33,7 +33,8 @@ import {Element} from './Element';
 
 /**
  * A flexbox
- * @param {Object} props Properties
+ * @param {BoxProperties} props Properties
+ * @param {string} [props.orientation='horizontal'] Box orientation
  * @param {h[]} children Children
  */
 export const Box = (props, children) =>

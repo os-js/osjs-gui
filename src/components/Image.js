@@ -34,9 +34,13 @@ import {h} from 'hyperapp';
  * A image
  * @param {Object} props Properties
  * @param {String} props.src The image source
+ * @param {String} [props.alt] The image alternate text
  * @param {number} [props.width] Image width
  * @param {number} [props.height] Image height
  * @param {Function} [props.onload] On loaded data event
+ * @param {Function} [props.oncreate] Hyperapp oncreate function
+ * @param {Function} [props.onupdate] Hyperapp onupdate function
+ * @param {Function} [props.ondestroy] Hyperapp ondestroy function
  */
 export const Image = (props, children) =>
   h('div', {
@@ -45,14 +49,4 @@ export const Image = (props, children) =>
       width: props.width ? String(props.width) + 'px' : undefined,
       height: props.height ? String(props.height) + 'px' : undefined
     }
-  }, [
-    h('img', {
-      src: props.src,
-      width: props.width,
-      height: props.height,
-      onload: props.onload,
-      oncreate: props.oncreate,
-      onupdate: props.onupdate,
-      ondestroy: props.ondestroy
-    })
-  ]);
+  }, h('img', props));

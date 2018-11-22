@@ -34,6 +34,7 @@ import {Element} from './Element';
 /**
  * A status bar
  * @param {Object} props Properties
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const Statusbar = (props, children) =>
