@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 4.0.8
+
+* Fixed some contextmenu issues
+* Updated documentation
+
 ## 4.0.7
 
 * Added 'Expander' element
