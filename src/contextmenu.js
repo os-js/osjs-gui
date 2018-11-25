@@ -74,7 +74,7 @@ const clampMenu = (root, el, currentPosition) => {
   }
 
   if (overflowRight) {
-    result.left = root.offsetWidth - el.offsetHeight - offX;
+    result.left = root.offsetWidth - el.offsetWidth - offX;
   }
 
   return (overflowBottom || overflowRight) ? result : null;
@@ -88,10 +88,13 @@ const view = callback => (props, actions) => h(Menu, {
   visible: props.visible,
   menu: props.menu,
   onclick: callback,
-  onshow: actions.onshow,
-  onupdate: el => actions.clamp(el),
-  oncreate: el => actions.clamp(el)
+  onshow: actions.onshow
 });
+
+const timeout = fn => {
+  fn();
+  return setTimeout(fn, 100);
+};
 
 /**
  * ContextMenu Class
@@ -126,21 +129,23 @@ export class ContextMenu {
       }
     }, {
       clamp: (el) => props => {
-        const root = this.core.$root;
-
+        el = el || document.querySelector('#osjs-context-menu');
         clearTimeout(clampTimeout);
-        const newPosition = clampMenu(root, el, props.position);
-        if (newPosition) {
-          return {position: newPosition};
+
+        if (el) {
+          const root = this.core.$root;
+          const newPosition = clampMenu(root, el, props.position);
+          if (newPosition) {
+            return {position: newPosition};
+          }
         }
 
         return {};
       },
       onshow: (ev) => props => {
-        clearTimeout(clampTimeout);
-        clampTimeout = setTimeout(() => clampSubMenu(this.core.$root, ev), 100);
+        clampTimeout = timeout(() => clampSubMenu(this.core.$root, ev));
       },
-      show: (options) => props => {
+      show: (options) => (props, actions) => {
         let {menu, position} = options;
         if (position instanceof Event) {
           position = {left: position.clientX, top: position.clientY};
@@ -159,6 +164,8 @@ export class ContextMenu {
 
           this.actions.hide();
         };
+
+        timeout(() => actions.clamp());
 
         return {visible: true, menu, position};
       },
