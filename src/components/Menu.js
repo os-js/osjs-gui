@@ -98,6 +98,7 @@ const ul = (props, children = [], level = 0) => {
  * Menu tree
  * @property {String} label Label
  * @property {String} [icon] Icon source
+ * @property {Boolean} [disabled] Disabled state
  * @property {Function} onclick Click callback
  * @property {MenuItems} [items] Child items
  * @typedef MenuItems
