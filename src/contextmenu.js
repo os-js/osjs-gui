@@ -155,6 +155,11 @@ export class ContextMenu {
             left: box.left,
             top: box.top + box.height
           };
+        } else if (!position) {
+          position = {
+            top: 0,
+            left: 0
+          };
         }
 
         this.callback = (...args) => {
