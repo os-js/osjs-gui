@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.9
+
+* Fixed an issue with contextmenu props getting unset
+
 ## 4.0.8
 
 * Fixed some contextmenu issues
