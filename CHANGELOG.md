@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 4.0.10
+
+* Fixed tab not showing in Tabs component (#4)
+* Removed some redundant code
+
 ## 4.0.9
 
 * Fixed an issue with contextmenu props getting unset
