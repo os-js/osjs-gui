@@ -35,15 +35,20 @@ const ul = (props, children = [], level = 0) => {
 
   const label = child => {
     const children = [];
-    if (child.type === 'checkbox' || typeof child.checked === 'boolean') {
-      children.push(h('span', {
-        class: 'osjs-gui-menu-checkbox ' + (child.checked ? 'active' : '')
-      }));
-    } else if (child.icon) {
-      children.push(h(Icon, child.icon));
-    }
 
-    children.push(h('span', {}, child.label));
+    if (typeof child.element === 'function') {
+      children.push(child.element());
+    } else {
+      if (child.type === 'checkbox' || typeof child.checked === 'boolean') {
+        children.push(h('span', {
+          class: 'osjs-gui-menu-checkbox ' + (child.checked ? 'active' : '')
+        }));
+      } else if (child.icon) {
+        children.push(h(Icon, child.icon));
+      }
+
+      children.push(h('span', {}, child.label));
+    }
 
     return children;
   };
@@ -99,6 +104,7 @@ const ul = (props, children = [], level = 0) => {
  * @property {String} label Label
  * @property {String} [icon] Icon source
  * @property {Boolean} [disabled] Disabled state
+ * @property {Function} [element] A callback that returns a virtual DOM element (ex. Hyperapp)
  * @property {Function} onclick Click callback
  * @property {MenuItems} [items] Child items
  * @typedef MenuItems
