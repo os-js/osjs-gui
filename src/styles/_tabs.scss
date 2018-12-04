@@ -63,8 +63,8 @@
     padding: $base-margin / 2;
     width: 100%;
 
-    &.active {
-      display: block;
+    &.osjs__active {
+      display: flex;
     }
   }
 }
