@@ -1,5 +1,13 @@
 # Changelog for osjs-gui
 
+## 4.0.11
+
+* Updated rollup config
+* Added contextmenu to Tabs labels (#7)
+* Support for adding components to Menu (#3)
+* Updated Tabs component (#6)
+
+
 ## 4.0.10
 
 * Fixed tab not showing in Tabs component (#4)
