@@ -52,4 +52,5 @@ export * from './src/components/ToggleField';
 export * from './src/components/RangeField';
 export * from './src/components/Icon';
 export * from './src/components/Expander';
+export * from './src/components/Table';
 export * from './src/provider';

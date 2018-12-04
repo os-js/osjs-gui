@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2018, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,21 +28,52 @@
  * @licence Simplified BSD License
  */
 
-$base-margin: 1em;
+.osjs-gui-table {
+  overflow: auto;
 
-@import "./src/styles/_common.scss";
-@import "./src/styles/_box.scss";
-@import "./src/styles/_button.scss";
-@import "./src/styles/_input.scss";
-@import "./src/styles/_listview.scss";
-@import "./src/styles/_iconview.scss";
-@import "./src/styles/_media.scss";
-@import "./src/styles/_menu.scss";
-@import "./src/styles/_panes.scss";
-@import "./src/styles/_progressbar.scss";
-@import "./src/styles/_statusbar.scss";
-@import "./src/styles/_tabs.scss";
-@import "./src/styles/_toolbar.scss";
-@import "./src/styles/_iframe.scss";
-@import "./src/styles/_expander.scss";
-@import "./src/styles/_table.scss";
+  table,
+  tr,
+  td,
+  th, {
+    box-sizing: border-box;
+  }
+
+  & > table {
+    min-width: 100%;
+
+    &[data-fixed="true"] {
+      table-layout: fixed;
+    }
+
+    &[data-collapse="true"] {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      text-align: left;
+      font-weight: normal;
+      padding: $base-margin / 2;
+    }
+
+    th > div {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      & > span:first-child {
+        flex: 1;
+      }
+    }
+  }
+
+  th[data-sort="true"] {
+    &[data-direction="asc"] > div > span:last-child::after {
+      content: '\25BC';
+    }
+
+    &[data-direction="desc"] > div > span:last-child::after {
+      content: '\25B2';
+    }
+  }
+}
