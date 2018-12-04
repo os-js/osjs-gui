@@ -31,12 +31,15 @@
 import {h} from 'hyperapp';
 import nestable from 'hyperapp-nestable';
 
-const headers = ({labels, onchange}, state, actions) => (labels || [])
+const headers = ({labels, onchange, oncontextmenu}, state, actions) => (labels || [])
   .map((label, index) => h('div', {
     class: state.selectedIndex === index ? 'osjs__active' : '',
+    oncontextmenu: ev => {
+      (oncontextmenu || function() {})(ev, index, label);
+    },
     onclick: ev => {
       actions.setSelectedIndex(index);
-      (onchange || function() {})(ev, index);
+      (onchange || function() {})(ev, index, label);
     }
   }, h('span', {}, label)));
 
