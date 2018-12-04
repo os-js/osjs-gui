@@ -5,6 +5,9 @@ import commonjs from 'rollup-plugin-commonjs';
 
 export default [{
   input: 'index.js',
+  watch: {
+    chokidar: false
+  },
   output: [{
     file: 'dist/esm.js',
     format: 'esm',
