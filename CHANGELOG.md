@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.12
+
+* Added 'closeable' contextmenu item options (#3)
+
 ## 4.0.11
 
 * Updated rollup config
