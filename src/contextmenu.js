@@ -157,12 +157,14 @@ export class ContextMenu {
           };
         }
 
-        this.callback = (...args) => {
+        this.callback = (child, ev, iter) => {
           if (options.callback) {
-            options.callback(...args);
+            options.callback(child, ev);
           }
 
-          this.actions.hide();
+          if (iter.closeable !== false) {
+            this.actions.hide();
+          }
         };
 
         timeout(() => actions.clamp());
