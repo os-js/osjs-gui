@@ -1,5 +1,11 @@
 # Changelog for osjs-gui
 
+## 4.0.13
+
+* Added zebra property to ListView
+* Updated Tabs styles
+* Updated ToggleField docs
+
 ## 4.0.12
 
 * Added 'closeable' contextmenu item options (#3)
