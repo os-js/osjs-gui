@@ -65,7 +65,10 @@ const createView = props => {
         display: props.hideColumns ? 'none' : undefined
       }
     }, typeof col === 'object' ? col.label : col),
-    h('div', {class: 'rows'}, props.rows.map(cols(index)))
+    h('div', {
+      class: 'rows',
+      'data-zebra': String(props.zebra)
+    }, props.rows.map(cols(index)))
   ]);
 
   return h('div', {
@@ -86,6 +89,7 @@ export const ListView = props => h(Element, Object.assign({
 export const listView = ({
   component: (state, actions) => {
     const newProps = Object.assign({
+      zebra: true,
       columns: [],
       rows: [],
       onselect: ({data, index, ev}) => {
