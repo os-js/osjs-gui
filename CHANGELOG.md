@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.14
+
+* SelectField now supports multiple form of choices
+
 ## 4.0.13
 
 * Added zebra property to ListView
