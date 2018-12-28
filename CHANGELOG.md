@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.15
+
+* Updated ListView styles and style support
+
 ## 4.0.14
 
 * SelectField now supports multiple form of choices
