@@ -58,13 +58,16 @@ const createView = props => {
     }, children);
   };
 
-  const pane = (index, col) => h('div', {class: 'osjs-gui-list-view-pane'}, [
+  const pane = (index, col) => h('div', {
+    class: 'osjs-gui-list-view-pane',
+    style: col.style || {}
+  }, [
     h('div', {
       class: 'osjs-gui-list-view-header',
       style: {
         display: props.hideColumns ? 'none' : undefined
       }
-    }, typeof col === 'object' ? col.label : col),
+    }, h('span', {}, typeof col === 'object' ? col.label : col)),
     h('div', {
       class: 'rows',
       'data-zebra': String(props.zebra)

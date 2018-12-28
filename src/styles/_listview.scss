@@ -46,8 +46,6 @@
 }
 
 .osjs-gui-list-view-pane {
-  display: flex;
-  flex-direction: column;
   min-width: 1em;
   min-height: 1em;
   position: relative;
@@ -72,6 +70,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    flex: 1 1;
   }
 }
 
