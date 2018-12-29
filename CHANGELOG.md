@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.17
+
+* Re-release as parcel messed up build
+
 ## 4.0.16
 
 * Fixed unused props on Panes
