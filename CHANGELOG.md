@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.18
+
+* Attempt to fix broken build
+
 ## 4.0.17
 
 * Re-release as parcel messed up build
