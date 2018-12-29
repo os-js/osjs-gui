@@ -109,7 +109,7 @@ const view = (state, actions) => (props, children) => {
 const inner = nestable({
   sizes: []
 }, {
-  init: props => props,
+  init: props => ({sizes: props.sizes || [150]}),
   setSize: ({index, size}) => state => {
     const sizes = [].concat(state.sizes);
     sizes[index] = size;
@@ -124,8 +124,6 @@ const inner = nestable({
  * @param {number[]} [props.sizes] Pane sizes
  * @param {h[]} children Children
  */
-export const Panes = (props = {}, children = {}) => h(inner, {
-  class: 'osjs-gui-panes',
-  orientation: props.orientation || 'vertical',
-  sizes: props.sizes || [150]
+export const Panes = (props, children) => h(inner, {
+  class: 'osjs-gui-panes'
 }, children);
