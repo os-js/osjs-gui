@@ -124,6 +124,6 @@ const inner = nestable({
  * @param {number[]} [props.sizes] Pane sizes
  * @param {h[]} children Children
  */
-export const Panes = (props, children) => h(inner, {
+export const Panes = (props, children) => h(inner, Object.assign({
   class: 'osjs-gui-panes'
-}, children);
+}, props), children);

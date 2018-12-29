@@ -35,7 +35,7 @@
   ],
   "dependencies": {
     "hyperapp": "^1.2.9",
-    "hyperapp-nestable": "^1.0.0"
+    "hyperapp-nestable": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
