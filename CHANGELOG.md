@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.19
+
+* Reverted a change relating to Panes
+
 ## 4.0.18
 
 * Attempt to fix broken build
