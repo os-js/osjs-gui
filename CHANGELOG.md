@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.16
+
+* Fixed unused props on Panes
+
 ## 4.0.15
 
 * Updated ListView styles and style support
