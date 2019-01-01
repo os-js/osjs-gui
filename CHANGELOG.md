@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 4.0.20
+
+* Added RTL support
+* Updated dependencies
+
 ## 4.0.19
 
 * Reverted a change relating to Panes
