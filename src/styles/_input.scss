@@ -144,3 +144,10 @@
     }
   }
 }
+
+.osjs-root[data-dir="rtl"] {
+  .osjs-gui-select-field > div::after {
+    right: auto;
+    left: $base-margin / 2;
+  }
+}

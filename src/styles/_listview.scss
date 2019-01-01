@@ -79,3 +79,12 @@
   position: sticky;
   top: 0;
 }
+
+.osjs-root[data-dir="rtl"] {
+  .osjs-gui-list-view {
+    .osjs-icon {
+      margin-right: 0;
+      margin-left: $base-margin / 2;
+    }
+  }
+}

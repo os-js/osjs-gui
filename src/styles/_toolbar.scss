@@ -47,3 +47,21 @@
     }
   }
 }
+
+.osjs-root[data-dir="rtl"] {
+  .osjs-gui-toolbar {
+    &.osjs-gui-vertical {
+      & > .osjs-gui:not(:last-child) {
+        margin-right: 0;
+        margin-left: $base-margin;
+      }
+    }
+
+    &.osjs-gui-horizontal {
+      & > .osjs-gui:not(:last-child) {
+        margin-bottom: 0;
+        margin-top: $base-margin;
+      }
+    }
+  }
+}

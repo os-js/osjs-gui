@@ -138,3 +138,25 @@
     }
   }
 }
+
+.osjs-root[data-dir="rtl"] {
+  .osjs-gui-menu-label {
+    padding-right: $base-margin / 2;
+    padding-left: 1.5em;
+
+    & > .osjs-icon,
+    & > .osjs-gui-menu-checkbox {
+      margin-right: 0;
+      margin-left: $base-margin / 2;
+    }
+  }
+
+  .osjs-gui-menu-container {
+    &[data-has-children] > .osjs-gui-menu-label {
+      &::after {
+        right: auto;
+        left: $base-margin / 2;
+      }
+    }
+  }
+}
