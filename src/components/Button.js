@@ -40,7 +40,7 @@ import {createField} from '../element';
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
-export const Button = (props = {}, children = []) => 
+export const Button = (props = {}, children = []) =>
   createField('button', props, {
   }, (fieldProps) => {
     const inner = [];
