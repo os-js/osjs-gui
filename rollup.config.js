@@ -23,11 +23,8 @@ export default [{
       sourceMap: true
     }),
     resolve({
-//            modulesOnly: true, // Default: false
-
+      // modulesOnly: true, // Default: false
     }),
     commonjs()
-    /*
-    */
   ]
 }];
