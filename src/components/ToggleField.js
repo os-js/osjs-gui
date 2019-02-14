@@ -31,6 +31,17 @@
 import {h} from 'hyperapp';
 import {createField} from '../element';
 
+/*
+ * Parses option value
+ */
+const parseValue = value => {
+  try {
+    return JSON.parse(value);
+  } catch (e) {
+    return value;
+  }
+};
+
 /**
  * A text field
  * @param {Object} props Properties
@@ -57,5 +68,5 @@ export const ToggleField = (props = {}, children = []) =>
       ...children
     ])
   ]), ev => [props.type === 'radio'
-    ? JSON.parse(ev.target.value)
+    ? parseValue(ev.target.value)
     : !!ev.target.checked]);
