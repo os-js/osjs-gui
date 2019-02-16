@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.22
+
+* Updated dependencies
+
 ## 4.0.21
 
 * Fixed a bug for radio fields value parsing
