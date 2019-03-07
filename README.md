@@ -18,6 +18,18 @@ This is the main client GUI component module of OS.js.
 
 Contains all components and adapters for the default UIs.
 
+## Development
+
+This package has two build targets: `UMD` and `ES`.
+
+UMD is built with Webpack via `npm run build` (or `npm run watch`), and ES via `npm run build:esm` (or `npm run watch:esm`).
+
+The OS.js distribution uses the UMD build to load *stylesheets*, and everything else uses ES modules to load components, service providers etc.
+
+So effectively you need to run both in order for this to work while developing.
+
+*The UMD javascript bundle is currently only used for environments like Codepen.*
+
 ## Contribution
 
 * **Become a [Patreon](https://www.patreon.com/user?u=2978551&ty=h&u=2978551)**
