@@ -35,15 +35,19 @@ import {Element} from './Element';
  * A flexbox
  * @param {Object} props Properties
  * @param {string} [props.text] Label Text
+ * @param {string} [props.placement] Placement
  * @param {h[]} children Children
  */
-export const Label = (props = {}, children = []) =>
-  h(Element, {
-    class: ['osjs-gui-field-label'],
-  }, [
-      h('label', {},
-      [
-          h('span', {}, props.text),
-          h(Element, {}, children)
+export const Label = (props = {}, children = []) => {
+  let placement = props.placement || 'top';
+
+  return h(Element, props,
+  [
+      h(Element, {
+        class: ['osjs-gui-field-label', 'osjs-gui-field-label-on-' + placement]
+      }, [
+        h('label', {}, props.text),
+        h(Element, {}, children)
       ])
   ]);
+}

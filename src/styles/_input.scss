@@ -28,6 +28,39 @@
  * @licence Simplified BSD License
  */
 
+.osjs-gui-field-label {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: left;
+
+  $half-margin: $base-margin / 2;
+  margin: $half-margin;
+
+  & > * {
+    margin: $half-margin;
+  }
+
+  &.osjs-gui-field-label-on-top,
+  &.osjs-gui-field-label-on-bottom {
+    & > * {
+      width: calc(100% - #{$half-margin});
+    }
+  }
+
+  &.osjs-gui-field-label-on-top {
+    flex-direction: column;
+  }
+
+  &.osjs-gui-field-label-on-left {
+    flex-direction: row;
+  }
+
+  &.osjs-gui-field-label-on-bottom {
+    flex-direction: column-reverse;
+  }
+}
+
 .osjs-gui-field {
   position: relative;
 
