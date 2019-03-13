@@ -42,12 +42,12 @@ export const Label = (props = {}, children = []) => {
   let placement = props.placement || 'top';
 
   return h(Element, props,
-  [
+    [
       h(Element, {
         class: ['osjs-gui-field-label', 'osjs-gui-field-label-on-' + placement]
       }, [
         h('label', {}, props.text),
         h(Element, {}, children)
       ])
-  ]);
-}
+    ]);
+};
