@@ -32,22 +32,24 @@ import {h} from 'hyperapp';
 import {Element} from './Element';
 
 /**
- * A flexbox
+ * A label element
  * @param {Object} props Properties
  * @param {string} [props.text] Label Text
  * @param {string} [props.placement] Placement
+ * @param {string} [props.for] The "for" attribute
+ * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
 export const Label = (props = {}, children = []) => {
   const placement = props.placement || 'top';
   const text = props.text || '';
 
-  const elementProps = Object.assign({}, props, {
+  const elementProps = Object.assign({
     class: ['osjs-gui-field-label', 'osjs-gui-field-label-on-' + placement]
-  });
+  }, props.box || {});
 
   return h(Element, elementProps, [
-    h('label', {}, text),
+    h('label', {for: props.for}, text),
     children
   ]);
 };
