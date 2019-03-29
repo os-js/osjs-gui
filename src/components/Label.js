@@ -39,15 +39,15 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Label = (props = {}, children = []) => {
-  let placement = props.placement || 'top';
+  const placement = props.placement || 'top';
+  const text = props.text || '';
 
-  return h(Element, props,
-  [
-      h(Element, {
-        class: ['osjs-gui-field-label', 'osjs-gui-field-label-on-' + placement]
-      }, [
-        h('label', {}, props.text),
-        h(Element, {}, children)
-      ])
+  const elementProps = Object.assign({}, props, {
+    class: ['osjs-gui-field-label', 'osjs-gui-field-label-on-' + placement]
+  });
+
+  return h(Element, elementProps, [
+    h('label', {}, text),
+    children
   ]);
-}
+};
