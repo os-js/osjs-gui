@@ -31,7 +31,7 @@
 import {h} from 'hyperapp';
 
 /**
- * Window dimension definition
+ * Elemet Box definition
  * @property {string} [class] Container class name
  * @property {number} [grow] Flexbox grow value
  * @property {number} [shrink] Flexbox shrink value
