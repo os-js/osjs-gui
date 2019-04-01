@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 4.0.23
+
+* Updated BoxProperties definition
+* Added Label component (#17)
+
 ## 4.0.22
 
 * Updated dependencies
