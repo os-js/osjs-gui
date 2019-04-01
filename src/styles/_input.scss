@@ -145,6 +145,51 @@
   }
 }
 
+.osjs-gui-field-label {
+  $half-margin: $base-margin / 2;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+
+  & > label {
+    display: block;
+  }
+
+  & > .osjs-gui {
+    margin: 0;
+  }
+
+  &.osjs-gui-field-label-on-top {
+    flex-direction: column;
+
+    & > label {
+      margin-bottom: $half-margin;
+    }
+  }
+
+  &.osjs-gui-field-label-on-bottom {
+    flex-direction: column-reverse;
+
+    & > label {
+      margin-top: $half-margin;
+    }
+  }
+
+  &.osjs-gui-field-label-on-left {
+    flex-direction: row;
+    align-items: center;
+
+    & > label {
+      margin-right: $half-margin;
+    }
+
+    & > .osjs-gui {
+      flex: 1 1;
+    }
+  }
+}
+
 .osjs-root[data-dir="rtl"] {
   .osjs-gui-select-field > div::after {
     right: auto;
