@@ -89,14 +89,19 @@ export class GUIServiceProvider {
   }
 
   start() {
-    this.core.$root.addEventListener('click', (ev) => {
+    const callback = ev => {
       const menu = document.getElementById('osjs-context-menu');
       const hit = menu.contains(ev.target);
 
       if (!hit && this.contextmenu) {
         this.contextmenu.hide();
       }
-    }, true);
+    };
+
+    this.core.$root.addEventListener('click', callback, true);
+    this.core.once('destroy', () => {
+      this.core.$root.removeEventListener('click', callback, true);
+    });
 
     this.contextmenu.init();
   }
