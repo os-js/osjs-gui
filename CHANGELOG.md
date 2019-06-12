@@ -1,5 +1,12 @@
 # Changelog for osjs-gui
 
+## 4.0.24
+
+* Updated dependencies
+* Unregister global events on destruction in provider
+* Updated eslint npm script
+
+
 ## 4.0.23
 
 * Updated BoxProperties definition
