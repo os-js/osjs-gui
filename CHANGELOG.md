@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 4.0.25
+
+* Added 'key' to ListView rows
+* Updated eslint
+
 ## 4.0.24
 
 * Updated dependencies
