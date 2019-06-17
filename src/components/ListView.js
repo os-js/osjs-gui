@@ -48,6 +48,7 @@ const createView = props => {
     }
 
     return h('div', {
+      key: row.key,
       'data-has-icon': col.icon ? true : undefined,
       class: 'osjs-gui-list-view-cell' + (selected ? ' osjs__active' : ''),
       ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: row.data, index: rowIndex, ev})),
