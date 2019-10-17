@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.26
+
+* Fix text field cursors on firefox (fixes #18)
+
 ## 4.0.25
 
 * Added 'key' to ListView rows
