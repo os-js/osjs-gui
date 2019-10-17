@@ -44,10 +44,13 @@
     border: 0 none;
     box-sizing: border-box;
     resize: none;
-    user-select: all;
     font-family: inherit;
     font-size: inherit;
     border-radius: 0;
+
+    /* NOTE: Why did I add  this ?! (#18)
+    user-select: auto;
+    */
   }
 }
 
