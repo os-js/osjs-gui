@@ -171,6 +171,8 @@ export class ContextMenu {
           }
         };
 
+        this.onclose = options.onclose;
+
         timeout(() => actions.clamp());
 
         return {
@@ -181,6 +183,8 @@ export class ContextMenu {
       },
       hide: () => props => {
         this.callback = null;
+        if (this.onclose) this.onclose();
+        this.onclose = null;
 
         return {visible: false};
       }
