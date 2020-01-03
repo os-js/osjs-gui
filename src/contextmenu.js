@@ -107,6 +107,7 @@ export class ContextMenu {
     this.core = core;
     this.callback = () => {};
     this.actions = null;
+    this.$element = document.createElement('div');
   }
 
   destroy() {
@@ -119,6 +120,9 @@ export class ContextMenu {
    */
   init() {
     let clampTimeout;
+
+    this.$element.className = 'osjs-system-context-menu';
+    this.core.$root.appendChild(this.$element);
 
     this.actions = app({
       visible: false,
@@ -186,7 +190,7 @@ export class ContextMenu {
           this.callback(...args);
         }
       }
-    }), this.core.$root);
+    }), this.$element);
   }
 
   /**
