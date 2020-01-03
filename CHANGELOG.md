@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.27
+
+* Added DOM wrapper for global context menu (#19)
+
 ## 4.0.26
 
 * Fix text field cursors on firefox (fixes #18)
