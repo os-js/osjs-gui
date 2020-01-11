@@ -124,6 +124,8 @@ export class ContextMenu {
     this.$element.className = 'osjs-system-context-menu';
     this.core.$root.appendChild(this.$element);
 
+    let isActive = false;
+
     this.actions = app({
       visible: false,
       menu: [],
@@ -150,8 +152,10 @@ export class ContextMenu {
         clampTimeout = timeout(() => clampSubMenu(this.core.$root, ev));
       },
       show: (options) => (props, actions) => {
-        let {menu, position} = options;
-        if (position instanceof Event) {
+        let {menu, position, toggle} = options;
+        if (toggle && isActive) {
+          return actions.hide();
+        } else if (position instanceof Event) {
           position = {left: position.clientX, top: position.clientY};
         } else if (position instanceof Element) {
           const box = position.getBoundingClientRect();
@@ -167,10 +171,11 @@ export class ContextMenu {
           }
 
           if (iter.closeable !== false) {
-            this.actions.hide();
+            actions.hide();
           }
         };
 
+        isActive = true;
         this.onclose = options.onclose;
 
         timeout(() => actions.clamp());
@@ -182,9 +187,14 @@ export class ContextMenu {
         };
       },
       hide: () => props => {
-        this.callback = null;
-        if (this.onclose) this.onclose();
+        if (isActive) {
+          setTimeout(() => (isActive = false), 0);
+        }
+        if (this.onclose) {
+          this.onclose();
+        }
         this.onclose = null;
+        this.callback = null;
 
         return {visible: false};
       }
