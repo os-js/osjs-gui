@@ -1,5 +1,13 @@
 # Changelog for osjs-gui
 
+## 4.0.28
+
+* Updated webpack config
+* Updated dependencies
+* Now using @osjs/stylelint-config
+* Updated dotfiles
+* Added 'toggle' option to ContextMenu.
+
 ## 4.0.27
 
 * Added DOM wrapper for global context menu (#19)
