@@ -6,14 +6,14 @@
   "main": "dist/main.js",
   "style": "dist/main.css",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run eslint && npm run stylelint",
     "eslint": "eslint index.js 'src/**/*.js'",
     "build": "webpack",
     "build:esm": "rollup -c",
     "watch": "webpack --watch",
     "watch:esm": "rollup -c --watch",
     "stylelint": "stylelint index.scss src/**/*.scss",
-    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && NODE_ENV=production npm run build && npm run build:esm"
+    "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build && npm run build:esm"
   },
   "repository": {
     "type": "git",
