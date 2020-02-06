@@ -2,8 +2,6 @@ version: 2
 plugins:
   eslint:
     enabled: true
-  stylelint:
-    enabled: true
 exclude_patterns:
   - __tests__/**
   - __mocks__/**
