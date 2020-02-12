@@ -70,7 +70,9 @@ const clampMenu = (root, el, currentPosition) => {
   const overflowBottom = bottom > root.offsetHeight;
 
   if (overflowBottom) {
-    result.top = root.offsetHeight - el.offsetHeight - offY;
+    if (root.offsetHeight > el.offsetHeight) {
+      result.top = root.offsetHeight - el.offsetHeight - offY;
+    }
   }
 
   if (overflowRight) {
