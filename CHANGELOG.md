@@ -1,5 +1,12 @@
 # Changelog for osjs-gui
 
+## 4.0.29
+
+* Updated dependencies
+* Don't re-adjust depending on viewport size (#23) (#24)
+* Updated package.json scripts
+* Updated copyright notices in preambles
+
 ## 4.0.28
 
 * Updated webpack config
