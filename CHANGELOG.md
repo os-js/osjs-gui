@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.30
+
+* Now using @osjs/dev-meta
+
 ## 4.0.29
 
 * Updated dependencies
