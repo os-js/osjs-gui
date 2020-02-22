@@ -29,9 +29,9 @@
     "dist/main.js.map",
     "dist/main.css",
     "dist/main.css.map",
+    "CHANGELOG.md",
     "README.md",
-    "LICENSE",
-    ".babelrc"
+    "LICENSE"
   ],
   "dependencies": {
     "hyperapp": "^1.2.10",
