@@ -1,5 +1,12 @@
 # Changelog for osjs-gui
 
+## 4.0.31 - 2020-03-01
+
+* Updated README.md
+* Prevent raising error when contextmenu not found
+* Updated files section in package.json
+* Added timestamps to CHANGELOG.md
+
 ## 4.0.30 - 2020-02-16
 
 * Now using @osjs/dev-meta
