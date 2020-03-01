@@ -91,7 +91,7 @@ export class GUIServiceProvider {
   start() {
     const callback = ev => {
       const menu = document.getElementById('osjs-context-menu');
-      const hit = menu.contains(ev.target);
+      const hit = menu && menu.contains(ev.target);
 
       if (!hit && this.contextmenu) {
         this.contextmenu.hide();
