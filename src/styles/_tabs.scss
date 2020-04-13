@@ -57,14 +57,18 @@
   z-index: 1;
   flex-grow: 1;
   display: flex;
+  overflow: hidden;
 
   & > div {
     display: none;
     padding: $base-margin / 2;
     width: 100%;
+    overflow: auto;
 
     &.osjs__active {
       display: flex;
+      flex-grow: 1;
+      flex-shrink: 1;
     }
   }
 }
