@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.33 - 2020-04-13
+
+* Correct overflow in Tabs (#28) (#29)
+
 ## 4.0.31 - 2020-03-01
 
 * Updated README.md
