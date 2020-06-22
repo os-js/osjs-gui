@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+
+## 4.0.34 - 2020-06-22
+
+* Fixed listview column staggering in FF (#31)
+
 ## 4.0.33 - 2020-04-13
 
 * Correct overflow in Tabs (#28) (#29)
