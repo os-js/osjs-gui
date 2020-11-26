@@ -38,9 +38,9 @@
     "hyperapp-nestable": "^1.0.0"
   },
   "devDependencies": {
-    "@osjs/dev-meta": "^1.0.2",
-    "rollup": "^1.31.0",
-    "rollup-plugin-babel": "^4.3.3",
+    "@osjs/dev-meta": "^2.0.0",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-babel-minify": "^9.1.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
