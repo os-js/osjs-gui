@@ -1,5 +1,8 @@
 # Changelog for osjs-gui
 
+## 4.0.35 - 2020-11-26
+
+* Updated dependencies
 
 ## 4.0.34 - 2020-06-22
 
