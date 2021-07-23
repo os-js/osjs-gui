@@ -1,5 +1,9 @@
 # Changelog for osjs-gui
 
+## 4.0.36 - 2021-07-23
+
+* Fixed progress bar progress value
+
 ## 4.0.35 - 2020-11-26
 
 * Updated dependencies
