@@ -40,7 +40,7 @@ import {Element} from './Element';
  */
 export const Progressbar = (props, children = []) => {
   let value = typeof props.value === 'number'
-    ? Math.max(0, Math.abs(props.value)) % 100
+    ? Math.min(100, Math.max(0, Math.abs(props.value)))
     : 0;
 
   const c = h('div', {class: 'osjs-gui-progressbar-wrapper'}, [
