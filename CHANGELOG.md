@@ -1,5 +1,10 @@
 # Changelog for osjs-gui
 
+## 4.1.0 - 2021-08-19
+
+* Add 'scroll' action for ListView (#38)
+* Updated dependencies
+
 ## 4.0.36 - 2021-07-23
 
 * Fixed progress bar progress value
