@@ -36,6 +36,7 @@ import {Icon} from './Icon';
 const tapper = doubleTap();
 
 const createView = props => {
+  let debounceScroll;
 
   const cols = (paneIndex) => (row, rowIndex) => {
     const col = row.columns[paneIndex] || {};
@@ -77,6 +78,12 @@ const createView = props => {
 
   return h('div', {
     class: 'osjs-gui-list-view-wrapper',
+    onscroll: ev => {
+      debounceScroll = clearTimeout(debounceScroll);
+      debounceScroll = setTimeout(() => {
+        props.onscroll(ev);
+      }, 100);
+    },
     oncreate: el => (el.scrollTop = props.scrollTop),
     onupdate: el => {
       if (props.selectedIndex < 0) {
@@ -111,6 +118,9 @@ export const listView = ({
       },
       oncreate: (args) => {
         actions.created(args);
+      },
+      onscroll: (ev) => {
+        actions.scroll(ev);
       }
     }, state);
 
@@ -127,6 +137,7 @@ export const listView = ({
     activate: () => () => ({}),
     contextmenu: () => () => ({}),
     created: () => () => ({}),
+    scroll: () => state => state,
     setRows: rows => ({rows}),
     setColumns: columns => ({columns}),
     setScrollTop: scrollTop => state => ({scrollTop}),
