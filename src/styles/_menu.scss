@@ -130,7 +130,7 @@
 .osjs-gui-menu-container {
   &[data-has-children] > .osjs-gui-menu-label {
     &::after {
-      content: '\25B6';
+      content: '\276f';
       position: absolute;
       right: $base-margin / 2;
       top: 50%;
