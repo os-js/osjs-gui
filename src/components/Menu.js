@@ -58,8 +58,14 @@ const ul = (props, children = [], level = 0) => {
       ? 'osjs-gui-menu-separator'
       : 'osjs-gui-menu-label ' + (child.disabled ? 'osjs__disabled' : '');
 
+    const innerChildren = [h('span', {}, label(child))];
+
+    if(child.shortcut) {
+      innerChildren.push(h('span', {class: 'osjs-gui-menu-shortcut'}, child.shortcut));
+    }
+
     const children = [
-      h('span', {class: className}, label(child))
+      h('span', {class: className}, innerChildren)
     ];
 
     if (child.items) {

@@ -105,11 +105,21 @@
   min-height: 1rem;
   align-items: center;
 
-  & > .osjs-icon {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: $base-margin / 2;
+
+  .osjs-icon {
     margin-right: $base-margin / 2;
   }
 
-  & > .osjs-gui-menu-checkbox {
+  .osjs-gui-menu-shortcut {
+    color: $shortcut-font-color;
+    font-size: $shortcut-font-size;
+  }
+
+  .osjs-gui-menu-checkbox {
     margin-right: $base-margin / 2;
 
     &::after {
