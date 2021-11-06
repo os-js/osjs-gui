@@ -121,7 +121,7 @@ const ul = (props, children = [], level = 0) => {
  * A menu
  * @param {Object} props Properties
  * @param {Boolean} [props.visible=true] Visible property
- * @param {Object} [posprops.ition] Position
+ * @param {Object} [props.position] Position
  * @param {MenuItems} [props.menu] Menu items
  */
 export const Menu = (props) => h('div', {
