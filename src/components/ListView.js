@@ -40,9 +40,11 @@ const createView = props => {
 
   const cols = (paneIndex) => (row, rowIndex) => {
     const col = row.columns[paneIndex] || {};
-    const selected = props.selectedIndex === rowIndex;
     const colIcon = col.icon ? h(Icon, col.icon) : null;
     const children = [h('span', {}, [typeof col === 'object' ? col.label : col])];
+    const selected = props.multiselect
+      ? props.selectedIndex.indexOf(rowIndex) !== -1
+      : props.selectedIndex === rowIndex;
 
     if (colIcon) {
       children.unshift(colIcon);
@@ -52,11 +54,11 @@ const createView = props => {
       key: row.key,
       'data-has-icon': col.icon ? true : undefined,
       class: 'osjs-gui-list-view-cell' + (selected ? ' osjs__active' : ''),
-      ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: row.data, index: rowIndex, ev})),
-      ondblclick: (ev) => props.onactivate({data: row.data, index: rowIndex, ev}),
-      onclick: (ev) => props.onselect({data: row.data, index: rowIndex, ev}),
-      oncontextmenu: (ev) => props.oncontextmenu({data: row.data, index: rowIndex, ev}),
-      oncreate: (el) => props.oncreate({data: row.data, index: rowIndex, el})
+      ontouchstart: (ev) => tapper(ev, () => props.onactivate({index: rowIndex, ev})),
+      ondblclick: (ev) => props.onactivate({index: rowIndex, ev}),
+      onclick: (ev) => props.onselect({index: rowIndex, ev}),
+      oncontextmenu: (ev) => props.oncontextmenu({index: rowIndex, ev}),
+      oncreate: (el) => props.oncreate({index: rowIndex, el})
     }, children);
   };
 
@@ -86,7 +88,11 @@ const createView = props => {
     },
     oncreate: el => (el.scrollTop = props.scrollTop),
     onupdate: el => {
-      if (props.selectedIndex < 0) {
+      const notSelected = props.multiselect
+        ? props.selectedIndex.length === 0
+        : props.selectedIndex < 0;
+
+      if (notSelected) {
         el.scrollTop = props.scrollTop;
       }
     }
@@ -99,25 +105,85 @@ export const ListView = props => h(Element, Object.assign({
 
 export const listView = ({
   component: (state, actions) => {
+    // TODO: Ability to deselect with control and shift key
+    const createSelection = (index) => state.selectedIndex.indexOf(index) === -1
+      ? [...state.selectedIndex, index]
+      : state.selectedIndex;
+
+    /**
+     * Creates a range of indexes from start to end
+     * @param {Number} start
+     * @param {Number} end
+     * @return {Array}
+     */
+    const createSelectionRange = (start, end) => {
+      // Swaps start and end if start is greater than end
+      if (start > end) [start, end] = [end, start];
+
+      const indices = [
+        ...state.selectedIndex,
+        // Generates a range of indexes from start to end
+        ...Array.from({ length: end - start + 1 }, (_, i) => i + start)
+      ];
+
+      // Remove duplicates from the array
+      return [...new Set(indices)];
+    }
+
+    const getSelection = (index, ev) => {
+      const selected = state.multiselect
+        ? (ev.shiftKey
+          ? createSelectionRange(state.previousSelectedIndex, index)
+          : ev.ctrlKey
+            ? createSelection(index)
+            : [index])
+        : index;
+
+      const data = state.multiselect
+        ? selected.map((item) => state.rows[item].data)
+        : state.rows[selected].data;
+
+      // Store the previous index in the state to use for calculating the
+      // range if the shift key is pressed
+      if (state.multiselect) state.previousSelectedIndex = index;
+      return { selected, data };
+    };
+
+    const clearCurrentSelection = (index) => {
+      const selected = state.multiselect ? [] : -1;
+
+      const data = state.multiselect
+        ? state.selectedIndex.map((item) => state.rows[item].data)
+        : state.rows[index].data;
+
+      return { selected, data };
+    };
+
     const newProps = Object.assign({
+      multiselect: false,
       zebra: true,
       columns: [],
       rows: [],
-      onselect: ({data, index, ev}) => {
+      onselect: ({index, ev}) => {
+        const {selected, data} = getSelection(index, ev);
+        actions.select({data, index, ev, selected});
+        actions.setSelectedIndex(selected);
+      },
+      onactivate: ({index, ev}) => {
+        const {selected, data} = clearCurrentSelection(index);
+        actions.activate({data, index, ev, selected});
+        actions.setSelectedIndex(selected);
+      },
+      oncontextmenu: ({index, ev}) => {
+        const {selected, data} = getSelection(index, ev);
+
         actions.select({data, index, ev});
-        actions.setSelectedIndex(index);
+        actions.contextmenu({data, index, ev, selected});
+        actions.setSelectedIndex(selected);
       },
-      onactivate: ({data, index, ev}) => {
-        actions.activate({data, index, ev});
-        actions.setSelectedIndex(-1);
-      },
-      oncontextmenu: ({data, index, ev}) => {
-        actions.select({data, index, ev});
-        actions.contextmenu({data, index, ev});
-        actions.setSelectedIndex(index);
-      },
-      oncreate: (args) => {
-        actions.created(args);
+      oncreate: ({index, el}) => {
+        const data = state.rows[index].data;
+        actions.created({index, el, data});
       },
       onscroll: (ev) => {
         actions.scroll(ev);
@@ -128,7 +194,7 @@ export const listView = ({
   },
 
   state: state => Object.assign({
-    selectedIndex: -1,
+    selectedIndex: state.multiselect ? [] : -1,
     scrollTop: 0
   }, state),
 
@@ -141,6 +207,6 @@ export const listView = ({
     setRows: rows => ({rows}),
     setColumns: columns => ({columns}),
     setScrollTop: scrollTop => state => ({scrollTop}),
-    setSelectedIndex: selectedIndex => state => ({selectedIndex})
+    setSelectedIndex: selectedIndex => ({selectedIndex}),
   }, actions || {})
 });
