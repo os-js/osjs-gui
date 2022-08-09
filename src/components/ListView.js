@@ -130,7 +130,7 @@ export const listView = ({
 
       // Remove duplicates from the array
       return [...new Set(indices)];
-    }
+    };
 
     const getSelection = (index, ev) => {
       const selected = state.multiselect
