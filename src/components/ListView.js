@@ -118,12 +118,14 @@ export const listView = ({
      */
     const createSelectionRange = (start, end) => {
       // Swaps start and end if start is greater than end
-      if (start > end) [start, end] = [end, start];
+      if (start > end) {
+        [start, end] = [end, start];
+      }
 
       const indices = [
         ...state.selectedIndex,
         // Generates a range of indexes from start to end
-        ...Array.from({ length: end - start + 1 }, (_, i) => i + start)
+        ...Array.from({length: end - start + 1}, (_, i) => i + start)
       ];
 
       // Remove duplicates from the array
@@ -145,8 +147,11 @@ export const listView = ({
 
       // Store the previous index in the state to use for calculating the
       // range if the shift key is pressed
-      if (state.multiselect) state.previousSelectedIndex = index;
-      return { selected, data };
+      if (state.multiselect) {
+        state.previousSelectedIndex = index;
+      }
+
+      return {selected, data};
     };
 
     const clearCurrentSelection = (index) => {
@@ -156,7 +161,7 @@ export const listView = ({
         ? state.selectedIndex.map((item) => state.rows[item].data)
         : state.rows[index].data;
 
-      return { selected, data };
+      return {selected, data};
     };
 
     const newProps = Object.assign({
