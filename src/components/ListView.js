@@ -148,7 +148,7 @@ export const listView = ({
       // Store the previous index in the state to use for calculating the
       // range if the shift key is pressed
       if (state.multiselect) {
-        state.previousSelectedIndex = index;
+        actions.setPreviousSelectedIndex(index);
       }
 
       return {selected, data};
@@ -213,5 +213,6 @@ export const listView = ({
     setColumns: columns => ({columns}),
     setScrollTop: scrollTop => state => ({scrollTop}),
     setSelectedIndex: selectedIndex => ({selectedIndex}),
+    setPreviousSelectedIndex: previousSelectedIndex => ({previousSelectedIndex}),
   }, actions || {})
 });
