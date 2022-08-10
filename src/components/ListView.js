@@ -119,7 +119,7 @@ export const listView = ({
       }
 
       return state.selectedIndex;
-    }
+    };
 
     /**
      * Creates a range of indexes from start to end
