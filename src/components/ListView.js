@@ -105,10 +105,21 @@ export const ListView = props => h(Element, Object.assign({
 
 export const listView = ({
   component: (state, actions) => {
-    // TODO: Ability to deselect with control and shift key
-    const createSelection = (index) => state.selectedIndex.indexOf(index) === -1
-      ? [...state.selectedIndex, index]
-      : state.selectedIndex;
+    const createSelection = index => {
+      if (state.multiselect) {
+        const foundIndex = state.selectedIndex.indexOf(index);
+        const newSelection = [...state.selectedIndex];
+        if (foundIndex === -1) {
+          newSelection.push(index);
+        } else {
+          newSelection.splice(foundIndex, 1);
+        }
+
+        return newSelection;
+      }
+
+      return state.selectedIndex;
+    }
 
     /**
      * Creates a range of indexes from start to end
