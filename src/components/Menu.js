@@ -58,8 +58,14 @@ const ul = (props, children = [], level = 0) => {
       ? 'osjs-gui-menu-separator'
       : 'osjs-gui-menu-label ' + (child.disabled ? 'osjs__disabled' : '');
 
+    const innerChildren = [h('span', {}, label(child))];
+
+    if(child.shortcut) {
+      innerChildren.push(h('span', {class: 'osjs-gui-menu-shortcut'}, child.shortcut));
+    }
+
     const children = [
-      h('span', {class: className}, label(child))
+      h('span', {class: className}, innerChildren)
     ];
 
     if (child.items) {
@@ -115,7 +121,7 @@ const ul = (props, children = [], level = 0) => {
  * A menu
  * @param {Object} props Properties
  * @param {Boolean} [props.visible=true] Visible property
- * @param {Object} [posprops.ition] Position
+ * @param {Object} [props.position] Position
  * @param {MenuItems} [props.menu] Menu items
  */
 export const Menu = (props) => h('div', {
